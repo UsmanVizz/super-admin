@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit {
     {
       routerLink: '/branch-manage',
       icon: 'home_work',
-      label: 'Manage Branches',
+      label: 'Manage companies',
       whiteImgPath:
         '../../../../assets/images/sidebar-icons/branch-icon-white.png',
       grayImgPath:
@@ -56,42 +56,6 @@ export class SidebarComponent implements OnInit {
       imgPath: '',
       submenus: [],
     },
-    {
-      routerLink: '/hall-manage',
-      icon: 'domain',
-      label: 'Manage Hall',
-      whiteImgPath:
-        '../../../../assets/images/sidebar-icons/hall-icon-white.png',
-      grayImgPath: '../../../../assets/images/sidebar-icons/hall-icon-grey.png',
-      imgPath: '',
-      submenus: [],
-    },
-    {
-      routerLink: '/order-management',
-      icon: 'contract',
-      label: 'Orders Management',
-      whiteImgPath:
-        '../../../../assets/images/sidebar-icons/order-management-white.png',
-      grayImgPath:
-        '../../../../assets/images/sidebar-icons/order-management-gray.png',
-      imgPath: '',
-      submenus: [],
-    },
-    {
-      routerLink: '/manage-menu/catagories',
-      // routerLink: '/catagories',
-      icon: 'food',
-      label: 'Manage Menu',
-      whiteImgPath: '../../../../assets/images/sidebar-icons/menu-white.png',
-      grayImgPath: '../../../../assets/images/sidebar-icons/menu-grey.png',
-      imgPath: '',
-      // submenus: [
-      //   { label: 'Categories ', routerLink: 'catagories' },
-      //   { label: 'Menu listing', routerLink: 'menu' },
-      //   { label: 'Deals', routerLink: 'deals' },
-      // ],
-    },
-
     {
       routerLink: '/manage-customer',
       icon: 'person_pin',
@@ -114,13 +78,23 @@ export class SidebarComponent implements OnInit {
       submenus: [],
     },
     {
-      routerLink: '/expense-manage',
-      icon: 'assured_workload',
-      label: 'Finance Management',
+      routerLink: '/order-management',
+      icon: 'contract',
+      label: 'Orders Management',
       whiteImgPath:
-        '../../../../assets/images/sidebar-icons/finance-management-white.png',
+        '../../../../assets/images/sidebar-icons/order-management-white.png',
       grayImgPath:
-        '../../../../assets/images/sidebar-icons/finance-management-gray.png',
+        '../../../../assets/images/sidebar-icons/order-management-gray.png',
+      imgPath: '',
+      submenus: [],
+    },
+    {
+      routerLink: '/hall-manage',
+      icon: 'domain',
+      label: 'Manage Amenities',
+      whiteImgPath:
+        '../../../../assets/images/sidebar-icons/hall-icon-white.png',
+      grayImgPath: '../../../../assets/images/sidebar-icons/hall-icon-grey.png',
       imgPath: '',
       submenus: [],
     },
@@ -145,14 +119,49 @@ export class SidebarComponent implements OnInit {
       submenus: [],
     },
     {
-      routerLink: '/profile',
-      icon: 'account_circle',
-      label: 'Profile',
-      whiteImgPath: '../../../../assets/images/sidebar-icons/profile-white.png',
-      grayImgPath: '../../../../assets/images/sidebar-icons/profile-gray.png',
+      routerLink: '/manage-menu/catagories',
+      // routerLink: '/catagories',
+      icon: 'food',
+      label: 'Settings',
+      whiteImgPath: '../../../../assets/images/sidebar-icons/menu-white.png',
+      grayImgPath: '../../../../assets/images/sidebar-icons/menu-grey.png',
+      imgPath: '',
+    },
+    {
+      routerLink: '/expense-manage',
+      icon: 'assured_workload',
+      label: 'System Logs',
+      whiteImgPath:
+        '../../../../assets/images/sidebar-icons/finance-management-white.png',
+      grayImgPath:
+        '../../../../assets/images/sidebar-icons/finance-management-gray.png',
       imgPath: '',
       submenus: [],
     },
+    {
+      routerLink: '/expense-manage',
+      icon: 'assured_workload',
+      label: 'CMS',
+      whiteImgPath:
+        '../../../../assets/images/sidebar-icons/finance-management-white.png',
+      grayImgPath:
+        '../../../../assets/images/sidebar-icons/finance-management-gray.png',
+      imgPath: '',
+      submenus: [],
+    },
+    {
+      routerLink: '/expense-manage',
+      icon: 'assured_workload',
+      label: 'Manage Leads',
+      whiteImgPath:
+        '../../../../assets/images/sidebar-icons/finance-management-white.png',
+      grayImgPath:
+        '../../../../assets/images/sidebar-icons/finance-management-gray.png',
+      imgPath: '',
+      submenus: [],
+    },
+
+
   ];
 
   ngOnInit(): void {
