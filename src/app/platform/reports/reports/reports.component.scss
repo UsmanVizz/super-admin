@@ -1,0 +1,77 @@
+$breadcrumb-divider: quote(">");
+
+$orange_color: #fb6f10;
+.reports {
+  margin: 30px 0px;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 150%;
+
+  letter-spacing: -0.03em;
+
+  color: #1e293b;
+}
+a {
+  text-decoration: none;
+  color: #fb6f10;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.breadcrumb-item {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: #b1b1b1;
+  cursor: pointer;
+}
+
+.booking-details {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 20px;
+}
+
+.card {
+  width: 478px;
+  height: 165px;
+  padding: 15px;
+}
+
+h4 {
+  margin-bottom: 0rem;
+}
+
+.h4-f-t {
+  color: #000000;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 27px;
+}
+
+.percent-rate {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  background-color: #dcfce7;
+  color: $orange_color;
+  font-size: 15px;
+}
+
+.last-year {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #000000;
+}
+
+@media (max-width: 1120px) {
+  .flex-wrap-2 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

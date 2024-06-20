@@ -1,0 +1,251 @@
+<div class="d-flex justify-content-between align-items-center">
+  <nav
+    style="--bs-breadcrumb-divider: '>'; color: #b1b1b1"
+    aria-label="breadcrumb"
+    class="mt-3 mb-4"
+  >
+    <ol class="breadcrumb d-flex align-items-center mt-4">
+      <li class="breadcrumb-item">
+        <div (click)="manageVendor()" class="a">
+          <img
+            src="../../../../assets/images/icons/service-management.png"
+            alt="icon"
+          />
+          Vendors Mangement
+        </div>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Add Vendor</li>
+    </ol>
+  </nav>
+
+  <button class="order-btn" (click)="vendorDetails()">Add Vendor</button>
+</div>
+
+<main class="bg-white mt-4 p-5 rounded-3">
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-start align-items-center mt-4 mb-4">
+      <span class="booking-details">Add Vendor</span>
+    </div>
+    <hr />
+    <div class="form-container d-flex flex-column">
+      <form
+        [formGroup]="addVendorForm"
+        (ngSubmit)="addUserVendor()"
+        class="d-flex flex-column gap-4"
+      >
+        <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="customer-name" class="label-text">Vendor Name</label>
+            <input
+              type="text"
+              id="customer-name"
+              placeholder="Vendor Name"
+              class="input-class"
+              formControlName="vendorName"
+            />
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="address" class="label-text">Select Vendor Type</label>
+
+            <div class="custom-dropdown">
+              <div
+                class="selected-item d-flex align-items-center justify-content-between input-class"
+                (click)="toggleDropdown()"
+              >
+                <span class="select-vender">
+                  {{ getSelectedVendorName() }}
+                </span>
+                <span
+                  class="material-symbols-outlined"
+                  style="color: #b1b1b1"
+                  *ngIf="!showDropdown"
+                  >expand_more</span
+                >
+                <span
+                  class="material-symbols-outlined"
+                  style="color: #b1b1b1"
+                  *ngIf="showDropdown"
+                  >expand_less</span
+                >
+              </div>
+              <div
+                class="dropdown-list custom-dropdown-list"
+                *ngIf="showDropdown"
+              >
+                <div *ngFor="let vendor of vendors">
+                  <label
+                    class="d-flex align-items-center gap-3 p-3 dropdown-select"
+                  >
+                    <input
+                      type="checkbox"
+                      [(ngModel)]="vendor.selected"
+                      [ngModelOptions]="{ standalone: true }"
+                    />
+                    <img [src]="vendor.image" alt="" />
+                    {{ vendor.name }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-start gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="description" class="label-text"
+              >Vendor Description</label
+            >
+            <textarea
+              type="text"
+              id="description"
+              placeholder="Description"
+              class="input-class text-area"
+              maxlength="300"
+              formControlName="vendorDescription"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-start gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="email" class="label-text">Email</label>
+            <input
+              type="text"
+              id="email"
+              placeholder="abc@gmail.com"
+              class="input-class"
+              formControlName="email"
+            />
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="email" class="label-text">Address</label>
+            <input
+              type="text"
+              id="address"
+              placeholder="Address"
+              class="input-class"
+              formControlName="address"
+            />
+          </div>
+        </div>
+        <div class="d-flex justify-content-start gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="zip-code" class="label-text">Zip Code</label>
+            <input
+              type="text"
+              id="zip-code"
+              placeholder="Zip Code"
+              class="input-class"
+              formControlName="zipCode"
+            />
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="email" class="label-text">City</label>
+            <input
+              type="text"
+              id="city"
+              placeholder="City"
+              class="input-class"
+              formControlName="city"
+            />
+          </div>
+        </div>
+        <div class="d-flex justify-content-start gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="contact-no" class="label-text">Contact No</label>
+            <input
+              type="text"
+              id="contact-no"
+              placeholder="03XXXXXXXXX"
+              class="input-class"
+              formControlName="contactUs"
+            />
+          </div>
+        </div>
+
+        <hr />
+        <div class="d-flex flex-column">
+          <div class="d-flex align-items-center gap-5 mt-2">
+            <label for="branchName" class="images-slider mt-5"
+              >Add Thumbnail Image</label
+            >
+            <label for="branchName" class="images-slider margin mt-5"
+              >Menu Images</label
+            >
+          </div>
+        </div>
+        <div class="d-flex gap-3">
+          <label for="img-upload-b" *ngIf="uploadedthumbnail.length === 0">
+            <input
+              type="file"
+              name=""
+              id="img-upload-b"
+              class="d-none"
+              (change)="onThumbnailSelected($event)"
+            />
+            <img
+              src="../../../../assets/images/food-item/uploadind-cover-b.png"
+              alt="img-drop"
+              class="upload-cover__img"
+            />
+          </label>
+
+          <div *ngFor="let image of uploadedthumbnail" class="chip-img">
+            <img
+              [src]="image.url"
+              width="200"
+              height="180"
+              class="object-fit-fill"
+            />
+            <span class="close" (click)="removeThumbnail(image)">
+              <img src="../../../../assets/icon/cross-btn.png" alt="" />
+            </span>
+          </div>
+          <div
+            class="d-flex align-items-center gap-3 mt-1"
+            style="height: fit-content"
+          >
+            <div *ngFor="let image of uploadedImages" class="chip">
+              <img
+                [src]="image.url"
+                width="100"
+                height="100"
+                class="object-fit-fill"
+              />
+              <span class="close" (click)="removeImage(image)"
+                ><img src="../../../../assets/icon/cross-btn.png" alt=""
+              /></span>
+            </div>
+            <label for="img-upload-sm" *ngIf="uploadedImages.length !== 3">
+              <input
+                type="file"
+                id="img-upload-sm"
+                class="d-none"
+                (change)="onFileSelected($event)"
+              />
+              <img
+                src="../../../../assets/images/food-item/uploadind-cover-sm.png"
+                alt="img-drop"
+                class="upload-cover__img"
+              />
+            </label>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="d-flex justify-content-end align-items-center gap-4">
+          <button
+            class="order-btn"
+            style="background-color: #b1b1b1; width: 180px"
+            type="reset"
+          >
+            Cancel
+          </button>
+          <button type="submit" class="order-btn" style="width: 180px">
+            Save & Next
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

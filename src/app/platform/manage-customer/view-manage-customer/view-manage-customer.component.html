@@ -1,0 +1,58 @@
+<h1 class="title">All Customer</h1>
+<div class="container-fluid">
+  <div class="d-flex align-items-center bottom-border">
+    <h1 class="flex-grow-1 mb-0 customer-details">Customer Details</h1>
+    <div class="ml-auto">
+      <button class="custom-button" (click)="customerDetail()">Done</button>
+    </div>
+  </div>
+  <div class="d-flex align-items-center image-container bottom-border">
+    <img src="../../../assets/images/customer.png" alt="Avatar" />
+    <!-- <div class="dropdown">
+      <button class="dropbtn">
+        Email<i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="#">Abc123@gmail.com</a>
+      </div>
+    </div> -->
+    <div class="dropdown" (click)="toggleDropdown()">
+      <button class="dropbtn">
+        Email <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="dropdown-content" [ngClass]="{ show: dropdownOpen }">
+        <a href="#">Abc123@gmail.com</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center customer-data">
+    <div>
+      <h1 class="profile-heads">Name</h1>
+      <h1 class="profile-body">Charlene Reed</h1>
+      <h1 class="profile-heads">Address</h1>
+      <h1 class="profile-body">Charlene Reed</h1>
+      <h1 class="profile-heads">CNIC Number</h1>
+      <h1 class="profile-body">0000-0000000-0</h1>
+      <h1 class="profile-heads">
+        <img src="../../../assets/images/map.png" /><span class="mx-3"
+          >Address on Map</span
+        >
+      </h1>
+      <h1 class="profile-body">https://maps.app.goo.gl mycsmY1YN mrw4ZA</h1>
+    </div>
+    <div class="ml-auto">
+      <h1 class="profile-heads">Email</h1>
+      <h1 class="profile-body">abc@email.com</h1>
+      <h1 class="profile-heads">Contact No</h1>
+      <h1 class="profile-body">000000000000</h1>
+      <h1 class="profile-heads">Joining Date</h1>
+      <h1 class="profile-body">12-Dec-2020</h1>
+      <h1 class="profile-heads">enable / disable</h1>
+      <label class="switch">
+        <input type="checkbox" checked />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+</div>

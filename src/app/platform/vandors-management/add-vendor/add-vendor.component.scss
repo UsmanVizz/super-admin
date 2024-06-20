@@ -1,0 +1,177 @@
+$breadcrumb-divider: quote(">");
+
+$orange_color: #fb6f10;
+
+main {
+  box-shadow: 0px 0px 8px -4px #00000052;
+}
+
+.a {
+  text-decoration: none;
+  color: #fb6f10;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.breadcrumb-item {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: #b1b1b1;
+  cursor: pointer;
+}
+
+.booking-details {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.order-btn {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background-color: $orange_color;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  padding: 12px 16px 12px 16px;
+  border-radius: 8px;
+  border: none;
+}
+
+.input-class {
+  width: 100%;
+  max-width: 535px;
+  height: 50px;
+  padding-left: 20px;
+  border-radius: 15px !important;
+  border: 1px solid #dfeaf2;
+  transition: 0.5s ease;
+}
+
+form {
+  width: 100%;
+}
+
+.custom-dropdown-list {
+  position: absolute;
+  z-index: 35;
+  background-color: aliceblue;
+  width: 100%;
+  max-width: 535px;
+}
+
+.input-class:focus {
+  outline: none;
+  border: 1px solid #0077ff;
+}
+
+.danger-outline {
+  outline: none;
+  border: 1px solid #ff0000;
+}
+
+.danger-outline:focus {
+  outline: none;
+  border: 1px solid #ff0000;
+}
+
+.label-text {
+  color: #232323;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
+.selected-item {
+  cursor: pointer;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.select-vender {
+  color: #718ebf;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+::placeholder {
+  color: #718ebf;
+}
+
+.dropdown-select {
+  cursor: pointer;
+  width: 100%;
+  max-width: 535px;
+  height: 50px;
+}
+
+.dropdown-select:hover {
+  background-color: #58585818;
+}
+
+.modal-title {
+  color: $orange_color;
+  font-size: 24px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+}
+
+.text-area {
+  width: 89%;
+  max-width: 89%;
+  height: 100px;
+}
+
+.upload-cover__img {
+  cursor: pointer;
+}
+.margin {
+  margin-left: 5rem !important;
+}
+.chip-img {
+  display: inline-block;
+  border-radius: 20px;
+  .close {
+    right: 16px;
+    top: -9px;
+    cursor: pointer;
+    font-weight: bold;
+    opacity: 1;
+    position: relative;
+  }
+  .object-fit-fill {
+    border-radius: 10px;
+  }
+}
+
+.close {
+  cursor: pointer;
+  font-weight: bold;
+  opacity: 1;
+  position: relative;
+  right: 13px;
+  top: -13px;
+  border-radius: 10px;
+}
+.images-slider {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #b1b1b1;
+}
+@media (max-width: 1125px) {
+  form {
+    display: flex;
+    justify-content: center;
+  }
+
+  .flex-wrap-2 {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

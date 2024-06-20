@@ -1,0 +1,101 @@
+<nav
+  style="--bs-breadcrumb-divider: '>'; color: #b1b1b1"
+  aria-label="breadcrumb"
+  class="mt-3 mb-4"
+>
+  <ol class="breadcrumb d-flex align-items-center mt-4 pb-3">
+    <li class="breadcrumb-item">
+      <div (click)="financeManagement()" class="a">
+        <img
+          src="../../../../assets/images/icons/order-management-icon.png"
+          alt="icon"
+        />
+        Order Management
+      </div>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Bookings</li>
+  </ol>
+</nav>
+<main class="bg-white mt-4 rounded-3">
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-start mt-4 mb-3">
+      <span class="booking-details">Booking Details</span>
+      <div class="ml-auto">
+        <button class="order-btn" (click)="editBooking()">Edit Booking</button>
+      </div>
+    </div>
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="booking-details mb-4" style="font-size: 18px"
+        >Hall Details</span
+      >
+    </div>
+    <div class="d-flex justify-content-start gap-5 mt-4 mb-3">
+      <div
+        class="d-flex flex-column gap-2 col-md"
+        *ngFor="let data of halldetail"
+      >
+        <div class="d-flex align-items-center gap-2">
+          <img [src]="data.image" alt="icon" class="vender-icons" />
+          <span class="type-class">{{ data.name }}</span>
+        </div>
+        <span class="customer-name mt-3">{{ data.vendertype }}</span>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="booking-details mb-4" style="font-size: 18px"
+        >Customer Details</span
+      >
+      <!-- <img
+        src="../../../../assets/images/icons/edit-pen-icon.png"
+        alt="icon"
+        class="edit-pen"
+      /> -->
+    </div>
+    <div class="d-flex justify-content-start gap-5 mt-4 mb-3">
+      <div class="d-flex flex-column gap-2 col-md" *ngFor="let data of detail">
+        <div class="d-flex align-items-center gap-2">
+          <img [src]="data.image" alt="icon" class="vender-icons" />
+          <span class="type-class">{{ data.name }}</span>
+        </div>
+        <span class="customer-name mt-3">{{ data.vendertype }}</span>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="booking-details mb-4" style="font-size: 18px">Vendor</span>
+    </div>
+    <div class="d-flex justify-content-start gap-5 mt-4 mb-3">
+      <div
+        class="d-flex flex-column gap-2 col-sm"
+        *ngFor="let data of detail.slice(0, 3)"
+      >
+        <div class="d-flex align-items-center gap-2">
+          <img [src]="data.image" alt="icon" class="vender-icons" />
+          <span class="type-class">{{ data.name }}</span>
+        </div>
+        <span class="customer-name mt-3">{{ data.vendertype }}</span>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="booking-details mb-4" style="font-size: 18px">Menu</span>
+    </div>
+    <div class="d-flex justify-content-start gap-5 mt-4 mb-3">
+      <div class="d-flex flex-column gap-2 col-md" *ngFor="let data of detail">
+        <div class="d-flex align-items-center gap-2">
+          <img [src]="data.image" alt="icon" class="vender-icons" />
+          <span class="type-class">{{ data.name }}</span>
+        </div>
+        <span class="customer-name mt-3">{{ data.vendertype }}</span>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-between mt-3 align-items-center">
+      <span class="booking-details mb-4" style="font-size: 18px"
+        >Event Status:</span
+      >
+      <button class="order-btn rounded-5">InProgress</button>
+    </div>
+  </div>
+</main>

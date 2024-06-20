@@ -1,0 +1,347 @@
+<div class="container-fluid">
+  <div class="d-flex justify-content-between mt-5 overflow-hidden">
+    <!-- <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <div (click)="manageMenu()">
+          <img
+            src="../../../../assets/images/sidebar-icons/menu.png"
+            alt="City Icon"
+            class="category-icon mx-1"
+          />
+          <span class="bread-menu">Manage Menu</span>
+        </div>
+      </li>
+      <i class="fa-solid fa-chevron-right arrow px-3"></i>
+
+      <li class="breadcrumb-item active add-category mt-2" aria-current="page">
+        Menu
+      </li>
+    </ol>
+  </nav> -->
+    <div class="d-flex align-items-center buttons bottom-border">
+      <div class="d-flex align-items-center">
+        <button
+          class="mx-2 left-button left-btn-text"
+          [class.orange-button]="selectedButton === 'category'"
+          (click)="selectButton('category')"
+          type="button"
+        >
+          Category
+        </button>
+        <button
+          class="mx-2 left-button left-btn-text"
+          [class.orange-button]="selectedButton === 'menu'"
+          (click)="selectButton('menu')"
+          type="button"
+        >
+          Menu
+        </button>
+        <button
+          class="mx-2 left-button left-btn-text"
+          [class.orange-button]="selectedButton === 'deals'"
+          (click)="selectButton('deals')"
+          type="button"
+        >
+          Deals
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center mt-4 mx-4">
+    <h1 class="flex-grow-1 mb-0 add-menu">Select Categories</h1>
+    <div class="ml-auto">
+      <button class="custom-button" (click)="navigateToAddMenu()">
+        Add Menu
+      </button>
+    </div>
+  </div>
+  <div class="scroll-container #scrollContainer">
+    <div class="card-container">
+      <div
+        class="card"
+        *ngFor="let card of cardsData; let i = index"
+        [class.selected]="isSelected(i)"
+        (click)="toggleSelection(i)"
+      >
+        <img
+          [src]="
+            card.thumbnail_image
+              ? 'https://dev-backend.hamaravenue.com/' + card.thumbnail_image
+              : '../../../../assets/dashboard/default-image.webp'
+          "
+          alt="{{ card.title }}"
+          class="card-img-top"
+        />
+        <div class="card-body">
+          <h5 class="card-title" [class.selected-text]="isSelected(i)">
+            {{ card.category_name }}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex align-items-center category" style="margin-top: 30px">
+    <h1 class="mx-4 flex-grow-1 mb-0 menu">Menu</h1>
+  </div>
+  <div class="d-flex align-items-center mt-5">
+    <div class="ml-auto d-flex gap-1 align-items-center">
+      <div class="not-active mx-2">
+        <div class="input-wrapper">
+          <button class="icon">
+            <span class="material-symbols-outlined">search</span>
+          </button>
+          <input
+            placeholder="Search..."
+            class="input"
+            [(ngModel)]="searchQuery"
+            (input)="onSearchChange()"
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="sort-container">
+        <button
+          class="mx-2 sort-button search-btn d-flex gap-1 align-items-center"
+          type="button"
+          (click)="toggleSorting()"
+        >
+          <span class="material-symbols-outlined"> filter_list </span>
+          <span class="btn-text">Sort</span>
+          <span class="btn-text span-text__color">{{ sortOption }}</span>
+        </button>
+        <div class="sorting" *ngIf="showDropdown">
+          <div class="sorting-item" (click)="sortBy('ascending')">
+            Ascending
+          </div>
+
+          <div class="sorting-item" (click)="sortBy('descending')">
+            Descending
+          </div>
+          <div class="sorting-item" (click)="sortBy('all')">All</div>
+        </div>
+      </div>
+      <button
+        #filterButton
+        class="mx-2 sort-button search-btn btn-text"
+        type="button"
+        (click)="toggleFilter()"
+      >
+        <img src="../../../../assets/images/setting-4.png" alt="Logo" />
+        <span class="btn-text-filter mx-3">Filter</span>
+      </button>
+
+      <div
+        #filterContainer
+        *ngIf="filterVisible"
+        class="filter-container"
+        (click)="stopPropagation($event)"
+      >
+        <div class="filter-header">
+          <span>Filters</span>
+          <img
+            src="../../../../assets/icon/cross-btn.png"
+            alt="Close"
+            class="close-btn"
+            (click)="closeFilters($event)"
+          />
+        </div>
+        <div class="filter-content">
+          <div class="form-group">
+            <label for="branchSelect" class="branchSelect"
+              >Select Menu Item</label
+            >
+            <select
+              id="branchSelect"
+              [(ngModel)]="selectedMenu"
+              (change)="filterByMenu()"
+            >
+              <option *ngFor="let menu of cards" [value]="menu._id">
+                {{ menu.item_name }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="filteredCategories && filteredCategories?.length === 0">
+    <div class="w-100-p main mt-50">
+      <div class="form-group mb-10 mr-12 text-center shadow noShow">
+        <div style="padding: 10px">
+          <h5 class="noShowTitle">
+            <img src="assets/images/empty.svg" alt="" /><br />
+            <b class="text-data"
+              >No Records Found <br />
+              Please Add Your Menus.</b
+            >
+          </h5>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <div class="row cards flex-wraper" style="margin-top: 30px">
+    <div
+      class="col-sm-6 mb-3 mb-sm-0"
+      *ngFor="let category of filteredCategories; let i = index"
+    >
+      <div class="card border-0" style="margin-bottom: 20px">
+        <div class="row no-gutters">
+          <!-- Image Side -->
+          <div class="image-container">
+            <ng-container *ngIf="category">
+              <div
+                #carouselElement
+                [id]="'carousel_card_' + i"
+                class="carousel slide carousel-fade"
+                *ngIf="category.images?.length > 0"
+              >
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators">
+                  <li
+                    *ngFor="let image of category.images; let j = index"
+                    type="button"
+                    [attr.data-bs-target]="'#carousel_card_' + i"
+                    [attr.data-bs-slide-to]="j"
+                    [class.active]="j === 0"
+                  ></li>
+                </div>
+
+                <!-- Carousel Inner -->
+                <div class="carousel-inner">
+                  <!-- Images in carousel -->
+                  <div
+                    *ngFor="let image of category.images; let j = index"
+                    class="carousel-item"
+                    [class.active]="j === 0"
+                  >
+                    <img
+                      [src]="
+                        image
+                          ? 'https://dev-backend.hamaravenue.com/' + image
+                          : '../../../../assets/dashboard/default-image.webp'
+                      "
+                      class="d-block card-img"
+                      alt="image not found"
+                    />
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+          <!-- Text Side -->
+          <div class="text-container">
+            <div class="card-body p-0">
+              <div class="d-flex align-items-center">
+                <h5 class="card-title flex-grow-1 mb-0">
+                  {{ category.item_name }}
+                </h5>
+                <span>
+                  <div class="onoffswitch">
+                    <input
+                      type="checkbox"
+                      class="onoffswitch-checkbox"
+                      [id]="'myonoffswitch' + i"
+                      name="serviceStatus"
+                      [checked]="category.status"
+                    />
+                    <label class="onoffswitch-label" for="myonoffswitch{{ i }}">
+                      <span class="onoffswitch-inner"></span>
+                      <span class="onoffswitch-switch"></span>
+                    </label>
+                  </div>
+                  <!-- <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="flexSwitchCheckDefault"
+                    />
+                  </div> -->
+                </span>
+              </div>
+              <p class="card-text mb-0">{{ category.item_description }}</p>
+              <div class="d-flex align-items-center">
+                <p class="category flex-grow-1 mb-0">
+                  Category:
+                  <span class="item">{{
+                    category?.category_info?.category_name ||
+                      "category not found"
+                  }}</span>
+                  <span class="rupee"
+                    >Rs.{{
+                      category?.item_price_per_head || "Price not found"
+                    }}</span
+                  ><span class="head">per head</span>
+                </p>
+                <div class="d-flex justify-content-between mt-4 mb-3">
+                  <img
+                    src="../../../../assets/icon/edit-button.png"
+                    alt="Image 1"
+                    class="image m-2"
+                    (click)="editCategory(category._id)"
+                  />
+                  <img
+                    src="../../../../assets/icon/delete-button.png"
+                    alt="Image 2"
+                    class="image m-2"
+                    (click)="deleteCategory(category._id)"
+                  />
+                  <img
+                    src="../../../../assets/icon/view-button.png"
+                    alt="Image 3"
+                    class="image m-2"
+                    (click)="viewCategory(category._id)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end m-5 align-items-center">
+      <!-- Previous button -->
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a
+          class="page-link d-flex align-items-center"
+          (click)="prevPage()"
+          tabindex="-1"
+        >
+          <span
+            class="material-symbols-outlined"
+            [style.color]="currentPage === 1 ? '#6c757d' : '#fb6f10'"
+            >chevron_left</span
+          >
+          <span [style.color]="currentPage === 1 ? '#6c757d' : '#fb6f10'">
+            Previous</span
+          >
+        </a>
+      </li>
+      <!-- Pagination links -->
+      <li
+        class="page-item"
+        *ngFor="let page of pages"
+        [class.active]="currentPage === page"
+      >
+        <a class="page-link" (click)="setCurrentPage(page)">{{ page }}</a>
+      </li>
+      <!-- Next button -->
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link d-flex align-items-center" (click)="nextPage()">
+          <span [style.color]="currentPage === 1 ? '#fb6f10' : '#6c757d'"
+            >Next</span
+          >
+          <span
+            class="material-symbols-outlined"
+            [style.color]="currentPage === totalPages ? '#6c757d' : '#fb6f10'"
+            >chevron_right</span
+          >
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

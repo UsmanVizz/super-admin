@@ -1,0 +1,544 @@
+// // .card-container {
+// //   padding: 0;
+// //   gap: 34.24px;
+// //   -webkit-gap: 34.24px;
+// //   -moz-gap: 34.24px;
+// //   -ms-gap: 34.24px;
+// //   width: 1496px;
+// //   height: 198px;
+// //   display: flex;
+// //   flex-wrap: wrap;
+// //   justify-content: space-between;
+// // }
+// // .card {
+// //   // width: calc((100% / 5) - 34.24px);
+// //   display: flex;
+// //   flex-direction: column;
+// //   justify-content: center;
+// //   align-items: flex-start;
+// //   padding: 25.6824px;
+// //   gap: 17.12px;
+// //   isolation: isolate;
+// //   // width: 271.81px;
+// //   border: none;
+// //   height: 198.41px;
+// //   box-shadow: 0px 12.8412px 17.1216px -4.2804px rgba(12, 26, 36, 0.04);
+// //   backdrop-filter: blur(14.5534px);
+// //   border-radius: 6.4206px;
+// //   .img-dropdown {
+// //     display: flex;
+// //     flex-direction: row;
+// //     align-items: center;
+// //     padding: 0px;
+// //     gap: 100.3px;
+// //     width: 220.99px;
+// //     height: 51.36px;
+// //     flex: none;
+// //     .custom-select {
+// //       font-family: "Plus Jakarta Sans", sans-serif;
+// //       font-size: 12px;
+// //       font-weight: 500;
+// //       line-height: 15.12px;
+// //       text-align: center;
+// //       color: #b1b1b1;
+// //     }
+// //   }
+// // }
+// // @media screen and (max-width: 768px) {
+// //   .card {
+// //     width: calc(40% - 20px); /* Two cards per row on smaller screens */
+// //   }
+// // }
+
+// // @media screen and (max-width: 576px) {
+// //   .card {
+// //     width: calc(50% - 20px); /* One card per row on extra small screens */
+// //   }
+// // }
+// // .text-bottom {
+// //   display: flex;
+// //   justify-content: space-between;
+// //   align-items: center;
+// //   padding: 0px;
+// //   gap: 8.56px;
+// //   width: 220.44px;
+// //   height: 26px;
+// //   flex: none;
+// //   padding-top: 20px;
+// //   .card-title {
+// //     font-family: "Plus Jakarta Sans";
+// //     font-style: normal;
+// //     font-weight: 500;
+// //     font-size: 14.9814px;
+// //     line-height: 150%;
+// //     display: flex;
+// //     align-items: center;
+// //     letter-spacing: -0.02em;
+// //     color: #64748b;
+// //   }
+// // }
+// // //table
+// .table {
+//   thead {
+//     // padding: 12px, 24px, 12px, 20px !important;
+//     tr {
+//       th {
+//         width: 55px;
+//         height: 21px;
+//         font-family: "Plus Jakarta Sans";
+//         font-style: normal;
+//         font-weight: 500;
+//         font-size: 14px;
+//         line-height: 150%;
+//         letter-spacing: -0.02em;
+//         border: none;
+//         color: #718ebf;
+//         flex: none;
+//         order: 0;
+//         flex-grow: 0;
+//       }
+//     }
+//   }
+//   tbody {
+//     tr {
+//       td {
+//         font-family: "Plus Jakarta Sans";
+//         font-size: 14px;
+//         font-weight: 400;
+//         line-height: 21px;
+//         letter-spacing: -0.02em;
+//         color: #b1b1b1;
+//         .card-img {
+//           border-radius: 100px;
+//           width: 47px;
+//           height: 47px;
+//           max-height: 100%;
+//         }
+//       }
+//     }
+//   }
+// }
+// // //button
+// .btn-text-filter {
+//   font-family: "Plus Jakarta Sans", sans-serif;
+//   font-size: 12px;
+//   font-weight: 700;
+//   line-height: 15.12px;
+//   letter-spacing: -0.02em;
+//   text-align: left;
+//   color: #b1b1b1;
+// }
+
+// .btn-text {
+//   font-family: "Plus Jakarta Sans", sans-serif;
+//   font-size: 14px;
+//   font-weight: 500;
+//   line-height: 21px;
+//   letter-spacing: -0.02em;
+//   text-align: left;
+//   color: #b1b1b1;
+// }
+// .sort-button {
+//   border: 1px solid #dddddd;
+//   background-color: #ffffff;
+//   color: #dddddd;
+//   padding: 5px 16px;
+//   border-radius: 6px;
+//   height: 32px;
+// }
+// .span-text__color {
+//   padding-left: 8px;
+//   color: #fb6f10 !important;
+// }
+// .material-symbols-outlined {
+//   font-size: 20px !important;
+// }
+// .left-button {
+//   //   width: 102px;
+//   height: 32px;
+//   padding: 7px 16px 12px 16px;
+//   gap: 8px;
+//   border-radius: 8px;
+//   border: 1px solid #dddddd;
+//   opacity: 0px;
+//   background: white;
+// }
+// .left-btn-text {
+//   font-family: "Plus Jakarta Sans";
+//   font-style: normal;
+//   font-weight: 600;
+//   font-size: 12px;
+//   line-height: 15px;
+//   text-align: center;
+//   color: #b1b1b1;
+// }
+
+// .finance-details {
+//   width: 206px;
+//   height: 27px;
+//   font-family: "Plus Jakarta Sans";
+//   font-style: normal;
+//   font-weight: 700;
+//   font-size: 18px;
+//   line-height: 150%;
+//   display: flex;
+//   align-items: center;
+//   letter-spacing: -0.03em;
+//   color: #1e293b;
+// }
+// // .custom-button {
+// //   display: flex;
+// //   flex-direction: row;
+// //   justify-content: center;
+// //   align-items: center;
+// //   padding: 12px 16px;
+// //   margin: 0 auto;
+// //   width: 114px;
+// //   height: 39px;
+// //   background: #fb6f10;
+// //   border-radius: 8px;
+// //   font-family: "Plus Jakarta Sans";
+// //   font-size: 12px;
+// //   font-weight: 600;
+// //   line-height: 15.12px;
+// //   letter-spacing: -0.02em;
+// //   color: #ffffff;
+// //   border: none;
+// // }
+// // .all {
+// //   border: 1.5px solid #fb6f10;
+// //   background-color: #fb6f10;
+// //   color: white;
+// // }
+// // .buttons {
+// //   margin-bottom: 25px;
+// // }
+// // // .custom-button {
+// // //   width: 68px;
+// // //   height: 45px;
+// // //   padding: 12px 16px;
+// // //   gap: 10px;
+// // //   border: 1px solid #fb6f10;
+// // //   border-radius: 8px;
+// // //   background: #fb6f10;
+// // //   font-family: "Plus Jakarta Sans";
+// // //   font-size: 14px;
+// // //   font-weight: 600;
+// // //   line-height: 21px;
+// // //   letter-spacing: -0.02em;
+// // //   text-align: center;
+// // //   color: #ffffff;
+// // // }
+// // .bottom-border {
+// //   border-bottom: 1px solid #ccc;
+// //   padding-bottom: 28px;
+// //   margin-bottom: 10px;
+// // }
+// // .finance-button {
+// //   display: flex;
+// //   flex-direction: row;
+// //   align-items: flex-start;
+// //   padding: 4px;
+// //   gap: 10px;
+// //   width: 207px;
+// //   height: 40px;
+// //   background: #f1f1f1;
+// //   border-radius: 6px;
+// //   .default-button {
+// //     display: flex;
+// //     flex-direction: row;
+// //     justify-content: center;
+// //     align-items: center;
+// //     padding: 6px 24px;
+// //     gap: 10px;
+
+// //     width: 98px;
+// //     height: 32px;
+
+// //     background: #fb6f10;
+// //     border-radius: 6px;
+// //     border: none;
+// //     .btn-text {
+// //       width: 50px;
+// //       height: 15px;
+// //       font-family: "Inter";
+// //       font-style: normal;
+// //       font-weight: 600;
+// //       font-size: 12px;
+// //       line-height: 15px;
+// //       color: #ffffff;
+// //       flex: none;
+// //       order: 0;
+// //       flex-grow: 0;
+// //     }
+// //   }
+// //   .income {
+// //     display: flex;
+// //     flex-direction: row;
+// //     justify-content: center;
+// //     align-items: center;
+// //     padding: 6px 24px;
+// //     gap: 10px;
+// //     width: 91px;
+// //     height: 32px;
+// //     flex: none;
+// //     order: 1;
+// //     border: none;
+// //     flex-grow: 0;
+
+// //     .income-text {
+// //       width: 43px;
+// //       height: 15px;
+
+// //       font-family: "Inter";
+// //       font-style: normal;
+// //       font-weight: 600;
+// //       font-size: 12px;
+// //       line-height: 15px;
+// //       color: #7b7b7b;
+// //       flex: none;
+// //       order: 0;
+// //       flex-grow: 0;
+// //     }
+// //   }
+// // }
+// .switch-field {
+//   display: flex;
+//   overflow: hidden;
+//   background-color: #f1f1f1;
+//   width: fit-content;
+//   border-radius: 7px;
+// }
+
+// .switch-field input {
+//   position: absolute !important;
+//   clip: rect(0, 0, 0, 0);
+//   height: 1px;
+//   width: 1px;
+//   border: 0;
+//   overflow: hidden;
+// }
+
+// .switch-field label {
+//   color: #7b7b7b;
+//   font-size: 12px;
+//   font-family: "Inter", sans-serif;
+//   font-weight: 600;
+//   line-height: 1;
+//   text-align: center;
+//   padding: 6px 24px;
+//   margin-right: -1px;
+//   transition: all 0.1s ease-in-out;
+// }
+
+// .switch-field label:hover {
+//   cursor: pointer;
+// }
+
+// .switch-field input:checked + label {
+//   background-color: #fb6f10;
+//   color: #fff;
+//   box-shadow: none;
+// }
+
+// .switch-field label:first-of-type {
+//   border-radius: 4px 4px;
+// }
+
+// .switch-field label:last-of-type {
+//   border-radius: 4px 4px;
+// }
+// .container-head {
+//   padding: 32px;
+//   margin-top: 50px;
+//   // position: absolute;
+//   width: 1496px;
+//   // height: 580px;
+//   // left: calc(50% - 715px + 85px);
+//   // left: calc(50% - 1496px / 2 + 152px);
+//   top: 802px;
+//   background: #ffffff;
+//   border-radius: 8px;
+// }
+// // .custom-text {
+// //   width: 40px;
+// //   height: 26px;
+// //   font-family: "Plus Jakarta Sans";
+// //   font-style: normal;
+// //   font-weight: 500;
+// //   font-size: 17.1216px;
+// //   line-height: 150%;
+// //   text-align: center;
+// //   letter-spacing: -0.02em;
+// //   color: #1fb31c;
+// //   flex: none;
+// //   order: 1;
+// //   flex-grow: 0;
+// // }
+// // .charts {
+// //   position: relative;
+// //   width: 1510px;
+// //   margin-top: 48px;
+// // }
+// // .text-header {
+// //   display: inline-block;
+// //   font-family: "Plus Jakarta Sans", sans-serif;
+// //   font-size: 18.67px;
+// //   font-weight: 500;
+// //   line-height: 28.01px;
+// //   letter-spacing: -0.02em;
+// //   text-align: center;
+// //   .fa {
+// //     width: 17.12px;
+// //     height: 17.12px;
+// //   }
+// //   .text {
+// //     width: 40px;
+// //     height: 26px;
+// //     font-family: "Plus Jakarta Sans";
+// //     font-style: normal;
+// //     font-weight: 500;
+// //     font-size: 17.1216px;
+// //     line-height: 150%;
+// //     text-align: center;
+// //     letter-spacing: -0.02em;
+// //     color: #1fb31c;
+// //     margin-right: 5px;
+// //   }
+// // }
+// // .rates {
+// //   width: 220.44px;
+// //   height: 44px;
+// //   font-family: "Inter";
+// //   font-style: normal;
+// //   font-weight: 600;
+// //   font-size: 32.103px;
+// //   line-height: 137%;
+// //   display: flex;
+// //   align-items: center;
+// //   letter-spacing: -0.85608px;
+// //   padding-top: 20px;
+// //   color: #1e293b;
+// //   flex: none;
+// //   order: 1;
+// //   align-self: stretch;
+// //   flex-grow: 0;
+// // }
+// $orange_color: #fb6f10;
+
+// .card {
+//   width: 100%;
+//   max-width: 271px;
+//   height: 198px;
+//   box-shadow: 3px 3px 5px 0 rgb(0 0 0 / 8%);
+// }
+
+// .income-type {
+//   color: #64748b;
+//   font-family: "Plus Jakarta Sans", sans-serif;
+//   font-weight: 500;
+//   font-size: 14.9px;
+// }
+
+// button {
+//   background-color: transparent;
+//   border: none;
+//   width: fit-content;
+//   color: #b1b1b1;
+//   font-family: "Plus Jakarta Sans", sans-serif;
+//   font-size: 12.5px;
+//   font-weight: 500;
+// }
+
+// .income-percent {
+//   color: #1fb21c;
+//   font-family: "Plus Jakarta Sans", sans-serif;
+//   font-size: 17.1px;
+//   font-weight: 500;
+// }
+
+// .h3 {
+//   font-family: "Inter", sans-serif;
+//   font-size: 32.1px;
+//   font-weight: 600;
+//   color: #1e293b;
+// }
+
+// @media (max-width: 900px) {
+//   .chart-container {
+//     display: flex;
+//     flex-wrap: wrap;
+//   }
+// }
+$orange_color: #fb6f10;
+
+.card {
+  width: 100%;
+  max-width: 286px;
+  height: 198px;
+  box-shadow: 3px 3px 5px 0 rgb(0 0 0 / 8%);
+  border-radius: 6px;
+}
+
+.income-type {
+  color: #64748b;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 500;
+  font-size: 14.9px;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  width: fit-content;
+  color: #b1b1b1;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.income-percent {
+  color: #1fb21c;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 17.1px;
+  font-weight: 500;
+}
+
+.h3 {
+  font-family: "Inter", sans-serif;
+  font-size: 32.1px;
+  font-weight: 600;
+  color: #1e293b;
+}
+.revenue-chart {
+  width: 100%;
+  height: 100%;
+}
+.customer-chart {
+  width: 100%;
+  height: 100%;
+}
+.finance-list {
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 900px) {
+  .chart-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+@media (min-width: 320px) and (max-width: 425px) {
+  .revenue-chart {
+    width: 50%;
+    height: 50%;
+  }
+  .customer-chart {
+    width: 50%;
+    height: 50%;
+  }
+  .finance-list {
+    width: 50%;
+    height: 50%;
+  }
+}

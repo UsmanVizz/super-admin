@@ -1,0 +1,268 @@
+<div class="d-flex justify-content-between mt-5">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <div (click)="manageMenu()">
+          <img
+            src="../../../../assets/images/sidebar-icons/menu.png"
+            alt="City Icon"
+            class="category-icon mx-1"
+          />
+          <span class="bread-menu">Manage Menu</span>
+        </div>
+      </li>
+      <i class="fa-solid fa-chevron-right arrow px-3"></i>
+
+      <li class="breadcrumb-item active add-category mt-2" aria-current="page">
+        Edit Menu
+      </li>
+    </ol>
+  </nav>
+</div>
+<div class="container-fluid">
+  <div class="d-flex align-items-center m-5">
+    <h1 class="category-header flex-grow-1">Edit Menu</h1>
+    <div class="ml-auto">
+      <button class="custom-button" (click)="updateMenu()">Save</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="menuForm">
+        <div class="row">
+          <div class="col">
+            <label for="branchName" class="menu">Item Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Item Name"
+              formControlName="item_name"
+              [ngClass]="{
+                'danger-outline':
+                  menuForm.get('item_name')?.touched &&
+                  menuForm.get('item_name')?.invalid
+              }"
+            />
+            <div
+              *ngIf="
+                menuForm.get('item_name')?.hasError('required') &&
+                menuForm.get('item_name')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Item Name is required.
+            </div>
+          </div>
+          <div class="col">
+            <label for="branchId" class="menu">Item Price per Head</label>
+            <input
+              type="number"
+              class="form-control"
+              placeholder="200"
+              formControlName="item_price_per_head"
+              [ngClass]="{
+                'danger-outline':
+                  menuForm.get('item_price_per_head')?.touched &&
+                  menuForm.get('item_price_per_head')?.invalid
+              }"
+            />
+            <div
+              *ngIf="
+                menuForm.get('item_price_per_head')?.hasError('required') &&
+                menuForm.get('item_price_per_head')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Item price per head is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="branchId" class="menu">Branch Name</label>
+            <select
+              class="form-select form-select-lg"
+              aria-label=".form-select-lg example"
+              formControlName="branch_id"
+            >
+              <option selected disabled value="">Select Branch</option>
+              <option *ngFor="let item of branches" [value]="item._id">
+                {{ item.branch_name }}
+              </option>
+            </select>
+            <div
+              *ngIf="
+                menuForm.get('branch_id')?.hasError('required') &&
+                menuForm.get('branch_id')?.touched
+              "
+              class="text-danger error-state"
+            >
+              Branch Name is required.
+            </div>
+            <!-- <div class="custom-dropdown mt-3">
+                <div
+                  class="selected-item d-flex align-items-center justify-content-between input-class"
+                  (click)="toggleDropdown()"
+                >
+                  <span class="select-vender">
+                    {{ getSelectedBranch() }}
+                  </span>
+                  <span
+                    class="material-symbols-outlined"
+                    style="color: #b1b1b1"
+                    *ngIf="!showDropdown"
+                    >expand_more</span
+                  >
+                  <span
+                    class="material-symbols-outlined"
+                    style="color: #b1b1b1"
+                    *ngIf="showDropdown"
+                    >expand_less</span
+                  >
+                </div>
+                <div
+                  class="dropdown-list custom-dropdown-list"
+                  *ngIf="showDropdown"
+                >
+                  <div *ngFor="let branch of branchs">
+                    <label
+                      class="d-flex align-items-center gap-3 p-3 dropdown-select"
+                    >
+                      <input
+                        type="checkbox"
+                        [(ngModel)]="branch.selected"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
+                      {{ branch.name }}
+                    </label>
+                  </div>
+                </div>
+              </div> -->
+          </div>
+          <div class="col">
+            <label for="branchName" class="menu">Select Category</label>
+            <select
+              class="form-select form-select-lg"
+              aria-label=".form-select-lg example"
+              formControlName="category_id"
+              [ngClass]="{
+                'danger-outline':
+                  menuForm.get('category_id')?.touched &&
+                  menuForm.get('category_id')?.invalid
+              }"
+            >
+              <option selected disabled value="">Select Category</option>
+              <option *ngFor="let item of categories" [value]="item._id">
+                {{ item.category_name }}
+              </option>
+            </select>
+            <div
+              *ngIf="
+                menuForm.get('category_name')?.hasError('required') &&
+                menuForm.get('category_name')?.touched
+              "
+              class="text-danger error-state"
+            >
+              Category Name is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <label for="br-decription" class="menu">Description</label>
+              <textarea
+                class="form-control"
+                id="inputDescription"
+                rows="6"
+                type="text"
+                formControlName="item_description"
+                [ngClass]="{
+                  'danger-outline':
+                    menuForm.get('item_description')?.touched &&
+                    menuForm.get('item_description')?.invalid
+                }"
+              ></textarea>
+            </div>
+            <div
+              *ngIf="
+                menuForm.get('item_description')?.hasError('required') &&
+                menuForm.get('item_description')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Item Description is required.
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="d-flex flex-column">
+      <div class="d-flex align-items-center gap-5 mx-4 mt-2">
+        <label for="branchName" class="images-slider mt-5"
+          >Thumbnail Image</label
+        >
+        <label for="branchName" class="images-slider mx-1 mt-5"
+          >Menu Images</label
+        >
+      </div>
+    </div>
+    <div class="d-flex flex-column">
+      <div class="d-flex align-items-center gap-3 mx-5 mt-2">
+        <div class="d-flex align-items-center gap-3 mx-10 mt-2 image-container">
+          <div *ngIf="uploadedthumbnail" class="chip-img">
+            <img
+              [src]="'https://dev-backend.hamaravenue.com/' + uploadedthumbnail"
+              width="200"
+              height="180"
+              class="object-fit-fill"
+            />
+            <span class="close" (click)="removeThumbnail()">
+              <img src="../../../../assets/icon/cross-btn.png" alt="" />
+            </span>
+          </div>
+          <div *ngIf="uploadedthumbnail === null || uploadedthumbnail === ''">
+            <label for="thumbnail-upload" class="custom-file-upload">
+              <input
+                id="thumbnail-upload"
+                type="file"
+                (change)="onThumbnailSelected($event)"
+                accept="image/*"
+                multiple
+              />
+              <span class="material-symbols-outlined"> add_circle </span>
+            </label>
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-3 mt-1">
+          <div *ngFor="let image of uploadedImages" class="chip">
+            <img
+              [src]="'https://dev-backend.hamaravenue.com/' + image"
+              width="100"
+              height="100"
+              class="object-fit-fill"
+            />
+            <span class="close" (click)="removeImage(image)"
+              ><img src="../../../../assets/icon/cross-btn.png" alt=""
+            /></span>
+          </div>
+
+          <div>
+            <label for="file-upload" class="custom-thumbnail-upload">
+              <input
+                id="file-upload"
+                type="file"
+                (change)="onFileSelected($event)"
+                accept="image/*"
+                multiple
+              />
+              <span class="material-symbols-outlined"> add_circle </span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

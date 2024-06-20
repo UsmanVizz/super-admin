@@ -1,0 +1,97 @@
+.myChart {
+  height: 70% !important;
+  width: 100% !important;
+}
+
+.card1 {
+  margin-top: 30%;
+  height: 80%;
+  // width: calc(100% / 6);
+  width: 90%;
+  border: none;
+  box-shadow: 0 15px 60px rgba(129, 124, 124, 0.2);
+  border-radius: 6px;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.745);
+  gap: 10px;
+  padding-top: 20px;
+  padding-left: 20px;
+  line-height: 3p;
+  margin-left: 2%;
+}
+.card {
+  box-shadow: 0 15px 60px rgba(129, 124, 124, 0.2);
+  height: 100% !important;
+}
+
+.custom-select {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15.12px;
+  text-align: center;
+  color: #b1b1b1;
+  margin-top: 8px;
+  margin-right: 25%;
+  width: 10%;
+  padding: 0 2px 0 1px;
+}
+
+.chartcanvas {
+  height: 320px !important;
+  width: 100% !important;
+}
+
+.trending-up {
+  cursor: pointer;
+  background-color: #fb6f10;
+  color: #fff;
+  padding: 7px;
+  border-radius: 100px;
+  user-select: none;
+}
+
+.trending-down {
+  cursor: pointer;
+  background-color: #622cad;
+  color: #fff;
+  padding: 7px;
+  border-radius: 100px;
+  user-select: none;
+}
+.p-text {
+  padding-top: 21px;
+  margin-top: 0%;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15.12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  text-align: left;
+  color: #474747;
+}
+.text-range {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15.12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  text-align: left;
+  color: #969696 !important;
+}
+
+.card-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: #1e293b;
+  margin-left: 9px;
+}
+#border {
+  border-bottom: 2px solid #f0f0f0;
+}

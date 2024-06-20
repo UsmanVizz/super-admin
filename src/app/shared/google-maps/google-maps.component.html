@@ -1,0 +1,78 @@
+<div class="card p-3" style="border: none">
+  <div
+    class="card-header bg-white pt-4 pb-0 border-0 d-flex justify-content-between align-items-center"
+  >
+    <div class="d-flex gap-2 align-items-center">
+      <h3 class="card-title text-nowrap">Geo Location Graph</h3>
+      <div class="custom-select border-0">
+        <select style="border: none">
+          <option selected="">This Week</option>
+          <option value="1">Last Week</option>
+          <option value="2">Last Month</option>
+          <option value="3">Last 6 Month</option>
+          <option value="3">Last Year</option>
+          <option value="3">Custom Date</option>
+        </select>
+        <span class="custom-arrow"></span>
+      </div>
+    </div>
+
+    <div class="d-flex gap-2 align-items-center">
+      <div class="d-flex gap-2 align-items-center">
+        <span
+          class="vendor"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="$1009"
+        >
+          <img
+            src="../../../assets/images/vendor.png"
+            alt="Image Description"
+          />
+        </span>
+
+        <div class="d-flex flex-column">
+          <span class="p-text">Vendor</span>
+          <p class="text-range p-text">$1009</p>
+        </div>
+      </div>
+      <div class="d-flex gap-2 align-items-center">
+        <span
+          class="material-symbols-outlined trending-up"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="$1009"
+        >
+          trending_up
+        </span>
+
+        <div class="d-flex flex-column">
+          <span class="p-text">Bookings</span>
+          <p class="text-range p-text">$1009</p>
+        </div>
+      </div>
+      <div class="d-flex gap-2 align-items-center">
+        <span
+          class="material-symbols-outlined trending-down"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="$1009"
+        >
+          trending_down
+        </span>
+        <div class="d-flex flex-column">
+          <span class="p-text">Customer</span>
+          <p class="text-range p-text">$19</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    #gmap
+    style="width: 100%; margin-top: 20px"
+    [ngStyle]="{ height: height, width: width }"
+  ></div>
+</div>
+
+<!-- </div> -->

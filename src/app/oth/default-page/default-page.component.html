@@ -1,0 +1,33 @@
+<!-- <div class="h-100-p"> -->
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+      <li *ngFor="let data of slideData; let i = index" [class.active]="i === 0"
+        [attr.data-bs-target]="'#carouselExampleIndicators'" [attr.data-bs-slide-to]="i"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div *ngFor="let data of slideData; let i = index" class="carousel-item" [class.active]="i === 0">
+        <div class="image-overlay"></div>
+        <!-- Gradient overlay -->
+        <img [src]="data.backdropImag" class="d-block w-100 carousel-img" alt="..." />
+        <div class="carousel-caption d-flex align-content-start align-items-baseline justify-content-start">
+          <span class="text-start data-paragraph">{{ data.paragraph }}</span>
+          <div class="d-flex gap-2 align-items-center justify-content-start">
+            <span class="mb-3">_____</span>
+            <img [src]="data.clientImage" alt="" />
+            <p class="m-0">{{ data.clientName }} from {{ data.address }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+<!-- </div> -->

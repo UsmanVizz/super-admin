@@ -1,0 +1,207 @@
+<h1 class="title">All Customer</h1>
+<div class="container-fluid">
+  <div class="d-flex align-items-center mt-5 mx-5 buttons">
+    <div class="d-flex align-items-center">
+      <button
+        class="mx-2 left-button left-btn-text"
+        [class.orange-button]="selectedButton === 'all'"
+        (click)="selectButton('all')"
+        type="button"
+      >
+        All
+      </button>
+      <button
+        class="mx-2 left-button left-btn-text"
+        [class.orange-button]="selectedButton === 'reservation'"
+        (click)="selectButton('reservation')"
+        type="button"
+      >
+        Reservations
+      </button>
+      <button
+        class="mx-2 left-button left-btn-text"
+        [class.orange-button]="selectedButton === 'bookings'"
+        (click)="selectButton('bookings')"
+        type="button"
+      >
+        Bookings
+      </button>
+      <button
+        class="mx-2 left-button left-btn-text"
+        [class.orange-button]="selectedButton === 'in-progress'"
+        (click)="selectButton('in-progress')"
+        type="button"
+      >
+        In Progress
+      </button>
+      <button
+        class="mx-2 left-button left-btn-text"
+        [class.orange-button]="selectedButton === 'cancel'"
+        (click)="selectButton('cancel')"
+        type="button"
+      >
+        Cancelled
+      </button>
+    </div>
+
+    <!-- Right side buttons -->
+    <div class="ml-auto d-flex gap-1 align-items-center">
+      <button class="mx-2 sort-button search-btn btn-text" type="button">
+        <span>
+          <img
+            src="../../../../assets/halls/search-normal.png"
+            style="height: 20px"
+            alt="Logo"
+        /></span>
+      </button>
+      <button
+        class="mx-2 sort-button search-btn d-flex gap-1 align-items-center"
+        type="button"
+        (click)="onSortButtonClick()"
+      >
+        <span class="material-symbols-outlined"> filter_list </span>
+        <span class="btn-text">Sort</span>
+        <span class="btn-text span-text__color">All</span>
+      </button>
+      <button class="mx-2 sort-button search-btn btn-text" type="button">
+        <img src="../../../../assets/images/setting-4.png" alt="Logo" />
+        <span class="btn-text-filter mx-3">Filter</span>
+      </button>
+    </div>
+  </div>
+  <div style="overflow: auto; flex: 1">
+    <table
+      class="table"
+      style="
+        overflow-x: auto;
+        width: 100%;
+        table-layout: fixed;
+        white-space: nowrap;
+        border-collapse: collapse;
+      "
+    >
+      <thead>
+        <tr>
+          <th scope="col" class="t-head">Sr No.</th>
+          <th scope="col" class="th-table text-nowrap">Order ID</th>
+          <th scope="col" class="th-table text-nowrap">Customer Name</th>
+          <th scope="col" class="th-table text-nowrap">Event Date & Time</th>
+          <th scope="col" class="th-table text-nowrap">Booking Date</th>
+          <th scope="col" class="th-table text-nowrap">Hall Name</th>
+          <th scope="col" class="th-table text-nowrap">Order Amount</th>
+          <th scope="col" class="th-table text-nowrap">Advance</th>
+          <th scope="col" class="th-table text-nowrap">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of paginatedData; let i = index" class="d-flex">
+          <td class="t-head" style="border-bottom: none">
+            {{ (currentPage - 1) * pageSize + i + 1 }}
+          </td>
+          <td class="email-td text-nowrap">{{ row.order_id }}</td>
+          <td class="email-td text-nowrap">{{ row.customer_name }}</td>
+          <td class="email-td text-nowrap">{{ row.date_time }}</td>
+          <td class="email-td text-nowrap">{{ row.booking_date }}</td>
+          <td class="email-td text-nowrap">{{ row.hall_name }}</td>
+          <td class="email-td text-nowrap">{{ row.order_amount }}</td>
+          <td class="email-td text-nowrap">{{ row.advance }}</td>
+          <td>
+            <div style="display: flex; border-bottom: none">
+              <button type="button" class="btn action-button">
+                <img src="../../../../assets/icon/edit.png" alt="Edit" />
+              </button>
+              <button type="button" class="btn action-button">
+                <img src="../../../../assets/icon/delete.png" alt="Delete" />
+              </button>
+              <button
+                type="button "
+                class="btn action-button"
+                (click)="openNewComponent()"
+              >
+                <img src="../../../../assets/icon/view.png" alt="View" />
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Sr No.</th>
+        <th scope="col">Order ID</th>
+        <th scope="col">Customer Name</th>
+        <th scope="col">Event Date & Time</th>
+        <th scope="col">Booking Date</th>
+        <th scope="col">Hall Name</th>
+        <th scope="col">Order Amount</th>
+        <th scope="col">Advance</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of paginatedData">
+        <td>{{ row.id }}</td>
+        <td>{{ row.order_id }}</td>
+        <td>{{ row.customer_name }}</td>
+        <td>{{ row.date_time }}</td>
+        <td>{{ row.booking_date }}</td>
+        <td>{{ row.hall_name }}</td>
+        <td>{{ row.order_amount }}</td>
+        <td>{{ row.advance }}</td>
+        <td>
+          <div style="display: flex">
+            <button type="button" class="btn action-button">
+              <img src="../../../../assets/icon/edit.png" alt="Edit" />
+            </button>
+            <button type="button" class="btn action-button">
+              <img src="../../../../assets/icon/delete.png" alt="Delete" />
+            </button>
+            <button
+              type="button "
+              class="btn action-button"
+              (click)="openNewComponent()"
+            >
+              <img src="../../../../assets/icon/view.png" alt="View" />
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end m-5 align-items-center">
+      <!-- Previous button -->
+      <li class="page-item" [class.disabled]="currentPage == 1">
+        <a
+          class="page-link d-flex align-items-center"
+          (click)="prevPage()"
+          tabindex="-1"
+        >
+          <span class="material-symbols-outlined" style="color: #fb6f10"
+            >chevron_left</span
+          >
+          Previous
+        </a>
+      </li>
+      <!-- Pagination links -->
+      <li
+        class="page-item"
+        *ngFor="let page of pages"
+        [class.active]="currentPage == page"
+      >
+        <a class="page-link" (click)="setCurrentPage(page)">{{ page }}</a>
+      </li>
+      <!-- Next button -->
+      <li class="page-item" [class.disabled]="currentPage == totalPages">
+        <a class="page-link d-flex align-items-center" (click)="nextPage()">
+          Next
+          <span class="material-symbols-outlined" style="color: #fb6f10"
+            >chevron_right</span
+          >
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

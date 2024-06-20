@@ -1,0 +1,284 @@
+<div class="d-flex justify-content-between align-items-center">
+  <nav
+    style="--bs-breadcrumb-divider: '>'; color: #b1b1b1"
+    aria-label="breadcrumb"
+    class="mt-3 mb-4"
+  >
+    <ol class="breadcrumb d-flex align-items-center mt-4 pb-3">
+      <li class="breadcrumb-item">
+        <a class="d-flex align-items-center gap-3" routerLink="/user-management"
+          ><img
+            src="../../../../assets/images/icons/user-management.png"
+            alt="icon"
+          />
+          User Management</a
+        >
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Personal Information
+      </li>
+    </ol>
+  </nav>
+
+  <button class="order-btn" (click)="toggleUpdateProfile()">
+    {{ updated_profile ? "Update" : "Edit" }}
+  </button>
+</div>
+
+<main class="bg-white mt-1 rounded-3">
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="booking-details" style="font-size: 18px"
+        >Personal Information</span
+      >
+    </div>
+    <hr />
+
+    <ng-container *ngIf="!updated_profile">
+      <div class="d-flex flex-column gap-4 pb-3">
+        <div class="d-flex align-items-center image-container bottom-border">
+          <div
+            class="d-flex align-items-center gap-3 mx-10 mt-2 image-container"
+          >
+            <div class="user-profile d-flex gap-3 align-items-center">
+              <img
+                [src]="
+                  'https://dev-backend.hamaravenue.com' +
+                  userDetail?.profile_image
+                "
+                class="object-fit-fill border user-profile"
+              />
+            </div>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex flex-column boxes-2">
+            <span class="text-type"> name </span>
+            <span class="text-get">{{ userDetail?.full_name }}</span>
+          </div>
+          <div class="d-flex flex-column boxes-2">
+            <span class="text-type">Email</span>
+            <span class="text-get text-lowercase">{{ userDetail?.email }}</span>
+          </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex flex-column boxes-2">
+            <span class="text-type">Address</span>
+            <span class="text-get">{{
+              userDetail?.address?.street_address
+            }}</span>
+          </div>
+          <div class="d-flex flex-column boxes-2">
+            <span class="text-type">Contact No.</span>
+            <span class="text-get">{{ userDetail?.phone_no }}</span>
+          </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex flex-column boxes-2">
+            <span class="text-type">Salary</span>
+            <span class="text-get">{{ userDetail?.salary }}</span>
+          </div>
+          <div class="d-flex flex-column boxes-2">
+            <span class="text-type">Designation</span>
+            <span class="text-get">{{ userDetail?.role }}</span>
+          </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex flex-column boxes-2">
+            <span class="text-type">CNIC Number</span>
+            <span class="text-get">{{ userDetail?.cnic }}</span>
+          </div>
+          <div class="d-flex flex-column boxes-2">
+            <span class="text-type">Joining Date</span>
+            <span class="text-get">{{
+              userDetail?.joining_date | date : "dd/MM/yyyy"
+            }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="updated_profile">
+      <div class="d-flex align-items-center image-container bottom-border">
+        <div class="d-flex align-items-center gap-3 mx-10 mt-2 image-container">
+          <div
+            class="user-profile"
+            *ngIf="!setThumbnail || setThumbnail.length === 0"
+          >
+            <img
+              [src]="
+                'https://dev-backend.hamaravenue.com' +
+                userDetail?.profile_image
+              "
+              alt="user profile"
+              class="user-profile border object-fit-fill"
+            />
+          </div>
+          <div
+            class="chip-img d-flex align-items-center gap-2"
+            *ngIf="setThumbnail && setThumbnail.length > 0"
+            [ngStyle]="{ display: setThumbnail.length > 0 ? 'block' : 'none' }"
+          >
+            <img
+              [src]="'https://dev-backend.hamaravenue.com' + setThumbnail"
+              class="object-fit-fill user-profile border"
+            />
+          </div>
+          <span class="upload-image" (change)="onThumbnailSelected($event)">
+            <label for="img-upload-p">
+              <input
+                type="file"
+                id="img-upload-p"
+                class="d-none"
+                (change)="onThumbnailSelected($event)"
+              />
+
+              <img
+                src="../../../../assets/images/icons/upload-btn.png"
+                alt=""
+                class="upload-image"
+              />
+            </label>
+          </span>
+        </div>
+      </div>
+      <hr />
+      <form
+        class="d-flex flex-column gap-4"
+        [formGroup]="userProfileUpdate"
+        (ngSubmit)="updateUserProfile()"
+      >
+        <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="name" class="label-text">Name</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Name"
+              class="input-class text-capitalize"
+              formControlName="full_name"
+            />
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="email" class="label-text">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="abc@gmail.com"
+              class="input-class"
+              formControlName="email"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="address" class="label-text">Address</label>
+            <input
+              type="text"
+              id="address"
+              placeholder="Floor 1"
+              class="input-class"
+              formControlName="address"
+            />
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="password" class="label-text">Password</label>
+            <input
+              type="text"
+              id="password"
+              placeholder="Password"
+              class="input-class"
+              formControlName="password"
+            />
+          </div>
+        </div>
+        <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="contact" class="label-text">Contact</label>
+            <input
+              type="text"
+              id="contact"
+              placeholder="+92000000000"
+              class="input-class"
+              (input)="formatPhone($event)"
+              formControlName="contact_number"
+            />
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="designation" class="label-text mt-3"
+              >Select Branch</label
+            >
+            <select
+              name=""
+              id="designation"
+              class="input-class"
+              formControlName="branch_id"
+            >
+              <option selected disabled value="">Select Branch</option>
+              <option *ngFor="let item of branches" [value]="item._id">
+                {{ item.branch_name }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="salary" class="label-text">Salary</label>
+            <input
+              type="text"
+              id="salary"
+              placeholder="Salary"
+              class="input-class"
+              (input)="formatSalary($event)"
+              formControlName="salary"
+            />
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="designation" class="label-text">Designation</label>
+            <select
+              name=""
+              id="designation"
+              class="input-class"
+              formControlName="role"
+            >
+              <option selected disabled>Select Designation</option>
+              <option
+                *ngFor="let designation of designations"
+                [value]="designation.name"
+              >
+                {{ designation.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="address" class="label-text">CNIC</label>
+            <input
+              type="text"
+              id="address"
+              placeholder="88888-8888888-8"
+              class="input-class"
+              (input)="formatCnic($event)"
+              formControlName="cnic"
+            />
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="joining-date" class="label-text">Joining Date</label>
+            <input
+              id="joining-date"
+              placeholder="Date"
+              class="input-class"
+              [value]="userDetail?.joining_date | date : 'dd/MM/yyyy'"
+              readonly
+            />
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+</main>

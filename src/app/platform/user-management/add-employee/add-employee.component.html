@@ -1,0 +1,246 @@
+<div class="d-flex justify-content-between">
+  <nav
+    style="--bs-breadcrumb-divider: '>'; color: #b1b1b1"
+    aria-label="breadcrumb"
+    class="mt-3 mb-4"
+  >
+    <ol class="breadcrumb d-flex align-items-center mt-4 pb-3">
+      <li class="breadcrumb-item">
+        <div (click)="navigateToUser()" class="a">
+          <img
+            src="../../../../assets/images/sidebar-icons/user-manage.png"
+            alt="icon"
+          />
+          User management
+        </div>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Add Employee</li>
+    </ol>
+  </nav>
+</div>
+<div class="container-fluid">
+  <div class="d-flex align-items-center bottom-border">
+    <h1 class="flex-grow-1 mb-0 customer-details">Personal Information</h1>
+    <div class="ml-auto">
+      <button class="custom-button" (click)="employeeRegistered()">
+        <span class="custom-text">Save</span>
+      </button>
+    </div>
+  </div>
+  <form [formGroup]="addEmployeeForm" (ngSubmit)="employeeRegistered()">
+    <div class="d-flex align-items-center image-container bottom-border">
+      <div class="d-flex align-items-center gap-3 mx-10 mt-2 image-container">
+        <div class="picture__container chip-img">
+          <img
+            #img
+            [src]="
+              avatar_url
+                ? avatar_url
+                : '../../../../assets/images/icons/user-profile.png'
+            "
+            (click)="ProfilePicture.click()"
+            style="border-radius: 100px; width: 150px; height: 150px"
+          />
+          <span class="close-img" *ngIf="avatar_url" (click)="removeImage()">
+            <img src="../../../../assets/images/icons/cross-btn.png" alt="" />
+          </span>
+          <input
+            hidden
+            type="file"
+            #ProfilePicture
+            accept=".jpg, .jpeg, .png"
+            (change)="fileChange($event)"
+          />
+        </div>
+
+        <!-- <div class="picture__container chip-img">
+          <img
+            #img
+            [src]="
+              avatar_url
+                ? avatar_url
+                : '../../../../assets/images/icons/user-profile.png'
+            "
+            (click)="ProfilePicture.click()"
+            style="border-radius: 100px; width: 150px; height: 150px"
+          />
+          <span class="close-img" (click)="removeImage()">
+            <img src="../../../../assets/images/icons/cross-btn.png" alt="" />
+          </span>
+          <input
+            hidden
+            type="file"
+            #ProfilePicture
+            accept=".jpg, .jpeg, .png"
+            (change)="fileChange($event)"
+          />
+        </div> -->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="profile-heads">Name</div>
+        <div class="profile-body">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            formControlName="full_name"
+            [ngClass]="{
+              'danger-outline':
+                addEmployeeForm.get('full_name')?.touched &&
+                addEmployeeForm.get('full_name')?.invalid
+            }"
+          />
+          <div *ngIf="addEmployeeForm.get('full_name')?.touched">
+            <span
+              *ngIf="addEmployeeForm.get('full_name')?.hasError('required')"
+              class="text-danger"
+              >This field is required. *</span
+            >
+          </div>
+          <div
+            *ngIf="
+              addEmployeeForm.get('full_name')?.touched &&
+              addEmployeeForm.get('full_name')?.invalid
+            "
+          >
+            <span
+              class="text-danger"
+              *ngIf="addEmployeeForm.get('full_name')?.hasError('minLength')"
+              >The minimum length is 8.</span
+            >
+          </div>
+        </div>
+        <div class="profile-heads">Address</div>
+        <div formGroupName="address">
+          <div class="profile-body">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Address"
+              formControlName="street_address"
+            />
+          </div>
+        </div>
+        <div class="profile-heads">Salary</div>
+        <div class="profile-body">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="50,000"
+            maxlength="12"
+            formControlName="salary"
+            (input)="formatSalary($event)"
+          />
+        </div>
+        <div class="profile-heads">CNIC Number</div>
+        <div class="profile-body">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="0000-0000000-0"
+            formControlName="cnic"
+            (input)="formatCnic($event)"
+          />
+        </div>
+        <div class="profile-heads">Joining Date</div>
+        <div class="profile-body">
+          <input
+            type="date"
+            class="form-control"
+            formControlName="joining_date"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-heads">Email</div>
+        <div class="profile-body">
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            placeholder="Abc123@gmail.com"
+            formControlName="email"
+            (input)="emailCorrection()"
+            [ngClass]="{
+              'danger-outline':
+                addEmployeeForm.get('email')?.invalid &&
+                (addEmployeeForm.get('email')?.dirty ||
+                  addEmployeeForm.get('email')?.touched)
+            }"
+          />
+          <span
+            class="text-danger"
+            *ngIf="addEmployeeForm.get('email')?.errors?.['email'] && (addEmployeeForm.get('email')?.dirty || addEmployeeForm.get('email')?.touched)"
+          >
+            Please enter a valid email address
+          </span>
+          <span
+            class="text-danger"
+            *ngIf="
+              addEmployeeForm.get('email')?.errors &&
+              (addEmployeeForm.get('email')?.dirty ||
+                addEmployeeForm.get('email')?.touched)
+            "
+          >
+            {{ getEmailErrorMessage() }}
+          </span>
+        </div>
+
+        <div class="profile-heads">Password</div>
+        <div class="profile-body">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Password"
+            formControlName="password"
+          />
+        </div>
+        <div class="profile-heads">Select Branch</div>
+        <div class="profile-body">
+          <select
+            class="form-select form-select-lg form-control"
+            aria-label=".form-select-lg example "
+            formControlName="branch_id"
+          >
+            <option selected disabled value="">Select Branch</option>
+            <option *ngFor="let item of branches" [value]="item._id">
+              {{ item.branch_name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="profile-heads">Contact No</div>
+        <div class="profile-body">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="+92XXXXXXXX"
+            formControlName="phone_no"
+            maxlength="11"
+            formControlName="phone_no"
+            (input)="formatPhone($event)"
+          />
+        </div>
+        <div class="profile-heads">Designation</div>
+        <div class="profile-body">
+          <select
+            class="form-select form-select-lg form-control"
+            aria-label=".form-select-lg example "
+            formControlName="role"
+          >
+            <option selected disabled value="">Select Designation</option>
+            <option
+              *ngFor="let designation of designations"
+              [value]="designation.name"
+            >
+              {{ designation.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,127 @@
+$orange_color: #fb6f10;
+
+a {
+  text-decoration: none;
+  color: #b1b1b1;
+}
+
+.a {
+  margin: 10px;
+}
+
+main {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.item-link {
+  height: 55px;
+  padding: 1.5rem 2.5rem !important;
+}
+
+.fav-icon {
+  height: 49px;
+  width: 207px;
+  margin-left: 25px;
+  animation: customAni 2s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
+}
+img.active {
+  filter: grayscale(0%) brightness(100%);
+}
+
+.item-link img.active {
+  filter: brightness(10);
+  color: white;
+}
+
+.item-link.active {
+  background-color: #fb6f10;
+  color: white;
+}
+
+.logo-container {
+  border-bottom: 2px solid #f0f0f0;
+  height: 80px;
+}
+
+.active {
+  background-color: $orange_color;
+  border-radius: 10px;
+  color: #fff;
+  text-align: center;
+}
+a.active img {
+  filter: grayscale(0%) brightness(100%);
+  color: white;
+}
+
+.hms-title {
+  font-family: "Yusei Magic", sans-serif;
+  font-size: 16px;
+}
+
+.text-visiblity {
+  display: none;
+}
+.dropdown {
+  width: 100%;
+  overflow: hidden;
+  transition: all 0.52s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  cursor: pointer;
+}
+
+@media (min-width: 1170px) {
+  .text-visiblity {
+    display: block;
+    font-family: "Plus Jakarta Sans";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Copy this code after the above code */
+@keyframes customAni {
+  0% {
+    animation-timing-function: ease-out;
+    transform: scale(1);
+    transform-origin: center center;
+  }
+
+  10% {
+    animation-timing-function: ease-in;
+    transform: scale(0.91);
+  }
+
+  17% {
+    animation-timing-function: ease-out;
+    transform: scale(0.98);
+  }
+
+  33% {
+    animation-timing-function: ease-in;
+    transform: scale(0.87);
+  }
+
+  45% {
+    animation-timing-function: ease-out;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 1154px) {
+  .fav-icon {
+    height: 49px;
+    width: 75px;
+    margin-left: 25px;
+    animation: customAni 2s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
+  }
+}
+.active-img {
+  filter: brightness(0) invert(1);
+}

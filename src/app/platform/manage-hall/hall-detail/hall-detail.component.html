@@ -1,0 +1,192 @@
+<div class="container">
+  <div class="row justify-content-center mt-4">
+    <div class="card" *ngIf="hallData">
+      <div class="row no-gutters">
+        <div class="d-flex align-items-center">
+          <h1 class="flex-grow-1 mb-0 branch-name">
+            {{ hallData.hall_title }}
+          </h1>
+          <div class="ml-auto">
+            <button
+              class="custom-button"
+              style="background-color: #fb6f10; font-size: 16px"
+            >
+              <span class="icon"
+                ><img src="../../../../assets/icon/edit.png"
+              /></span>
+              <span class="edit-text" (click)="editBranch(hallData._id)">
+                Edit Hall</span
+              >
+            </button>
+          </div>
+        </div>
+
+        <!-- <div class="image-container"> -->
+        <div class="col-md-4">
+          <div
+            #carouselElement
+            [id]="'carousel_card_' + i"
+            class="carousel slide carousel-fade"
+          >
+            <div class="carousel-indicators">
+              <button
+                *ngFor="let image of hallData.images; let j = index"
+                type="button"
+                [attr.data-bs-target]="'#carousel_card_' + i"
+                [attr.data-bs-slide-to]="j"
+                [class.active]="j === 0"
+                aria-current="true"
+                [attr.aria-label]="'Slide ' + (j + 1)"
+              ></button>
+            </div>
+
+            <div class="carousel-inner">
+              <div
+                *ngFor="let image of hallData.images; let j = index"
+                class="carousel-item"
+                [class.active]="j === 0"
+              >
+                <img
+                  [src]="'https://dev-backend.hamaravenue.com' + image"
+                  class="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div
+                *ngIf="!hallData.images || hallData.images.length === 0"
+                class="carousel-item active"
+              >
+                <img
+                  src="../../../../assets/dashboard/default-image.webp"
+                  class="d-block"
+                  alt="Default Image"
+                />
+                <span class="no-image-text">No Image Found</span>
+              </div>
+            </div>
+
+            <button
+              class="carousel-control-prev"
+              type="button"
+              [attr.data-bs-target]="'#carousel_card_' + i"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              [attr.data-bs-target]="'#carousel_card_' + i"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        <!-- <div class="text-container"> -->
+        <div class="col-md-8">
+          <div class="branch-detail">Hall Details</div>
+          <div class="info-container">
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/Text.png"
+                  class="icons"
+                />Title
+              </p>
+              <div class="info-value">{{ hallData.hall_title }}</div>
+            </div>
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/File Text.png"
+                  class="icons"
+                />Description
+              </p>
+              <p class="info-value">{{ hallData.hall_description }}</p>
+            </div>
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/address.png"
+                  class="icons"
+                  class="icons"
+                />Branch
+              </p>
+              <p class="info-value">{{ hallData.branch_info?.branch_name }}</p>
+            </div>
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/area.png"
+                  class="icons"
+                />Area
+              </p>
+              <p class="info-value">{{ hallData.hall_area }}</p>
+            </div>
+
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/halls/range.png"
+                  class="icons"
+                />Parking Capacity
+              </p>
+              <p class="info-value">{{ hallData.people_capacity }}</p>
+            </div>
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/floor.png"
+                  class="icons"
+                />Floor
+              </p>
+              <p class="info-value">{{ hallData.floor || "its not hall" }}</p>
+            </div>
+
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/map.png"
+                  class="icons"
+                />Address on Map
+              </p>
+              <p class="info-value">
+                {{
+                  hallData.address.length > 0 ? hallData.address[0]?.city : ""
+                }}
+              </p>
+            </div>
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/address1.png"
+                  class="icons"
+                />Address
+              </p>
+              <p class="info-value">
+                {{
+                  hallData.address.length > 0
+                    ? hallData.address[0]?.street_adress
+                    : ""
+                }}
+              </p>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Price</div>
+              <p class="info-value">{{ hallData.rent }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

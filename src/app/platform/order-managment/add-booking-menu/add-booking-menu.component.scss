@@ -1,0 +1,443 @@
+$breadcrumb-divider: quote(">");
+
+$orange_color: #fb6f10;
+.vendor-container {
+  padding: 30px;
+  border-radius: 10px;
+}
+main {
+  box-shadow: 0px 0px 8px -4px #00000052;
+}
+.booking-container {
+  background-color: white;
+}
+.a {
+  text-decoration: none;
+  color: #fb6f10;
+  font-weight: 600;
+  font-size: 12px;
+}
+.vendor-details {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #232323;
+}
+.breadcrumb-item {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: #b1b1b1;
+  cursor: pointer;
+}
+
+.booking-details {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+}
+.card {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  padding: 9px 29px !important;
+  gap: 32px;
+  background: #ffffff;
+  border-radius: 8px;
+  .select-category {
+    width: 172px;
+    height: 19px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #232323;
+  }
+  .scroll-container {
+    white-space: nowrap;
+    overflow-y: hidden;
+    margin-bottom: -16px;
+
+    .card-container {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 12.46px;
+      width: 808px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+
+      .card-category {
+        width: 125.15px;
+        height: 110.61px;
+
+        background: #ffffff;
+        border-radius: 4.15424px;
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+
+        .card-title {
+          padding: 4px 29px;
+          width: 121px;
+          height: 9px;
+          left: calc(50% - 121px / 2 + 0.33px);
+          top: 91.99px;
+
+          font-family: "Plus Jakarta Sans";
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 150%;
+          display: flex;
+          align-items: center;
+          text-align: center;
+          letter-spacing: -0.02em;
+          color: #737373;
+        }
+        .card-img-top {
+          width: 125.15px;
+          height: 83.08px;
+        }
+      }
+    }
+  }
+  .card-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0px;
+    gap: 16px;
+    width: 668px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+}
+.drop-card {
+  display: flex;
+  flex-direction: column;
+  padding: 74px 52px;
+  gap: 32px;
+  position: absolute;
+  left: 1100px;
+  top: 241px;
+  background: #ffffff;
+  border-radius: 8px;
+  .custom-drag-box {
+    padding: 9px;
+    gap: 9px;
+    margin: 10px;
+    width: 213px;
+    height: 87px;
+
+    background: #ffffff;
+    box-shadow: 0px 0px 9.10345px rgba(0, 0, 0, 0.25);
+    border-radius: 9.10345px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    img {
+      width: 89px;
+      height: 70px;
+    }
+  }
+  .cross-btn {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  .selected-item {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #232323;
+    .drag-text {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 12px;
+      color: #232323;
+    }
+  }
+}
+.span {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12.7448px;
+  line-height: 150%;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
+
+.custom-price-text {
+  width: 40px;
+  height: 14px;
+
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10.9241px;
+  line-height: 14px;
+  /* identical to box height */
+  letter-spacing: -0.02em;
+  color: #fb6f10;
+}
+.color-grey {
+  width: 46px;
+  height: 14px;
+  font-family: "Plus Jakarta Sans";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 10.9241px;
+  line-height: 14px;
+  letter-spacing: -0.01em;
+  color: #b1b1b1;
+}
+.drag-drop-text {
+  font-family: "Plus Jakarta Sans";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 10.9241px;
+  line-height: 14px;
+  letter-spacing: -0.01em;
+  color: #b1b1b1;
+}
+.select-item {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12.7448px;
+  line-height: 150%;
+  letter-spacing: -0.02em;
+  color: #000000;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.example-list {
+  min-height: 60px;
+  margin-top: -4%;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  overflow-y: auto;
+  height: 250px;
+}
+
+.drag-box__container {
+  height: 325px !important;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f90;
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+}
+
+.example-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-container {
+  margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.menu-border {
+  width: 620px;
+}
+
+.ng-star-inserted {
+  width: fit-content !important;
+  height: fit-content !important;
+}
+.custom-box {
+  margin: 10px;
+  cursor: move;
+  border-radius: 10px;
+  padding: 8px;
+  height: 87px;
+  width: 280px;
+  box-shadow: 1px 1px 6px 1px #7777;
+  .img-fluid {
+    width: 91.03px;
+    height: 72.83px;
+    border-radius: 7.28276px;
+    display: block; /* Ensure proper rendering */
+    object-fit: cover;
+  }
+}
+
+.cross-btn {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.card-category.selected {
+  background-color: #fb6f10 !important;
+  color: white !important;
+}
+.selected-text {
+  color: white !important;
+}
+.price-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+  height: 22px;
+  padding-top: 30px;
+  .total-price {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #232323;
+  }
+  .standard-price {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+    color: #fb6f10;
+  }
+}
+.view-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 10px;
+  width: 256px;
+  height: 45px;
+  margin-top: 7% !important;
+  background: #fb6f10;
+  border-radius: 8px;
+  flex: none;
+  order: 2;
+  border: none;
+  flex-grow: 0;
+}
+.order-btn {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background-color: $orange_color;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  padding: 12px 16px 12px 16px;
+  border-radius: 8px;
+  border: none;
+}
+.view-btn-active {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.view-btn:hover {
+  background-color: #fff;
+  color: #fb6f10;
+}
+.manage-category {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 150%;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.03em;
+  color: #1e293b;
+}
+
+.select-vender {
+  color: #718ebf;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  padding-left: 20px;
+}

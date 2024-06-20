@@ -1,0 +1,201 @@
+<nav aria-label="breadcrumb" class="mt-5">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <div class="a" (click)="personalInfo()">
+        <img
+          src="../../../../assets/images/profile.png"
+          alt="City Icon"
+          class="category-icon"
+        />
+        <span class="bread-menu">Profile</span>
+      </div>
+    </li>
+    <i class="fa-solid fa-chevron-right arrow px-3"></i>
+
+    <li class="breadcrumb-item active add-category mt-2" aria-current="page">
+      Edit Profile
+    </li>
+  </ol>
+</nav>
+
+<div class="container-fluid">
+  <div class="d-flex align-items-center bottom-button">
+    <button class="default-button" (click)="personalInfo()">
+      <span class="btn-text">Personal Information</span>
+    </button>
+    <button class="mx-3 change-password" (click)="changePassword()">
+      <span class="pwd-text">Change Password</span>
+    </button>
+  </div>
+  <div class="d-flex align-items-center bottom-border mt-4">
+    <h1 class="flex-grow-1 mb-0 profile-details">Personal Information</h1>
+    <div class="ml-auto">
+      <button class="custom-button" (click)="updateProfile()">
+        <span class="custom-text">Save Changes</span>
+      </button>
+    </div>
+  </div>
+  <div class="d-flex align-items-center image-container bottom-border">
+    <div class="d-flex align-items-center gap-3 mx-10 mt-2 image-container">
+      <div *ngIf="uploadedthumbnail.length > 0" class="chip-img">
+        <img
+          [src]="'https://dev-backend.hamaravenue.com' + setThumbnail"
+          class="object-fit-cover border user-profile"
+        />
+        <span class="close-img" (click)="removeThumbnail(uploadedthumbnail[0])">
+          <img
+            src="../../../../assets/images/icons/cross-btn.png"
+            alt="remove"
+          />
+        </span>
+      </div>
+      <div *ngIf="uploadedthumbnail?.length === 0" class="user-profile">
+        <div
+          style="
+            width: 128px;
+            height: 128px;
+            background-color: #00000054;
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid #000;
+          "
+          class="d-flex align-items-center justify-content-center"
+          data-tooltip="Upload Photo"
+          data-flow="top"
+        >
+          <span class="text-white fw-normal" style="cursor: pointer"
+            >Upload Photo</span
+          >
+        </div>
+        <label for="thumbnail-upload">
+          <input
+            id="thumbnail-upload"
+            type="file"
+            (change)="onThumbnailSelected($event)"
+            accept="image/*"
+          />
+          <img
+            [src]="
+              'https://dev-backend.hamaravenue.com/' + profileData?.logo_image
+            "
+            alt="user profile"
+            class="user-profile object-fit-cover border"
+          />
+        </label>
+
+        <span class="upload-image">
+          <label for="img-upload-p">
+            <input
+              type="file"
+              id="img-upload-p"
+              class="d-none"
+              (change)="onThumbnailSelected($event)"
+            />
+            <img
+              src="../../../../assets/images/icons/upload-icon.png"
+              alt="upload icon"
+              class="img-upload-p"
+            />
+          </label>
+        </span>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="userProfileUpdate" (ngSubmit)="updateProfile()">
+    <div class="row">
+      <div class="col">
+        <div class="profile-heads">Name</div>
+        <div class="profile-body">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            [value]="profileData?.first_name + ' ' + profileData?.last_name"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="profile-heads">Email</div>
+        <div class="profile-body">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Abc123@gmail.com"
+            formControlName="email"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="profile-heads">Address</div>
+        <div class="profile-body">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="address"
+            placeholder="street"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="profile-heads">Zip Code</div>
+        <div class="profile-body">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="zip_code"
+            (input)="formatZipCode($event)"
+            placeholder="Zip Code"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="profile-heads">Business Contact</div>
+        <div class="profile-body">
+          <input
+            type="text"
+            class="form-control"
+            maxlength="11"
+            placeholder="xxxxxxxxxx"
+            formControlName="business_contact_number"
+          />
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="profile-heads">Contact No</div>
+        <div class="profile-body">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="phone_no"
+            (input)="formatPhone($event)"
+            placeholder="03XXXXXXXX"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="profile-heads">CNIC Number</div>
+        <div class="profile-body" style="padding-top: 2% !important">
+          <input
+            style="padding-left: 1% !important"
+            type="text"
+            class="form-control"
+            placeholder="0000-0000000-0"
+            formControlName="cnic"
+            (input)="formatCnic($event)"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

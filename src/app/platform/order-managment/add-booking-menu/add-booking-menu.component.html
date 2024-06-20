@@ -1,0 +1,186 @@
+<nav
+  style="--bs-breadcrumb-divider: '>'; color: #b1b1b1"
+  aria-label="breadcrumb"
+  class="mt-3 mb-4"
+>
+  <ol class="breadcrumb d-flex align-items-center mt-4 pb-3">
+    <li class="breadcrumb-item">
+      <div class="a">
+        <img
+          src="../../../../assets/images/icons/order-management-icon.png"
+          alt="icon"
+        />
+        Order Management
+      </div>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Bookings</li>
+  </ol>
+</nav>
+
+<main class="bg-white mt-4 vendor-container">
+  <div class="d-flex flex-column">
+    <div
+      class="d-flex justify-content-between align-items-center mt-4 mx-5 mb-5"
+    >
+      <span class="booking-details">Booking Details</span>
+    </div>
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="booking-details mb-4 mx-5" style="font-size: 18px"
+        >Add Menu</span
+      >
+    </div>
+    <div class="booking-container">
+      <div cdkDropListGroup class="d-flex justify-content-between">
+        <div class="card">
+          <div class="select-category">Select Categories</div>
+          <div class="scroll-container #scrollContainer">
+            <div class="card-container">
+              <div
+                class="card-category"
+                *ngFor="let card of cardsData; let i = index"
+                [class.selected]="isSelected(i)"
+                (click)="toggleSelection(i)"
+              >
+                <img
+                  [src]="card.imageUrl"
+                  alt="{{ card.title }}"
+                  class="card-img-top"
+                />
+                <div class="card-body">
+                  <h5 class="card-title" [class.selected-text]="isSelected(i)">
+                    {{ card.title }}
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="select-category">Select Item (6)</div>
+          <div class="card-item">
+            <div class="d-flex flex-column p-3 rounded-3">
+              <div class="d-flex justify-content-between">
+                <div class="example-container menu-border">
+                  <div
+                    cdkDropList
+                    [cdkDropListData]="items"
+                    class="example-list drag-box__container"
+                    cdkDropListSortingDisabled
+                    (cdkDropListDropped)="drop($event)"
+                  >
+                    <div class="d-flex flex-column">
+                      <div *ngIf="items.length === 0">
+                        <div class="checkbox">No more items</div>
+                      </div>
+                      <div class="d-flex flex-wrap align-content-start">
+                        <div
+                          *ngFor="let item of items; trackBy: trackByFn"
+                          cdkDrag
+                        >
+                          <div
+                            class="d-flex justify-content-between custom-box"
+                          >
+                            <div class="d-flex gap-3 align-items-center">
+                              <img
+                                src="../../../../assets/menu-categories/image-5.png"
+                                alt=""
+                              />
+                              <div class="d-flex flex-column">
+                                <span class="span">{{ item }}</span>
+                                <div class="flex-grow-1">
+                                  <span class="custom-price-text">
+                                    Rs: 250
+                                  </span>
+                                  <span class="color-grey">per head</span>
+                                </div>
+                              </div>
+                            </div>
+                            <img
+                              src="../../../../assets/menu-categories/add-btn.png"
+                              alt="cross btn"
+                              class="cross-btn"
+                              (click)="addSelectItem(item)"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="drop-card">
+          <h2 class="selected-item">
+            Selected Item <span class="drag-text">(Drag and Drop)</span>
+          </h2>
+          <div class="example-container menu-border">
+            <div
+              cdkDropList
+              [cdkDropListData]="basket"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <!-- <div *ngIf="basket.length === 0">
+                <div class="checkbox">No Item Selected</div>
+              </div> -->
+              <div *ngFor="let item of basket; trackBy: trackByFn" cdkDrag>
+                <div class="d-flex justify-content-between custom-box">
+                  <div class="d-flex gap-3 align-items-center">
+                    <img
+                      src="../../../../assets/menu-categories/image-5.png"
+                      alt=""
+                    />
+                    <div class="d-flex flex-column">
+                      <span class="span">{{ item }}</span>
+                      <div class="flex-grow-1">
+                        <span class="custom-price-text"> Rs: 250 </span>
+                        <span class="color-grey">per head</span>
+                      </div>
+                    </div>
+                  </div>
+                  <img
+                    src="../../../../assets/menu-categories/cross-btn.png"
+                    alt="cross btn"
+                    class="cross-btn"
+                    (click)="returnSelectedItem(item)"
+                  />
+                </div>
+              </div>
+              <div class="d-flex custom-drag-box">
+                <div class="d-flex gap-4 align-items-center">
+                  <img src="../../../../assets/images/upload.png" alt="" />
+                  <div class="d-flex flex-column gap-3">
+                    <span class="select-item">Select Item</span>
+                    <span class="drag-drop-text">(Drag and Drop)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div
+              class="d-flex justify-content-between align-items-center price-section"
+            >
+              <span class="total-price">Stander Price</span>
+              <span class="standard-price">Rs: 2,453</span>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-end align-items-center gap-4">
+      <button class="order-btn" style="background-color: #b1b1b1; width: 180px">
+        Go Back
+      </button>
+      <button
+        class="order-btn"
+        type="submit"
+        style="width: 180px"
+        (click)="addbookingTeam()"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</main>

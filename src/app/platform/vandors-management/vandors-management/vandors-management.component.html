@@ -1,0 +1,218 @@
+<main class="mt-4 p-4 rounded-3">
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <span class="order-title">Hire Vendor</span>
+      <button class="order-btn" (click)="addService()">Add Vendor</button>
+    </div>
+    <!-- <div class="d-flex header-card justify-content-between mt-5">
+      <div class="d-flex gap-3 align-items-center">
+        <div class="d-flex gap-3" *ngFor="let item of chipItems; let i = index">
+          <span class="order-btn"
+            >{{ item.type }} <span class="item-value">{{ item.value }}</span>
+            <img
+              src="../../../../assets/icon/cross-icon.png"
+              alt="cross icon"
+              (click)="deleteChip(i)"
+              style="cursor: pointer"
+          /></span>
+        </div>
+
+        <span
+          class="order-btn bg-white filter-title not-active"
+          (click)="clearAllChip()"
+          >Clear All</span
+        >
+      </div>
+      <div class="ml-auto d-flex gap-1 align-items-center">
+        <button
+          class="mx-2 sort-button d-flex gap-1 align-items-center"
+          type="button"
+        >
+          <span>
+            <img src="../../../../assets/halls/search-normal.png" alt="Logo"
+          /></span>
+        </button>
+        <button
+          class="mx-2 sort-button search-btn d-flex gap-1 align-items-center"
+          type="button"
+        >
+          <span class="material-symbols-outlined"> filter_list </span>
+          <span class="btn-text">Sort date</span>
+          <span class="btn-text span-text__color">All</span>
+        </button>
+        <button
+          class="mx-2 sort-button search-btn btn-text d-flex gap-1 align-items-center"
+          type="button"
+        >
+          <img src="../../../../assets/images/setting-4.png" alt="" />
+          <span class="btn-text-filter mx-3">Filter</span>
+        </button>
+      </div>
+    </div> -->
+  </div>
+</main>
+
+<div class="container-fluid justify-content-center mt-5 d-flex gap-3 flex-wrap">
+  <div
+    *ngFor="let vendor of vendorOffers; let i = index"
+    class="d-flex bg-white p-3 rounded-3"
+    style="width: 736px"
+  >
+    <div
+      id="vendorCarousel{{ i }}"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div
+          *ngFor="let image of vendor.images; let j = index"
+          class="carousel-item"
+          [ngClass]="{ active: j === 0 }"
+        >
+          <img [src]="image.image1" class="carousel-image" alt="..." />
+        </div>
+      </div>
+      <div class="carousel-indicators-2">
+        <button
+          class="carousel-control-prev"
+          type="button"
+          [attr.data-bs-target]="
+            '#vendorCarousel' + (i === 0 ? vendorOffers.length - 1 : i - 1)
+          "
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <ol class="carousel-indicators">
+          <li
+            *ngFor="let data of vendorOffers; let i = index"
+            [class.active]="i === 0"
+            [attr.data-bs-target]="'#carouselExampleIndicators'"
+            [attr.data-bs-slide-to]="i"
+          ></li>
+        </ol>
+
+        <button
+          class="carousel-control-next"
+          type="button"
+          [attr.data-bs-target]="
+            '#vendorCarousel' + (i === vendorOffers.length - 1 ? 0 : i + 1)
+          "
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="card border-0">
+      <div class="d-flex flex-column">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex flex-column gap-1">
+            <span class="vendor-name__title">Vendor Name</span>
+            <span class="vendor-name">{{ vendor.vendorName }}</span>
+          </div>
+          <div class="onoffswitch">
+            <input
+              type="checkbox"
+              name="onoffswitch"
+              class="onoffswitch-checkbox"
+              id="myonoffswitch{{ i }}"
+              tabindex="0"
+            />
+            <label class="onoffswitch-label" for="myonoffswitch{{ i }}">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </label>
+          </div>
+        </div>
+        <hr />
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex flex-column address-box">
+            <span class="address-title__name">Address:</span>
+            <span class="address-title text-break">{{ vendor.address }}</span>
+          </div>
+          <div class="d-flex flex-column rating-box">
+            <span class="address-title__name">Rating:</span>
+            <div class="rate d-flex align-items-center">
+              <span class="rating-title">{{ vendor.rating }}</span>
+              <ng-container *ngFor="let star of [5, 4, 3, 2, 1]">
+                <input
+                  type="radio"
+                  [id]="'star' + star + 'Vendor' + i"
+                  name="rate{{ i }}"
+                  [value]="star"
+                  [(ngModel)]="vendor.starRating"
+                  [disabled]="true"
+                />
+                <label [for]="'star' + star + 'Vendor' + i" title="text">
+                  {{ vendor.starRating }} stars
+                </label>
+              </ng-container>
+            </div>
+            <span class="rating-number">(5646)</span>
+          </div>
+          <div class="d-flex gap-1">
+            <span class="total-price">Rs. {{ vendor.totalPrice }}</span>
+            <span class="per-event fst-italic">per event</span>
+          </div>
+        </div>
+        <hr />
+        <div class="d-flex justify-content-end align-items-center gap-2">
+          <img
+            src="../../../../assets/images/table-icons/filter-icon-2.png"
+            alt="icon"
+            class="icon-img object-fit-cover"
+          />
+          <img
+            src="../../../../assets/images/table-icons/delete-icon.png"
+            alt="icon"
+            class="icon-img object-fit-cover"
+          />
+          <img
+            src="../../../../assets/images/table-icons/view-icon.png"
+            alt="icon"
+            class="icon-img object-fit-cover"
+          />
+        </div>
+      </div>
+    </div>
+    <hr />
+  </div>
+</div>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end m-5 align-items-center">
+    <!-- Previous button -->
+    <li class="page-item" [class.disabled]="currentPage == 1">
+      <a
+        class="page-link d-flex align-items-center"
+        (click)="prevPage()"
+        tabindex="-1"
+      >
+        <span class="material-symbols-outlined" style="color: #fb6f10"
+          >chevron_left</span
+        >
+        Previous
+      </a>
+    </li>
+    <!-- Pagination links -->
+    <li
+      class="page-item"
+      *ngFor="let page of pages"
+      [class.active]="currentPage == page"
+    >
+      <a class="page-link" (click)="setCurrentPage(page)">{{ page }}</a>
+    </li>
+    <!-- Next button -->
+    <li class="page-item" [class.disabled]="currentPage == totalPages">
+      <a class="page-link d-flex align-items-center" (click)="nextPage()">
+        Next
+        <span class="material-symbols-outlined" style="color: #fb6f10"
+          >chevron_right</span
+        >
+      </a>
+    </li>
+  </ul>
+</nav>

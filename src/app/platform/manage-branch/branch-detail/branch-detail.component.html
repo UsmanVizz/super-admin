@@ -1,0 +1,183 @@
+<div class="container">
+  <div class="row justify-content-center mt-4">
+    <div class="card" *ngIf="branchData">
+      <div class="row no-gutters">
+        <div class="d-flex align-items-center">
+          <h1 class="flex-grow-1 mb-0 branch-name">
+            {{ branchData.branch_name }}
+          </h1>
+          <div class="ml-auto">
+            <button
+              class="custom-button"
+              style="background-color: #fb6f10; font-size: 16px"
+            >
+              <span class="icon"
+                ><img src="../../../../assets/icon/edit.png"
+              /></span>
+              <span class="edit-text" (click)="editBranch(branchData._id)">
+                Edit Branch</span
+              >
+            </button>
+          </div>
+        </div>
+
+        <!-- <div class="image-container"> -->
+        <div class="col-md-4">
+          <div
+            #carouselElement
+            [id]="'carousel_card_' + i"
+            class="carousel slide carousel-fade"
+          >
+            <div class="carousel-indicators">
+              <button
+                *ngFor="let image of branchData.images; let j = index"
+                type="button"
+                [attr.data-bs-target]="'#carousel_card_' + i"
+                [attr.data-bs-slide-to]="j"
+                [class.active]="j === 0"
+                aria-current="true"
+                [attr.aria-label]="'Slide ' + (j + 1)"
+              ></button>
+            </div>
+
+            <div class="carousel-inner">
+              <div
+                *ngFor="let image of branchData.images; let j = index"
+                class="carousel-item"
+                [class.active]="j === 0"
+              >
+                <img
+                  [src]="'https://dev-backend.hamaravenue.com' + image"
+                  class="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div
+                *ngIf="!branchData.images || branchData.images.length === 0"
+                class="carousel-item active"
+              >
+                <div class="image-container">
+                  <img
+                    src="../../../../assets/dashboard/default-image.webp"
+                    class="d-block"
+                    alt="Default Image"
+                  />
+                  <span class="no-image-text">No Image Found</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="carousel-control-prev"
+              type="button"
+              [attr.data-bs-target]="'#carousel_card_' + i"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              [attr.data-bs-target]="'#carousel_card_' + i"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        <!-- <div class="text-container"> -->
+        <div class="col-md-8">
+          <div class="branch-detail">Branch Details</div>
+          <div class="info-container">
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/Text.png"
+                  class="icons"
+                />Title
+              </p>
+              <div class="info-value">{{ branchData.branch_name }}</div>
+            </div>
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/File Text.png"
+                  class="icons"
+                />Description
+              </p>
+              <p class="info-value">{{ branchData.branch_description }}</p>
+            </div>
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/address.png"
+                  class="icons"
+                  class="icons"
+                />City
+              </p>
+              <p class="info-value">{{ branchData.address[0].city }}</p>
+            </div>
+
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/car.png"
+                  class="icons"
+                />Parking Capacity
+              </p>
+              <p class="info-value">{{ branchData.parking_capacity }}</p>
+            </div>
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/ferris-wheel.png"
+                  class="icons"
+                />Special Attractions
+              </p>
+              <p class="info-value">
+                {{
+                  branchData.attraction ? branchData.attraction : "not found"
+                }}
+              </p>
+            </div>
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/map.png"
+                  class="icons"
+                />Address
+              </p>
+              <p class="info-value">
+                {{ branchData.address[0].street_adress }}
+              </p>
+            </div>
+
+            <div class="info-item">
+              <div class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/owner.png"
+                  class="icons"
+                />Venus Owner
+              </div>
+              <p class="info-value text-capitalize">
+                {{
+                  branchData.hall_info.first_name +
+                    " " +
+                    branchData.hall_info.last_name
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

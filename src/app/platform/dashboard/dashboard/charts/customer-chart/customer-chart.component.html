@@ -1,0 +1,42 @@
+<div class="card p-3 border-0">
+  <div class="d-flex justify-content-between" id="border">
+    <div class="card-header bg-white pt-4 d-flex pb-4 align-items-start border-0">
+      <h3 class="card-title">Customer</h3>
+      <div class="custom-select border-0">
+        <select style="border: none">
+          <option selected="">This Week</option>
+          <option value="1">Last Week</option>
+          <option value="2">Last Month</option>
+          <option value="3">Last 6 Month</option>
+          <option value="3">Last Year</option>
+          <option value="3">Custom Date</option>
+        </select>
+        <span class="custom-arrow"></span>
+      </div>
+    </div>
+
+    <div class="d-flex gap-3 align-items-center">
+      <div class="d-flex gap-2 align-items-center mx-4">
+        <span class="trending-down" (click)="toggleValueVisibility('Repeated Customer')" data-toggle="tooltip"
+          data-placement="top" title="$1009">
+        </span>
+        <div class="d-flex flex-column">
+          <span class="p-text">Repeated Customer</span>
+          <p class="text-range">$1009</p>
+        </div>
+      </div>
+      <div class="d-flex gap-2 align-items-center mx-3">
+        <span class="trending-up" (click)="toggleValueVisibility('New Customer')" data-toggle="tooltip"
+          data-placement="top" title="$1009">
+        </span>
+        <div class="d-flex flex-column">
+          <span class="p-text">New Customers</span>
+          <p class="text-range">$19</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div #chartCanvas2 id="myChart" class="chartcanvas"></div>
+  </div>
+</div>

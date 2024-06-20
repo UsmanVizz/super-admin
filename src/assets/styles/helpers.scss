@@ -1,0 +1,303 @@
+@import "./breakpoints";
+
+// ------------------------------------------------------------------------------------------------------
+// @ Font-size helpers
+// ------------------------------------------------------------------------------------------------------
+@each $prop,
+$abbrev in (font-size: fs) {
+    @for $index from 0 to 72 {
+        $size: $index * 1;
+        $length: #{$size}px;
+
+        .#{$abbrev}-#{$size} {
+            #{$prop}: $length !important;
+        }
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------
+// @ Font-weight helpers
+// ------------------------------------------------------------------------------------------------------
+@each $prop,
+$abbrev in (font-weight: fw) {
+    @for $index from 1 to 9 {
+        $size: $index * 100;
+        $length: #{$size};
+
+        .#{$abbrev}-#{$size} {
+            #{$prop}: $length !important;
+        }
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------
+// @ Line-height helpers
+// ------------------------------------------------------------------------------------------------------
+@each $prop,
+$abbrev in (line-height: lh) {
+    @for $index from 0 to 72 {
+        $size: $index * 1;
+        $length: #{$size}px;
+
+        .#{$abbrev}-#{$size} {
+            #{$prop}: $length !important;
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Size helpers
+// -----------------------------------------------------------------------------------------------------
+@each $prop,
+$abbrev in (height: h, width: w) {
+
+    @for $index from 0 through 360 {
+        $size: $index * 2;
+        $length: #{$size}px;
+
+        .#{$abbrev}-#{$size} {
+            #{$prop}: $length !important;
+        }
+
+        .max#{$abbrev}-#{$size} {
+            max-#{$prop}: $length !important;
+        }
+
+        .min#{$abbrev}-#{$size} {
+            min-#{$prop}: $length !important;
+        }
+    }
+
+    // With Percentage
+    @for $i from 0 through 100 {
+        $i-p: 1 * $i;
+        $size-p: 1% * $i;
+
+        .#{$abbrev}-#{$i-p}-p {
+            #{$prop}: $size-p !important;
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Spacing helpers
+// -----------------------------------------------------------------------------------------------------
+@each $breakpoint,
+$materialBreakpoint in $helper-breakpoints {
+
+    @include media-breakpoint($materialBreakpoint) {
+
+        $infix: if($materialBreakpoint ==null, "", "-#{$breakpoint}");
+
+        @each $prop,
+        $abbrev in (margin: m, padding: p) {
+
+            @for $index from 0 through 256 {
+                $size: $index * 1;
+                $length: #{$size}px;
+
+                .#{$abbrev}#{$infix}-#{$size} {
+                    #{$prop}: $length !important;
+                }
+            }
+
+            @for $index from 0 through 256 {
+                $size: $index * 1;
+                $length: #{$size}px;
+
+                .#{$abbrev}x#{$infix}-#{$size} {
+                    #{$prop}-right: $length !important;
+                    #{$prop}-left: $length !important;
+                }
+
+                .#{$abbrev}y#{$infix}-#{$size} {
+                    #{$prop}-top: $length !important;
+                    #{$prop}-bottom: $length !important;
+                }
+
+                .#{$abbrev}x#{$infix}-nve-#{$size} {
+                    #{$prop}-right: -$length !important;
+                    #{$prop}-left: -$length !important;
+                }
+
+                .#{$abbrev}y#{$infix}-nve-#{$size} {
+                    #{$prop}-top: -$length !important;
+                    #{$prop}-bottom: -$length !important;
+                }
+            }
+
+            @for $index from 0 through 256 {
+                $size: $index * 1;
+                $length: #{$size}px;
+
+                .#{$abbrev}t#{$infix}-#{$size} {
+                    #{$prop}-top: $length !important;
+                }
+
+                .#{$abbrev}r#{$infix}-#{$size} {
+                    #{$prop}-right: $length !important;
+                }
+
+                .#{$abbrev}b#{$infix}-#{$size} {
+                    #{$prop}-bottom: $length !important;
+                }
+
+                .#{$abbrev}l#{$infix}-#{$size} {
+                    #{$prop}-left: $length !important;
+                }
+
+                .#{$abbrev}t#{$infix}-nve-#{$size} {
+                    #{$prop}-top: -$length !important;
+                }
+
+                .#{$abbrev}r#{$infix}-nve-#{$size} {
+                    #{$prop}-right: -$length !important;
+                }
+
+                .#{$abbrev}b#{$infix}-nve-#{$size} {
+                    #{$prop}-bottom: -$length !important;
+                }
+
+                .#{$abbrev}l#{$infix}-nve-#{$size} {
+                    #{$prop}-left: -$length !important;
+                }
+            }
+
+            @if ($abbrev ==m) {
+
+                // Some special margin utils for flex alignments
+                .m#{$infix}-auto {
+                    margin: auto !important;
+                }
+
+                .mt#{$infix}-auto {
+                    margin-top: auto !important;
+                }
+
+                .mr#{$infix}-auto {
+                    margin-right: auto !important;
+                }
+
+                .mb#{$infix}-auto {
+                    margin-bottom: auto !important;
+                }
+
+                .ml#{$infix}-auto {
+                    margin-left: auto !important;
+                }
+
+                .mx#{$infix}-auto {
+                    margin-right: auto !important;
+                    margin-left: auto !important;
+                }
+
+                .my#{$infix}-auto {
+                    margin-top: auto !important;
+                    margin-bottom: auto !important;
+                }
+            }
+        }
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------
+// @ Position helpers
+// ------------------------------------------------------------------------------------------------------
+$positions: (
+    'relative',
+    'absolute',
+    'fixed',
+    'sticky'
+);
+$abs-positions: (
+    top: top,
+    right: right,
+    bottom: bottom,
+    left: left
+);
+
+@each $pos in $positions {
+    .pos-#{$pos} {
+        position: #{$pos} !important;
+    }
+}
+
+@each $prop,
+$abbrev in ($abs-positions) {
+    @for $index from 0 to 500 {
+        $size: $index * 1;
+        $length: #{$size}px;
+
+        .#{$abbrev}-#{$size} {
+            #{$prop}: $length !important;
+        }
+
+        .#{$abbrev}-nve-#{$size} {
+            #{$prop}: -$length !important;
+        }
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------
+// @ Border helpers
+// ------------------------------------------------------------------------------------------------------
+$borders: (
+    border: b,
+    border-top: bt,
+    border-right: br,
+    border-bottom: bm,
+    border-left: bl
+);
+
+@each $prop,
+$abbrev in ($borders) {
+    @for $index from 0 to 500 {
+        $size: $index * 1;
+        $length: #{$size}px;
+
+        .#{$abbrev}-#{$size} {
+            #{$prop}: $length solid !important;
+        }
+
+        .#{$abbrev}x-#{$size} {
+            #{$prop}-right: $length solid !important;
+            #{$prop}-left: $length solid !important;
+        }
+
+        .#{$abbrev}y-#{$size} {
+            #{$prop}-top: -$length solid !important;
+            #{$prop}-bottom: -$length solid !important;
+        }
+
+        .#{$abbrev}-dashed-#{$size} {
+            #{$prop}: $length dashed !important;
+        }
+
+        .#{$abbrev}-dotted-#{$size} {
+            #{$prop}: $length dotted !important;
+        }
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------
+// @ Border Radius helpers
+// ------------------------------------------------------------------------------------------------------
+$border-radius: (
+    border-radius: brr,
+    border-top-left-radius: btlr,
+    border-top-right-radius: btrr,
+    border-bottom-left-radius: bblr,
+    border-bottom-right-radius: bmrr
+);
+
+@each $prop,
+$abbrev in ($border-radius) {
+    @for $index from 0 to 500 {
+        $size: $index * 1;
+        $length: #{$size}px;
+
+        .#{$abbrev}-#{$size} {
+            #{$prop}: $length !important;
+        }
+    }
+}

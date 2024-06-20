@@ -1,0 +1,302 @@
+<nav
+  style="--bs-breadcrumb-divider: '>'; color: #b1b1b1"
+  aria-label="breadcrumb"
+  class="mt-3 mb-4"
+>
+  <ol class="breadcrumb d-flex align-items-center mt-4 pb-3">
+    <li class="breadcrumb-item">
+      <div (click)="financeManagement()" class="a">
+        <img
+          src="../../../../assets/images/icons/order-management-icon.png"
+          alt="icon"
+        />
+        Finance Mangement
+      </div>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Bookings</li>
+  </ol>
+</nav>
+<main class="bg-white mt-4 rounded-3">
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-start mt-4 mb-3">
+      <span class="booking-details">Booking Details</span>
+    </div>
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="booking-details mb-4" style="font-size: 18px"
+        >Hall Details</span
+      >
+    </div>
+    <div class="d-flex justify-content-start gap-5 mt-4 mb-3">
+      <div
+        class="d-flex flex-column gap-2 col-md"
+        *ngFor="let data of halldetail"
+      >
+        <div class="d-flex align-items-center gap-2">
+          <img [src]="data.image" alt="icon" class="vender-icons" />
+          <span class="type-class">{{ data.name }}</span>
+        </div>
+        <span class="customer-name">{{ data.vendertype }}</span>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="booking-details mb-4" style="font-size: 18px"
+        >Customer Details</span
+      >
+      <!-- <img
+        src="../../../../assets/images/icons/edit-pen-icon.png"
+        alt="icon"
+        class="edit-pen"
+      /> -->
+    </div>
+    <div class="d-flex justify-content-start gap-5 mt-4 mb-3">
+      <div class="d-flex flex-column gap-2 col-md" *ngFor="let data of detail">
+        <div class="d-flex align-items-center gap-2">
+          <img [src]="data.image" alt="icon" class="vender-icons" />
+          <span class="type-class">{{ data.name }}</span>
+        </div>
+        <span class="customer-name">{{ data.vendertype }}</span>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="booking-details mb-4" style="font-size: 18px">Menu</span>
+    </div>
+    <div class="d-flex justify-content-start gap-5 mt-4 mb-3">
+      <div class="d-flex flex-column gap-2 col-md" *ngFor="let data of detail">
+        <div class="d-flex align-items-center gap-2">
+          <img [src]="data.image" alt="icon" class="vender-icons" />
+          <span class="type-class">{{ data.name }}</span>
+        </div>
+        <span class="customer-name">{{ data.vendertype }}</span>
+      </div>
+    </div>
+    <hr />
+
+    <div class="d-flex justify-content-start align-items-center">
+      <span class="booking-details mb-4" style="font-size: 18px"
+        >Assign the team</span
+      >
+    </div>
+    <div class="d-flex justify-content-start gap-5 mt-4 mb-3">
+      <div
+        class="d-flex flex-column gap-2 col-md"
+        *ngFor="let data of detail.slice(0, 3)"
+      >
+        <div class="d-flex align-items-center gap-2">
+          <img [src]="data.image" alt="icon" class="vender-icons" />
+          <span class="type-class">{{ data.name }}</span>
+        </div>
+        <span class="customer-name">{{ data.vendertype }}</span>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="booking-details" style="font-size: 18px"
+        >Standard Price:</span
+      >
+      <span class="total-payment">Rs: 50,000</span>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+        <div class="input-group d-flex flex-column gap-2">
+          <label for="discount" class="label-text">Discount (%)</label>
+          <input
+            type="text"
+            id="address"
+            placeholder="0%"
+            class="input-class"
+            readonly
+          />
+        </div>
+        <div class="input-group d-flex flex-column gap-2">
+          <label for="final price" class="label-text"> &nbsp; </label>
+          <div
+            class="input-class border-0 d-flex justify-content-between align-items-center"
+          >
+            <label for="" class="label-text">Final Price</label>
+            <span class="final-price">Rs: 50,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <span class="booking-details" style="font-size: 18px"
+        >Funds and Payments:</span
+      >
+      <div class="d-flex align-items-center gap-3">
+        <img
+          src="../../../../assets/images/icons/download-icon.png"
+          alt="icon"
+          class="object-fit-contain icon-size__download"
+        />
+        <img
+          src="../../../../assets/images/icons/printer-icon.png"
+          alt="icon"
+          class="object-fit-contain icon-size__download"
+        />
+      </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <span class="booking-details" style="font-size: 18px">Total:</span>
+      <span class="total-payment">Rs: 30,000</span>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <span class="booking-details" style="font-size: 18px">Advance:</span>
+      <span class="total-payment">Rs: 20,000</span>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <span class="booking-details" style="font-size: 18px"
+        >Pending Amount:</span
+      >
+      <span class="total-payment" style="color: #f31414">Rs: 30,000</span>
+    </div>
+
+    <hr />
+    <div class="d-flex justify-content-end align-items-center gap-4">
+      <button class="order-btn" style="background-color: #b1b1b1; width: 180px">
+        Cancel
+      </button>
+      <button
+        class="order-btn"
+        style="width: 180px"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+      >
+        Add Payment
+      </button>
+    </div>
+
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered d-flex justify-content-center"
+      >
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="d-flex flex-column gap-4">
+              <div class="d-flex align-items-center justify-content-between">
+                <span class="h3">Add Payment</span>
+                <button class="close-btn__modal" data-bs-dismiss="modal">
+                  <span
+                    class="material-symbols-outlined"
+                    style="color: #ffffff"
+                  >
+                    close
+                  </span>
+                </button>
+              </div>
+              <span class="expense-type">Expense Type</span>
+              <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+                <div class="input-group d-flex flex-column gap-2">
+                  <label for="expense-type" class="label-text"
+                    >Expense Type</label
+                  >
+
+                  <select name="" id="expense-type" class="input-class">
+                    <option value="Electricity">Electricity</option>
+                    <option value="Bills">Bills</option>
+                  </select>
+                </div>
+                <div class="input-group d-flex flex-column gap-2">
+                  <label for="utility-bills" class="label-text">Date</label>
+                  <input
+                    type="date"
+                    id="utility-bills"
+                    placeholder="Utility Bills"
+                    class="input-class"
+                  />
+                </div>
+              </div>
+              <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+                <div class="input-group d-flex flex-column gap-2">
+                  <label for="time-bills" class="label-text">Time</label>
+                  <input
+                    type="time"
+                    id="time-bills"
+                    placeholder="Customer Name"
+                    class="input-class"
+                  />
+                </div>
+                <div class="input-group d-flex flex-column gap-2">
+                  <label for="pending-amount" class="label-text"
+                    >Pending Amount:</label
+                  >
+                  <input
+                    type="text"
+                    id="pending-amount"
+                    placeholder="25000"
+                    class="input-class"
+                    value="25000"
+                    style="color: red; font-weight: bold"
+                  />
+                </div>
+              </div>
+              <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+                <div class="input-group d-flex flex-column gap-2">
+                  <label for="paying-amount" class="label-text"
+                    >Paying Amount</label
+                  >
+                  <input
+                    type="text"
+                    id="paying-amount"
+                    placeholder="Rs: 00000"
+                    class="input-class"
+                  />
+                </div>
+                <div class="input-group d-flex flex-column gap-2">
+                  <label class="label-text">Payment Type</label>
+
+                  <div class="input-class border-0 d-flex gap-4">
+                    <label for="on-trans" class="checkbox-label">
+                      <input
+                        type="checkbox"
+                        id="on-trans"
+                        name="payment-type"
+                        value="on-trans"
+                        [(ngModel)]="onlineChecked"
+                        (change)="toggleCheckbox('on-trans')"
+                      />
+                      Online Transaction
+                    </label>
+
+                    <label for="off-trans" class="checkbox-label">
+                      <input
+                        type="checkbox"
+                        id="off-trans"
+                        name="payment-type"
+                        value="off-trans"
+                        [(ngModel)]="offlineChecked"
+                        (change)="toggleCheckbox('off-trans')"
+                      />
+                      Offline
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button> -->
+            <button type="button" class="order-btn">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

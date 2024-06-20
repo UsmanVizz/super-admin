@@ -1,0 +1,321 @@
+.cards {
+  max-width: 1310px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+agm-map {
+  height: 300px;
+}
+
+.card-container {
+  display: flex;
+  border-radius: 30px !important;
+  justify-content: space-between;
+  border: none;
+  box-shadow: 0 0px 60px rgba(129, 124, 124, 0.2);
+}
+.image-container {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+#chartContainer {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+.myChart {
+  height: 70% !important;
+  width: 100% !important;
+}
+
+.card-body {
+  width: 100%;
+  background-color: #fff;
+  max-width: 238px;
+  padding: 30px;
+  height: 185px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 15px;
+  box-shadow: 0px 14px 18.67px -4.67px rgba(0, 0, 0, 0.192);
+  .text-range {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #1fb21c;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .card-title {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 16.34px;
+    font-weight: 500;
+  }
+  .rates {
+    font-family: "Inter", sans-serif;
+    font-size: 35.01px;
+    font-weight: 600;
+
+    color: #1e293b;
+  }
+}
+
+.card1 {
+  margin-top: 30%;
+  height: 185.37px;
+  width: 100%;
+  border: none;
+  box-shadow: 6px 6px 54px 0px #0000000d;
+  border-radius: 14px;
+  backdrop-filter: blur(5px);
+  background-color: #fff;
+  gap: 10px;
+  padding-top: 20px;
+  padding-left: 20px;
+  line-height: 3p;
+  // margin-left: 2%;
+  .card-body {
+    padding: 11.01px !important;
+    .card-title {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 16.34px;
+      font-weight: 500;
+      line-height: 24.51px;
+      letter-spacing: -0.02em;
+      text-align: left;
+    }
+    .rates {
+      font-family: "Inter", sans-serif;
+      font-size: 35.01px;
+      font-weight: 600;
+      line-height: 47.96px;
+      letter-spacing: -0.9335412979125977px;
+      text-align: left;
+      color: #1e293b;
+    }
+  }
+}
+.card {
+  box-shadow: 0 15px 60px rgba(129, 124, 124, 0.2);
+  height: 100% !important;
+}
+
+.form-select {
+  font-size: 14px;
+}
+
+.chartcanvas {
+  height: 320px !important;
+  width: 100% !important;
+}
+
+.trending-up {
+  cursor: pointer;
+  background-color: #1814f3;
+  color: #fff;
+  padding: 7px;
+  border-radius: 100px !important;
+  user-select: none;
+}
+
+.trending-down {
+  cursor: pointer;
+  background-color: #622cad;
+  color: #fff;
+  padding: 7px;
+  border-radius: 50px;
+  user-select: none;
+}
+
+.p-text {
+  margin-bottom: 0% !important;
+  font-size: 13px;
+}
+
+.cardHeader {
+  margin-top: 60px;
+  width: 100%;
+  .header-body {
+    display: flex;
+    align-items: flex-start;
+    .text {
+      margin-left: 20px;
+      margin-top: 43px;
+      header {
+        font-family: "Poppins", sans-serif;
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 42.72px;
+        text-align: left;
+        color: white;
+      }
+      p {
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: left;
+        color: white;
+      }
+    }
+  }
+  .stars {
+    margin-top: -13%;
+    color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 3%;
+    .rating {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 19.03px;
+      font-weight: 600;
+      line-height: 28.54px;
+      letter-spacing: -0.02em;
+      text-align: left;
+    }
+    .numbers {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 16.65px;
+      font-weight: 400;
+      line-height: 24.97px;
+      letter-spacing: -0.02em;
+      text-align: left;
+    }
+    .stars label,
+    .stars span {
+      margin-right: 5px;
+    }
+
+    .star {
+      img {
+        width: 21.03px;
+        height: 19.84px;
+        top: 0.51px;
+        left: 21.03px;
+        gap: 0px;
+        opacity: 0px;
+      }
+    }
+
+    p {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+    label {
+      font-family: "Plus Jakarta Sans";
+      font-size: 19.03px;
+      font-weight: 600;
+      line-height: 28.54px;
+      letter-spacing: -0.02em;
+      text-align: left;
+    }
+  }
+  img {
+    width: 100%;
+    height: 221px;
+    // height: 20vh;
+  }
+  .card {
+    margin-top: 1%;
+    height: 196px !important;
+    width: 232px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    background-color: white;
+    gap: 10px;
+    border: none;
+    margin-left: 2%;
+    box-shadow: 6px 6px 54px 0px #0000000d;
+
+    img {
+      // height: 150px;
+      top: 256px;
+      padding: 30px;
+      // width: 200px;
+      left: 427px;
+      gap: 0px;
+      opacity: 0px;
+      object-fit: cover;
+    }
+  }
+}
+.checked {
+  color: #fb6f10;
+}
+.star-container {
+  display: inline-block;
+}
+.banquet-hall {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19.94px;
+  text-align: left;
+  padding-left: 10px;
+}
+p {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16.65px;
+  font-weight: 400;
+  line-height: 24.97px;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+@media only screen and (min-width: 1330px) and (max-width: 1720px) {
+  .cardHeader {
+    .stars {
+      margin-top: -16%;
+    }
+  }
+}
+@media only screen and (min-width: 315px) and (max-width: 815px) {
+  .cardHeader {
+    .stars {
+      margin-top: -33%;
+    }
+  }
+}
+@media only screen and (min-width: 815px) and (max-width: 1024px) {
+  .cardHeader {
+    .stars {
+      margin-top: -24%;
+    }
+  }
+}
+@media only screen and (min-width: 1025px) and (max-width: 1440px) {
+  .cardHeader {
+    .stars {
+      margin-top: -21%;
+    }
+  }
+}
+@media only screen and (min-width: 1880px) and (max-width: 2390px) {
+  .cardHeader {
+    .stars {
+      margin-top: -13%;
+    }
+  }
+  .card-body {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media only screen and (min-width: 2391px) and (max-width: 2590px) {
+  .cardHeader {
+    .stars {
+      margin-top: -11%;
+    }
+  }
+  .card-body {
+    width: 100%;
+    max-width: 100%;
+  }
+}

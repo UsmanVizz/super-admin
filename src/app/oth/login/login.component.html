@@ -1,0 +1,89 @@
+<div class="split-screen">
+  <div class="right">
+    <form [formGroup]="userLogin" (ngSubmit)="loggedIn()">
+      <div class="form-row">
+        <div class="form-row-inner">
+          <p id="account">Don't have an account?</p>
+          <button type="button" class="btn request-btn">Request access</button>
+        </div>
+        <form [formGroup]="userLogin" (ngSubmit)="loggedIn()"></form>
+      </div>
+      <section class="section">
+        <h4 class="heading">Sign in to Hall Owner</h4>
+        <div class="login-container pt-2">
+          <p class="description">Please enter your details below to sign in</p>
+        </div>
+      </section>
+      <div class="form-container d-flex justify-content-end align-items-end">
+        <div class="input-container email">
+          <label for="email" class="custom-text">Your Email Address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="abc@email.com"
+            class="input-size"
+            formControlName="email"
+          />
+          <div
+            *ngIf="
+              userLogin.get('email')?.touched && userLogin.get('email')?.invalid
+            "
+          >
+            <span
+              *ngIf="userLogin.get('email')?.hasError('required')"
+              class="text-danger"
+            >
+              Email filed is required.
+            </span>
+            <span
+              *ngIf="userLogin.get('email')?.hasError('email')"
+              class="text-danger"
+            >
+              Email Format is Invalid
+            </span>
+          </div>
+        </div>
+        <div class="input-container password">
+          <div class="d-flex justify-content-between w-100">
+            <label for="password" class="custom-text">Your Password</label>
+            <p class="forgot-password" (click)="forgotPassword()">
+              Forgot Password?
+            </p>
+          </div>
+          <input
+            [type]="hidePassword ? 'password' : 'text'"
+            id="password"
+            placeholder="***********"
+            class="input-size"
+            formControlName="password"
+          />
+          <i
+            class="far font-size"
+            [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'"
+            (click)="togglePasswordVisibility()"
+          ></i>
+          <div
+            *ngIf="
+              userLogin.get('password')?.touched &&
+              userLogin.get('password')?.invalid
+            "
+          >
+            <span
+              *ngIf="userLogin.get('password')?.hasError('required')"
+              class="text-danger"
+            >
+              Password field is required.
+            </span>
+          </div>
+        </div>
+
+        <div class="signup-btn-container">
+          <button type="submit" class="btn signup-btn">
+            <img src="../../../assets/images/login/key.png" alt="" /> Sign in to
+            admin
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

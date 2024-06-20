@@ -1,0 +1,29 @@
+.chartcanvas {
+  height: 250px !important;
+  width: 100% !important;
+}
+.card-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: #1e293b;
+}
+.location-map {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #4f4f4f;
+}
+#border {
+  border-bottom: 2px solid #f0f0f0 !important;
+}
+.card {
+  box-shadow: 0 15px 60px rgba(129, 124, 124, 0.2);
+  height: 100% !important;
+}

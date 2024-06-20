@@ -1,0 +1,355 @@
+$breadcrumb-divider: quote(">");
+
+$orange_color: #fb6f10;
+
+a {
+  text-decoration: none;
+  color: #fb6f10;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.breadcrumb-item {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: #b1b1b1;
+  cursor: pointer;
+}
+
+.order-title {
+  font-size: 18px;
+  font-weight: 700;
+  cursor: default;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.search-icon {
+  padding: 12px 16px 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.material-symbols-outlined {
+  color: #b1b1b1;
+  border-radius: 8px;
+  font-size: 20px;
+}
+
+.filter-title {
+  color: #b1b1b1;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.carousel-image {
+  width: 229px;
+  height: 199px;
+  object-fit: fill;
+}
+
+.carousel {
+  width: fit-content;
+}
+
+.card {
+  width: 472px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.carousel-indicators {
+  margin-bottom: -1rem;
+}
+
+.carousel-indicators-2 {
+  position: absolute;
+  right: 0;
+  bottom: 45px;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-indicators li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  text-indent: -999px;
+  cursor: pointer;
+  border: 1px solid #cfcfcf;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.carousel-indicators .active {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  background-color: #cfcfcf;
+  border: 1px solid #cfcfcf;
+}
+
+.carousel-control-prev {
+  height: fit-content;
+}
+
+.carousel-control-next {
+  height: fit-content;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 100% 100%;
+}
+
+.vendor-name__title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.vendor-name {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.address-box {
+  width: 166px;
+}
+
+.address-title__name {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a4a4a;
+}
+
+.address-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #b1b1b1;
+}
+
+.rating-box {
+  width: 105px;
+}
+
+.rate {
+  width: 155px;
+  vertical-align: middle !important;
+}
+.rate:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+}
+.rate:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 25px;
+  color: #ccc;
+  width: 22px;
+  height: 28px;
+  margin-top: -8px;
+}
+.rate:not(:checked) > label:before {
+  content: "★ ";
+}
+.rate > input:checked ~ label {
+  color: #ffc700;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+.rating-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: #656565;
+}
+
+.rating-number {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 9.6px;
+  font-weight: 400;
+  color: #b1b1b1;
+}
+
+.price-box {
+  width: 115px;
+}
+
+.total-price {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #fb6f10;
+}
+
+.per-event {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 9.7px;
+  font-weight: 400;
+  color: #b1b1b1;
+}
+
+.onoffswitch {
+  position: relative;
+  width: 56px;
+  height: 32px;
+  user-select: none;
+}
+
+.onoffswitch-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  border-radius: 20px;
+}
+
+.onoffswitch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-inner:before,
+.onoffswitch-inner:after {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 32px;
+  padding: 0;
+  line-height: 32px;
+  font-size: 14px;
+  color: white;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+  content: "";
+  padding-left: 10px;
+  background-color: #fb6f10;
+  color: #ffffff;
+}
+
+.onoffswitch-inner:after {
+  content: "";
+  padding-right: 10px;
+  background-color: #eeeeee;
+  color: #999999;
+  text-align: right;
+}
+
+.onoffswitch-switch {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 7px;
+  background: #ffffff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20px;
+  border: 2px solid #ffffff;
+  border-radius: 20px;
+  transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px;
+}
+
+.icon-img {
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+}
+// buttons
+
+.span-text__color {
+  padding-left: 8px;
+  color: #fb6f10 !important;
+}
+.material-symbols-outlined {
+  font-size: 20px !important;
+}
+.sort-button {
+  height: 32px;
+  float: center;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+
+  border: 1px solid #dddddd;
+  background-color: #ffffff;
+  color: #dddddd;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+.header-card {
+  // margin-right: 1%;
+  background: white;
+  padding: 20px;
+}
+
+.order-btn {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background-color: $orange_color;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  padding: 12px 16px 12px 16px;
+  border-radius: 8px;
+  border: none;
+}
+.not-active {
+  border: 1px solid #dddddd;
+  cursor: pointer;
+}
+.filter-title {
+  color: #b1b1b1;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}

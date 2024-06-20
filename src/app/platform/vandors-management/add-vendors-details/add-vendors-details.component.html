@@ -1,0 +1,259 @@
+<nav
+  style="--bs-breadcrumb-divider: '>'; color: #b1b1b1"
+  aria-label="breadcrumb"
+  class="mt-3 mb-4"
+>
+  <ol class="breadcrumb d-flex align-items-center mt-4 pb-3">
+    <li class="breadcrumb-item">
+      <div (click)="manageVendor()" class="a">
+        <img
+          src="../../../../assets/images/icons/service-management.png"
+          alt="icon"
+        />
+        Vendor Mangement
+      </div>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Add Vendors</li>
+  </ol>
+</nav>
+
+<main class="bg-white add-vendor mt-4 rounded-3">
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-start align-items-center mt-4 mb-3">
+      <span class="booking-details">Add Vendor</span>
+    </div>
+    <hr />
+    <div
+      class="d-flex justify-content-start gap-4 align-content-start flex-wrap"
+    >
+      <div
+        class="d-flex flex-column gap-2 boxes"
+        *ngFor="let data of vendorsDetails"
+      >
+        <span class="vendor-type">{{ data.vendorType }}</span>
+        <div class="d-flex gap-2">
+          <img
+            [src]="data.imageIUrl"
+            alt="image not preview"
+            class="object-fit-contain icon-size"
+          />
+          <span class="vendor-detail">{{ data.detail }}</span>
+        </div>
+      </div>
+    </div>
+    <hr />
+
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="booking-details mb-4 mt-3" style="font-size: 18px"
+        >Add packages</span
+      >
+
+      <!-- <button
+        class="order-btn"
+        style="font-size: 10px; width: fit-content; height: 40px"
+      >
+        Add Multiple Packages
+      </button> -->
+    </div>
+
+    <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+      <div class="input-group d-flex flex-column gap-2">
+        <label for="address" class="label-text">Deliverables</label>
+
+        <div class="custom-dropdown">
+          <div
+            class="selected-item d-flex align-items-center justify-content-between input-class"
+            (click)="toggleDeliverables()"
+          >
+            <span class="select-vender">
+              {{ getDeliverablesName() }}
+            </span>
+            <span
+              class="material-symbols-outlined"
+              style="color: #b1b1b1"
+              *ngIf="!showDeliverables"
+              >expand_more</span
+            >
+            <span
+              class="material-symbols-outlined"
+              style="color: #b1b1b1"
+              *ngIf="showDeliverables"
+              >expand_less</span
+            >
+          </div>
+          <div
+            class="dropdown-list custom-dropdown-list"
+            *ngIf="showDeliverables"
+          >
+            <div *ngFor="let vendor of deliverables">
+              <label
+                class="d-flex align-items-center gap-3 p-3 dropdown-select"
+              >
+                <input
+                  type="checkbox"
+                  [(ngModel)]="vendor.selected"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+                <img [src]="vendor.image" alt="" />
+                {{ vendor.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input-group d-flex flex-column gap-2">
+        <label for="deal-name" class="label-text">Deal Name</label>
+        <input
+          type="email"
+          id="deal-name"
+          placeholder="1-Day Deal"
+          class="input-class"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-start gap-5 flex-wrap-2 mt-3">
+      <div class="input-group d-flex flex-column gap-2">
+        <label for="deliverables" class="label-text">Deliverables</label>
+        <textarea
+          type="text"
+          id="deliverables"
+          placeholder="Text here"
+          class="input-class"
+          style="height: 7rem"
+        ></textarea>
+      </div>
+      <div class="input-group d-flex flex-column gap-2">
+        <label for="photography" class="label-text">Photography</label>
+        <textarea
+          type="text"
+          id="photography"
+          placeholder="Text here"
+          class="input-class"
+          style="height: 7rem"
+        ></textarea>
+      </div>
+    </div>
+    <div class="d-flex justify-content-start gap-5 flex-wrap-2 mt-3">
+      <div class="input-group d-flex flex-column gap-2">
+        <label for="video" class="label-text">Video</label>
+        <textarea
+          type="text"
+          id="video"
+          placeholder="Text here"
+          class="input-class"
+          style="height: 7rem"
+        ></textarea>
+      </div>
+      <div class="input-group d-flex flex-column gap-2">
+        <label for="team-member" class="label-text">Team Member</label>
+        <input
+          type="text"
+          id="team-member"
+          placeholder="Floor 1"
+          class="input-class"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-start gap-5 flex-wrap-2 mt-3">
+      <div class="input-group d-flex flex-column gap-2">
+        <label for="price-per-event" class="label-text">Price Per event</label>
+        <input
+          type="text"
+          id="price-per-event"
+          placeholder="25000"
+          class="input-class"
+        />
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="bg-color d-flex gap-3 justify-content-between p-3 m-3">
+      <div class="d-flex flex-column">
+        <span class="vendor-type">Deal</span>
+        <span class="orange-span">1 Day-Deal</span>
+      </div>
+      <div class="d-flex flex-column">
+        <div class="d-flex align-items-center gap-2">
+          <img
+            src="../../../../assets/images/icons/img-preview.png"
+            alt="icon"
+            class="object-fit-contain"
+            style="width: 26px; height: 20px"
+          />
+          <span class="vendor-type">Deliverables</span>
+        </div>
+        <ul style="list-style-type: none; padding-left: 0rem">
+          <li>1 Day Event - Team Coverage</li>
+          <li>1 Day Team Shoot</li>
+          <li>1 Event Albums (100 photos per album)</li>
+          <li>1 Shoot Album (50 photos per album)</li>
+          <li>1 Long Videos (20-50 mins)</li>
+          <li>1 Highlight of Event (3-5 mins)</li>
+          <li>1 Shoot Highlight (30-60 Sec)</li>
+        </ul>
+      </div>
+      <div class="d-flex flex-column">
+        <div class="d-flex align-items-center gap-2">
+          <img
+            src="../../../../assets/images/icons/img-preview.png"
+            alt="icon"
+            class="object-fit-contain"
+            style="width: 26px; height: 20px"
+          />
+          <span class="vendor-type">Photography</span>
+        </div>
+        <ul style="list-style-type: none; padding-left: 0rem">
+          <li>1 Day Event - Team Coverage</li>
+          <li>1 Day Team Shoot</li>
+        </ul>
+      </div>
+      <div class="d-flex flex-column">
+        <div class="d-flex align-items-center gap-2">
+          <img
+            src="../../../../assets/images/icons/team.png"
+            alt="icon"
+            class="object-fit-contain"
+            style="width: 26px; height: 20px"
+          />
+          <span class="vendor-type">Team</span>
+        </div>
+        <ul style="list-style-type: none; padding-left: 0rem">
+          <li>1 Long Videos (20-50 mins)</li>
+          <li>1 Highlight of Event (3-5 mins)</li>
+          <li>1 Shoot Highlight (30-60 Sec).</li>
+        </ul>
+      </div>
+
+      <div class="d-flex flex-column">
+        <div class="d-flex align-items-center gap-2">
+          <img
+            src="../../../../assets/images/icons/photographer.png"
+            alt="icon"
+            class="object-fit-contain"
+            style="width: 26px; height: 20px"
+          />
+          <span class="vendor-type">Video</span>
+        </div>
+        <ul style="list-style-type: none; padding-left: 0rem">
+          <li>1 Long Videos (20-50 mins)</li>
+          <li>1 Highlight of Event (3-5 mins)</li>
+        </ul>
+      </div>
+      <div class="d-flex flex-column justify-content-between">
+        <span class="orange-btn">Delete</span>
+        <span class="orange-btn">Update</span>
+      </div>
+    </div>
+    <hr />
+
+    <div class="d-flex justify-content-end align-items-center gap-4">
+      <button class="order-btn" style="background-color: #b1b1b1; width: 180px">
+        Cancel
+      </button>
+      <button class="order-btn" style="width: 180px">Save</button>
+    </div>
+  </div>
+</main>

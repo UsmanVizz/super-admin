@@ -1,0 +1,377 @@
+/* Extra small devices (portrait phones, less than 576px) */
+.request-btn {
+  font-family: "Satoshi", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 8px;
+  width: 118px;
+  height: 40px;
+  background: #2e2e2e;
+  border-radius: 4px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin-left: 10px;
+}
+.custom-text {
+  font-family: "Satoshi", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 19px;
+  color: #2e2e2e;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.forgot-password {
+  font-family: "Satoshi", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  color: #b7b7b7;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+.signup-btn {
+  padding: 16px 27px;
+  gap: 11px;
+  width: fit-content;
+  font-size: 12px !important;
+  background: #fb6f10;
+}
+.description {
+  font-family: "Satoshi", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: #b7b7b7;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.input-size {
+  font-size: 14px !important;
+  font-family: "Satoshi", Arial, sans-serif;
+  padding: 12px !important;
+  background-color: transparent;
+}
+.form-container {
+  margin-top: 40px;
+}
+
+@media only screen and (max-width: 575.98px) {
+  /* Your styles for extra small devices here */
+  .split-screen {
+    .right form {
+      width: 88% !important;
+    }
+
+    .right {
+      .form-row-inner {
+        justify-content: center;
+      }
+
+      .section {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .section h4 {
+        font-weight: 500;
+        line-height: 43px;
+        font-size: 20px;
+      }
+
+      .section p {
+        font-size: 14px;
+      }
+    }
+
+    .input-container.password i {
+      top: 46px;
+    }
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media only screen and (min-width: 576px) and (max-width: 767.98px) {
+  /* Your styles for small devices here */
+  .split-screen {
+    .right form {
+      width: 88% !important;
+    }
+
+    .right {
+      .form-row-inner {
+        justify-content: center;
+      }
+
+      .section {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .section h4 {
+        font-weight: 500;
+        line-height: 43px;
+        font-size: 20px;
+      }
+
+      .section p {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .input-container.password i {
+    top: 46px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991.98px) {
+  /* Your styles for medium devices here */
+  .split-screen {
+    .right form {
+      width: 72% !important;
+    }
+
+    .right {
+      .form-row-inner {
+        justify-content: flex-end;
+      }
+
+      .section {
+        text-align: center;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .section h4 {
+        font-weight: 500;
+        line-height: 43px;
+        font-size: 20px;
+      }
+
+      .section p {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media only screen and (min-width: 992px) and (max-width: 1199.98px) {
+  /* Your styles for large devices here */
+  .split-screen {
+    .right form {
+      width: 64% !important;
+    }
+
+    .input-size {
+      font-size: 14px !important;
+    }
+
+    .right .form-container .forgot-password {
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .form-row-inner #account {
+      font-size: 12px;
+      font-weight: 500;
+      color: #b7b7b7 !important;
+    }
+
+    .right .form-row-inner .btn-dark {
+      font-size: 12px;
+      padding: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 16px !important;
+    }
+
+    .right {
+      .section {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .section h4 {
+        font-weight: 500;
+        line-height: 43px;
+        font-size: 24px;
+      }
+
+      .section p {
+        font-size: 16px;
+        margin-top: -8px;
+      }
+    }
+
+    .font-size {
+      font-size: 18px;
+    }
+
+    .input-container.password i {
+      top: 48px;
+    }
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (max-width: 1919.98px) {
+  /* Your styles for extra large devices here */
+
+  .split-screen {
+    .right form {
+      width: 48% !important;
+    }
+
+    .input-size {
+      font-size: 16px !important;
+    }
+
+    .right .form-container .forgot-password {
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .form-row-inner #account {
+      font-size: 16px;
+      font-weight: 500;
+      color: #b7b7b7 !important;
+    }
+
+    .right .form-row-inner .btn-dark {
+      font-size: 16px;
+      padding: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 16px !important;
+    }
+
+    .right {
+      .section {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .section h4 {
+        font-weight: 500;
+        line-height: 43px;
+        font-size: 32px;
+      }
+
+      .section p {
+        font-size: 20px;
+        margin-top: -8px;
+      }
+    }
+
+    .font-size {
+      font-size: 18px;
+    }
+
+    .input-container.password i {
+      top: 46px;
+    }
+  }
+}
+
+/* Extra extra large devices (extra large desktops, 1920px and up) */
+@media only screen and (min-width: 1920px) and (max-width: 5000px) {
+  /* Your styles for extra extra large devices here */
+  .split-screen {
+    .right form {
+      width: 50% !important;
+    }
+
+    .input-size {
+      font-size: 14px !important;
+    }
+
+    .right .form-container .forgot-password {
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .form-row-inner #account {
+      font-size: 14px;
+      font-weight: 500;
+      color: #b7b7b7 !important;
+    }
+
+    .right .form-row-inner .btn-dark {
+      font-size: 14px;
+      padding: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 16px !important;
+    }
+
+    .right {
+      .section {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .section h4 {
+        font-weight: 500;
+        line-height: 43px;
+        font-size: 32px;
+      }
+
+      .section p {
+        font-size: 20px;
+        margin-top: -8px;
+      }
+    }
+
+    .font-size {
+      font-size: 18px;
+    }
+
+    .input-container.password i {
+      top: 46px;
+    }
+  }
+}
+
+::-ms-input-placeholder {
+  /* Edge 12-18 */
+  font-size: 22px;
+}
+
+::placeholder {
+  font-family: "Satoshi Variable";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 16px;
+  color: #d9d9d9 !important;
+}

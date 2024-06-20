@@ -1,0 +1,133 @@
+.pac-container {
+  z-index: 1100 !important;
+}
+.pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto;
+}
+
+#pac-container {
+  z-index: 1100 !important;
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+#title {
+  color: #fff;
+  background-color: #fc0909;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+#target {
+  width: 345px;
+}
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  color: #76838f;
+}
+
+.table-sm td,
+.table-sm th {
+  padding: 0.3rem 1.3rem 0.3rem 0.5rem !important;
+}
+.table td,
+.table th {
+  border-top: 0 !important;
+}
+
+.trending-up {
+  cursor: pointer;
+  background-color: #269f07;
+  color: #fff;
+  padding: 7px;
+  border-radius: 100px;
+  user-select: none;
+}
+
+.trending-down {
+  cursor: pointer;
+  background: #052ebe;
+
+  color: #fff;
+  padding: 7px;
+  border-radius: 100px;
+  user-select: none;
+}
+.card-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: #000000;
+}
+.card {
+  box-shadow: 0 15px 60px rgba(129, 124, 124, 0.2);
+  height: 100% !important;
+}
+.custom-select {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15.12px;
+  color: #b1b1b1;
+  border: none !important;
+  width: 10% !important;
+}
+.vendor {
+  cursor: pointer;
+  background: #ca0303;
+
+  color: #fff;
+  padding: 10px;
+  border-radius: 100px;
+  user-select: none;
+}
+.p-text {
+  margin-bottom: 0% !important;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15.12px;
+  color: #b1b1b1 !important;
+  text-align: left;
+}
+.text-range {
+  color: #474747 !important;
+}

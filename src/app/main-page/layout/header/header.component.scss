@@ -1,0 +1,377 @@
+$custom: (
+  input-width: 300px,
+  input-height: 50px,
+  border-width: 0px,
+  border-radius: 25px,
+  input-border-color: #cccccc,
+  input-focus-border-color: #ff2e83,
+  input-background: #f5f7fa,
+  input-focus-background: #ffffff,
+  font-size: 14px,
+  placeholder-color: #8ba3cb,
+  icon: sbx-icon-search-11,
+  icon-size: 22px,
+  icon-position: left,
+  icon-color: #718ebf,
+  icon-background: #ffffff,
+  icon-background-opacity: 0,
+  icon-clear: sbx-icon-clear-5,
+  icon-clear-size: 18px,
+);
+
+.img-icon {
+  cursor: pointer;
+  image-rendering: pixelated;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.img-fluid {
+  max-width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  image-rendering: pixelated;
+  object-fit: cover;
+}
+.dashboard-title {
+  font-weight: 500;
+  letter-spacing: -1px;
+  color: #343c6a;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  user-select: none;
+  padding-left: 1.5rem;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0%;
+  background-color: #f9f9f9;
+  min-width: 150px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.user-btn {
+  min-width: 150px;
+  height: 50px;
+  background-color: #f9f9f9;
+  color: #000;
+  border: none;
+  // text-align: left;
+}
+
+.user-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropdown-button {
+  background-color: #2980b9;
+}
+
+@function even-px($value) {
+  @if type-of($value) == "number" {
+    @if (unitless($value)) {
+      $value: $value * 1px;
+    } @else if unit($value) == "em" {
+      $value: ($value / 1em * 16px);
+    } @else if unit($value) == "pts" {
+      $value: $value * 1.3333 * 1px;
+    } @else if unit($value) == "%" {
+      $value: $value * 16 / 100% * 1px;
+    }
+    $value: round($value);
+    @if ($value % 2 != 0) {
+      $value: $value + 1;
+    }
+    @return $value;
+  }
+}
+
+@mixin searchbox(
+  $font-size: 90%,
+  $input-width: 350px,
+  $input-height: $font-size * 2.4,
+  $border-width: 1px,
+  $border-radius: $input-height / 2,
+  $input-border-color: #ccc,
+  $input-focus-border-color: #1ec9ea,
+  $input-background: #f8f8f8,
+  $input-focus-background: #fff,
+  $placeholder-color: #aaa,
+  $icon: "sbx-icon-search-1",
+  $icon-size: $input-height / 1.6,
+  $icon-position: left,
+  $icon-color: #888,
+  $icon-background: $input-focus-border-color,
+  $icon-background-opacity: 0.1,
+  $icon-clear: "sbx-icon-clear-1",
+  $icon-clear-size: $font-size / 1.1
+) {
+  display: inline-block;
+  position: relative;
+  width: $input-width;
+  height: even-px($input-height);
+  white-space: nowrap;
+  box-sizing: border-box;
+  font-size: $font-size;
+
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__input {
+    display: inline-block;
+    transition: box-shadow 0.4s ease, background 0.4s ease;
+    border: 0;
+    border-radius: even-px($border-radius);
+    box-shadow: inset 0 0 0 $border-width $input-border-color;
+    background: $input-background;
+    padding: 0;
+    padding-right: if(
+        $icon-position == "right",
+        even-px($input-height) + even-px($icon-clear-size) + 8px,
+        even-px($input-height * 0.8)
+      ) + if($icon-background-opacity == 0, 0, even-px($font-size));
+    padding-left: if(
+      $icon-position == "right",
+      even-px($font-size / 2) + even-px($border-radius / 2),
+      even-px($input-height) +
+        if($icon-background-opacity == 0, 0, even-px($font-size * 1.2))
+    );
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    white-space: normal;
+    font-size: inherit;
+    appearance: none;
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      display: none;
+    }
+
+    &:hover {
+      box-shadow: inset 0 0 0 $border-width darken($input-border-color, 10%);
+    }
+
+    &:focus,
+    &:active {
+      outline: 0;
+      box-shadow: inset 0 0 0 $border-width $input-focus-border-color;
+      background: $input-focus-background;
+    }
+
+    &::placeholder {
+      color: $placeholder-color;
+    }
+  }
+
+  &__submit {
+    position: absolute;
+    top: 0;
+    @if $icon-position == "right" {
+      right: 0;
+      left: inherit;
+    } @else {
+      right: inherit;
+      left: 0;
+    }
+    margin: 0;
+    border: 0;
+    border-radius: if(
+      $icon-position == "right",
+      0 $border-radius $border-radius 0,
+      $border-radius 0 0 $border-radius
+    );
+    background-color: rgba($icon-background, $icon-background-opacity);
+    padding: 0;
+    width: even-px($input-height) +
+      if($icon-background-opacity == 0, 0, even-px($font-size / 2));
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+    font-size: inherit;
+    user-select: none;
+
+    // Helper for vertical alignement of the icon
+    &::before {
+      display: inline-block;
+      margin-right: -4px;
+      height: 100%;
+      vertical-align: middle;
+      content: "";
+    }
+
+    &:hover,
+    &:active {
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    svg {
+      width: even-px($icon-size);
+      height: even-px($icon-size);
+      vertical-align: middle;
+      fill: $icon-color;
+    }
+  }
+
+  &__reset {
+    display: none;
+    position: absolute;
+    top: (even-px($input-height) - even-px($icon-clear-size)) / 2 - 4px;
+    right: if(
+      $icon-position == "right",
+      even-px($input-height) +
+        if($icon-background-opacity == 0, 0, even-px($font-size)),
+      (even-px($input-height) - even-px($icon-clear-size)) / 2 - 4px
+    );
+    margin: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: inherit;
+    user-select: none;
+    fill: rgba(#000, 0.5);
+
+    &:focus {
+      outline: 0;
+    }
+
+    svg {
+      display: block;
+      margin: 4px;
+      width: even-px($icon-clear-size);
+      height: even-px($icon-clear-size);
+    }
+  }
+
+  &__input:valid ~ &__reset {
+    display: block;
+    animation-name: sbx-reset-in;
+    animation-duration: 0.15s;
+  }
+
+  @at-root {
+    @keyframes sbx-reset-in {
+      0% {
+        transform: translate3d(-20%, 0, 0);
+        opacity: 0;
+      }
+
+      100% {
+        transform: none;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.sbx-custom {
+  @include searchbox($custom...);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.hamburger {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.hamburger input {
+  display: none;
+}
+
+.hamburger svg {
+  /* The size of the SVG defines the overall size */
+  height: 2em;
+  /* Define the transition for transforming the SVG */
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+  fill: none;
+  stroke: #fb6f10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+  stroke-dasharray: 12 63;
+}
+
+.hamburger input:checked + svg {
+  transform: rotate(-45deg);
+}
+
+.hamburger input:checked + svg .line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
+}
+
+.sbx-custom__input {
+  color: #718ebf;
+}
+
+@media (min-width: 767px) and (max-width: 1025px) {
+  .navbar-expand-md {
+    padding: 0% !important;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-expand-md .navbar-nav .nav-link {
+    padding-right: 0% !important;
+    padding-left: 0% !important;
+  }
+}
+.navbar-expand-md {
+  height: 20px;
+  padding-top: 25px;
+}

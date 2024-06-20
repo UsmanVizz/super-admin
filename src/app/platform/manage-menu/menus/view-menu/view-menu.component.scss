@@ -1,0 +1,57 @@
+main {
+  box-shadow: 0px 0px 8px -4px #00000052;
+  padding: 60px;
+}
+.booking-details {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+}
+.images-loader {
+  height: 95px;
+  width: 95px;
+  border-radius: 15px;
+}
+.image-preview {
+  height: 300px;
+  cursor: zoom-in;
+}
+.info-item {
+  margin-right: 20px; /* Adjust the margin between items */
+  margin-bottom: 20px; /* Adjust the margin bottom */
+}
+
+.info-label {
+  margin-bottom: 5px;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+
+  letter-spacing: -0.02em;
+  color: #b1b1b1;
+}
+.icons {
+  margin-right: 10px;
+}
+.info-value {
+  margin: 0;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: -0.02em;
+  color: #2b2b2b;
+  margin-bottom: 20px;
+}
+.custom-button {
+  color: white;
+  padding: 5px 20px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  position: relative;
+}

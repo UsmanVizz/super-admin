@@ -1,0 +1,118 @@
+<nav
+  style="--bs-breadcrumb-divider: '>'; color: #b1b1b1"
+  aria-label="breadcrumb"
+  class="mt-3 mb-4"
+>
+  <ol class="breadcrumb d-flex align-items-center mt-4 pb-3">
+    <li class="breadcrumb-item">
+      <div (click)="orderManagement()" class="a">
+        <img
+          src="../../../../assets/images/icons/order-management-icon.png"
+          alt="icon"
+        />
+        Order Management
+      </div>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Bookings</li>
+  </ol>
+</nav>
+
+<main class="bg-white mt-4 vendor-container">
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-5">
+      <span class="booking-details">Booking Details</span>
+    </div>
+
+    <div class="form-container d-flex flex-column">
+      <span class="booking-details mb-4" style="font-size: 18px"
+        >Select Vendors</span
+      >
+      <form
+        [formGroup]="addOrder"
+        (ngSubmit)="submitOrder()"
+        class="d-flex flex-column gap-4"
+      >
+        <div
+          class="d-flex justify-content-start align-items-center gap-5 flex-wrap-2"
+        >
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="address" class="vendor-details" style="font-size: 16px"
+              >Select Vender Type</label
+            >
+            <div class="custom-dropdown">
+              <div
+                class="selected-item d-flex align-items-center justify-content-between input-class"
+                (click)="toggleDropdown()"
+              >
+                <span class="select-vender">Select Vendor Type</span>
+                <span
+                  class="material-symbols-outlined"
+                  style="color: #b1b1b1"
+                  *ngIf="!showDropdown"
+                >
+                  expand_more
+                </span>
+                <span
+                  class="material-symbols-outlined"
+                  style="color: #b1b1b1"
+                  *ngIf="showDropdown"
+                >
+                  expand_less
+                </span>
+              </div>
+              <div class="dropdown-list" *ngIf="showDropdown">
+                <div *ngFor="let vendor of vendors">
+                  <label
+                    class="d-flex align-items-center gap-3 p-3 dropdown-select"
+                  >
+                    <input
+                      type="checkbox"
+                      [checked]="vendor.selected"
+                      (change)="
+                        $event.preventDefault(); toggleVendorSelection(vendor)
+                      "
+                    />
+                    <img [src]="vendor.image" alt="" />
+                    <span class="vendor-name">{{ vendor.name }}</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-group d-flex gap-3">
+            <div
+              *ngFor="let vendor of vendors"
+              class="d-flex flex-column gap-4"
+            >
+              <div
+                *ngIf="vendor.selected"
+                class="d-flex align-items-center gap-3"
+              >
+                <img [src]="vendor.image" alt="" />
+                <span>{{ vendor.name }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr />
+        <div class="d-flex justify-content-end align-items-center gap-4">
+          <button
+            class="order-btn"
+            style="background-color: #b1b1b1; width: 180px"
+          >
+            Cancel
+          </button>
+          <button
+            class="order-btn"
+            type="submit"
+            style="width: 180px"
+            (click)="confirmButton()"
+          >
+            Confirm Order
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

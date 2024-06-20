@@ -1,0 +1,537 @@
+<div class="d-flex justify-content-between mt-5">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <div (click)="manageHall()">
+          <img
+            src="../../../../assets/images/sidebar-icons/hall.png"
+            alt="City Icon"
+            class="category-icon mx-1"
+          />
+          <span class="bread-menu">Manage Hall</span>
+        </div>
+      </li>
+      <i class="fa-solid fa-chevron-right arrow px-3"></i>
+
+      <li class="breadcrumb-item active add-category mt-2" aria-current="page">
+        Edit Hall
+      </li>
+    </ol>
+  </nav>
+</div>
+
+<main class="bg-white mt-4 p-5 rounded-3">
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-start align-items-center mt-4 mb-4">
+      <span class="hall-details">Hall Details</span>
+    </div>
+    <div class="form-container d-flex flex-column">
+      <form [formGroup]="hallForm" class="d-flex flex-column gap-4">
+        <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="branchName" class="label-text">Hall Title</label>
+            <input
+              type="text"
+              class="input-class"
+              placeholder="Hall Title"
+              formControlName="hall_title"
+              [ngClass]="{
+                'danger-outline':
+                  hallForm.get('hall_title')?.touched &&
+                  hallForm.get('hall_title')?.invalid
+              }"
+            />
+            <div
+              *ngIf="
+                hallForm.get('hall_title')?.hasError('required') &&
+                hallForm.get('hall_title')?.touched
+              "
+              class="text-danger error-state"
+            >
+              Hall Title is required.
+            </div>
+          </div>
+
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="branchName" class="label-text">People Capacity</label>
+            <input
+              type="text"
+              class="input-class"
+              placeholder="People Capacity"
+              formControlName="people_capacity"
+              [ngClass]="{
+                'danger-outline':
+                  hallForm.get('people_capacity')?.touched &&
+                  hallForm.get('people_capacity')?.invalid
+              }"
+            />
+            <div
+              *ngIf="
+                hallForm.get('people_capacity')?.hasError('required') &&
+                hallForm.get('people_capacity')?.touched
+              "
+              class="text-danger error-state"
+            >
+              People Capacity is required.
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-start gap-5 mt-4 flex-wrap-2">
+          <div class="input-wrapper">
+            <div class="input-group d-flex flex-column gap-2">
+              <label for="branchName" class="label-text">Branch Name</label>
+              <select
+                class="form-select form-select-lg"
+                aria-label=".form-select-lg example"
+                formControlName="branch"
+                (change)="onBranchSelect($event)"
+                [ngClass]="{
+                  'danger-outline':
+                    hallForm.get('branch')?.touched &&
+                    hallForm.get('branch')?.invalid
+                }"
+              >
+                <option selected disabled value="">Select Branch</option>
+                <option *ngFor="let item of branches" [value]="item._id">
+                  {{ item.branch_name }}
+                </option>
+              </select>
+              <div
+                *ngIf="
+                  hallForm.get('branch')?.hasError('required') &&
+                  hallForm.get('branch')?.touched
+                "
+                class="text-danger error-state"
+              >
+                Branch Name is required.
+              </div>
+            </div>
+          </div>
+          <div class="input-wrapper">
+            <div class="input-group d-flex flex-column gap-2">
+              <div class="select-branch">
+                <label for="br-decription" class="label-text"
+                  >Select Categories</label
+                >
+                <div class="custom-dropdown mt-3">
+                  <div
+                    class="selected-item d-flex align-items-center text-capitalize justify-content-between input-class"
+                    (click)="toggleCategory()"
+                  >
+                    <span class="select-vender">{{
+                      getSelectedCategory()
+                    }}</span>
+                    <span
+                      class="material-symbols-outlined"
+                      style="color: #b1b1b1"
+                      *ngIf="!showEvents"
+                      >expand_more</span
+                    >
+                    <span
+                      class="material-symbols-outlined"
+                      style="color: #b1b1b1"
+                      *ngIf="showEvents"
+                      >expand_less</span
+                    >
+                  </div>
+                  <div
+                    class="dropdown-list custom-dropdown-list"
+                    *ngIf="showEvents"
+                  >
+                    <div *ngFor="let category of categories">
+                      <label
+                        class="d-flex align-items-center gap-3 p-3 dropdown-select"
+                      >
+                        <input
+                          type="checkbox"
+                          [(ngModel)]="category.selected"
+                          [checked]="category.selected"
+                          [ngModelOptions]="{ standalone: true }"
+                          (change)="onCategorySelected()"
+                        />
+                        {{ category.name }}
+                      </label>
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="
+                      hallForm.get('event_type')?.hasError('required') &&
+                      hallForm.get('event_type')?.touched
+                    "
+                    class="text-danger error-state"
+                  >
+                    Category is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-start gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <div class="select-branch">
+              <label for="br-decription" class="label-text"
+                >Select Amenities</label
+              >
+              <div class="custom-dropdown mt-3">
+                <div
+                  class="selected-item d-flex align-items-center text-capitalize justify-content-between input-class"
+                  (click)="toggleDropdown()"
+                >
+                  <span class="select-vender">{{
+                    getSelectedAmenities()
+                  }}</span>
+                  <span
+                    class="material-symbols-outlined"
+                    style="color: #b1b1b1"
+                    *ngIf="!showDropdown"
+                    >expand_more</span
+                  >
+                  <span
+                    class="material-symbols-outlined"
+                    style="color: #b1b1b1"
+                    *ngIf="showDropdown"
+                    >expand_less</span
+                  >
+                </div>
+                <div
+                  class="dropdown-list custom-dropdown-list"
+                  *ngIf="showDropdown"
+                >
+                  <div *ngFor="let amenity of amenities">
+                    <label
+                      class="d-flex align-items-center gap-3 p-3 dropdown-select"
+                    >
+                      <input
+                        type="checkbox"
+                        [(ngModel)]="amenity.selected"
+                        [ngModelOptions]="{ standalone: true }"
+                        (change)="onAmenitySelected()"
+                      />
+                      {{ amenity.name }}
+                    </label>
+                  </div>
+                </div>
+                <div
+                  *ngIf="
+                    hallForm.get('amenities')?.hasError('required') &&
+                    hallForm.get('amenities')?.touched
+                  "
+                  class="text-danger error-state"
+                >
+                  Amenities is required.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="br-decription" class="label-text">Hall Rent</label>
+            <input
+              type="text"
+              class="input-class"
+              placeholder=" "
+              formControlName="rent"
+              placeholder="Hall Rent"
+              [ngClass]="{
+                'danger-outline':
+                  hallForm.get('rent')?.touched && hallForm.get('rent')?.invalid
+              }"
+            />
+            <div
+              *ngIf="
+                hallForm.get('rent')?.hasError('required') &&
+                hallForm.get('rent')?.touched
+              "
+              class="text-danger error-state"
+            >
+              Hall Rent is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-start gap-5 mt-4 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="branchName" class="label-text">Hall Contact</label>
+            <input
+              type="text"
+              class="input-class"
+              placeholder="Hall Contact"
+              formControlName="hall_contact"
+              [ngClass]="{
+                'danger-outline':
+                  hallForm.get('branch')?.touched &&
+                  hallForm.get('branch')?.invalid
+              }"
+            />
+            <div
+              *ngIf="
+                hallForm.get('branch')?.hasError('required') &&
+                hallForm.get('branch')?.touched
+              "
+              class="text-danger error-state"
+            >
+              Hall Contact is required.
+            </div>
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="branchName" class="label-text">City</label>
+            <input
+              type="text"
+              class="input-class"
+              placeholder="City"
+              formControlName="city"
+              [ngClass]="{
+                'danger-outline':
+                  hallForm.get('city')?.touched && hallForm.get('city')?.invalid
+              }"
+              readonly
+            />
+            <div
+              *ngIf="
+                hallForm.get('city')?.hasError('required') &&
+                hallForm.get('city')?.touched
+              "
+              class="text-danger error-state"
+            >
+              City is required.
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-start mt-4 gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="branchName" class="label-text"
+              >Hall Area <span class="fs-12">(sq ft)</span></label
+            >
+            <input
+              type="text"
+              class="input-class"
+              placeholder="Hall Area"
+              formControlName="hall_area"
+              [ngClass]="{
+                'danger-outline':
+                  hallForm.get('hall_area')?.touched &&
+                  hallForm.get('hall_area')?.invalid
+              }"
+            />
+            <div
+              *ngIf="
+                hallForm.get('hall_area')?.hasError('required') &&
+                hallForm.get('hall_area')?.touched
+              "
+              class="text-danger error-state"
+            >
+              Hall Area is required.
+            </div>
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="branchName" class="label-text">Attraction NearBy</label>
+            <input
+              type="text"
+              class="input-class"
+              placeholder="Attraction NearBy"
+              formControlName="attraction"
+              [ngClass]="{
+                'danger-outline':
+                  hallForm.get('attraction')?.touched &&
+                  hallForm.get('attraction')?.invalid
+              }"
+            />
+          </div>
+        </div>
+        <div class="d-flex justify-content-start gap-5 mt-4 flex-wrap-2">
+          <div class="input-wrapper">
+            <div class="input-group d-flex flex-column gap-2">
+              <label for="branchName" class="label-text">Address</label>
+              <input
+                type="text"
+                class="input-class"
+                placeholder="Hall Address"
+                formControlName="street_adress"
+                [ngClass]="{
+                  'danger-outline':
+                    hallForm.get('street_adress')?.touched &&
+                    hallForm.get('street_adress')?.invalid
+                }"
+                readonly
+              />
+              <div
+                *ngIf="
+                  hallForm.get('street_adress')?.hasError('required') &&
+                  hallForm.get('street_adress')?.touched
+                "
+                class="text-danger error-state"
+              >
+                Hall Address is required.
+              </div>
+            </div>
+          </div>
+          <div
+            class="input-wrapper"
+            *ngIf="selectedBranch && selectedBranch.branch_type === 'hall'"
+          >
+            <div>
+              <div class="input-group d-flex flex-column gap-2">
+                <div class="d-flex align-items-center gap-3">
+                  <label for="branchId" class="label-text">Select Floor</label>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="groundFloorIncluded"
+                      formControlName="ground_floor_included"
+                    />
+                    <label
+                      class="form-check-label fw-400"
+                      for="groundFloorIncluded"
+                      >Ground Floor</label
+                    >
+                  </div>
+                </div>
+
+                <select
+                  class="form-select form-select-lg"
+                  aria-label=".form-select-lg example"
+                  formControlName="floor"
+                  [ngClass]="{
+                    'danger-outline':
+                      hallForm.get('floor')?.touched &&
+                      hallForm.get('floor')?.invalid
+                  }"
+                  [disabled]="hallForm.get('ground_floor_included')?.value"
+                >
+                  <option selected disabled value="">Select Floor</option>
+                  <option *ngFor="let floor of floors" [value]="floor">
+                    {{ floor }}
+                  </option>
+                </select>
+
+                <div
+                  *ngIf="
+                    hallForm.get('floor')?.hasError('required') &&
+                    hallForm.get('floor')?.touched
+                  "
+                  class="text-danger error-state"
+                >
+                  Floor is required.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-start gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="branchName" class="label-text"
+              >Custom Menu Discount in %
+            </label>
+            <input
+              type="text"
+              class="input-class"
+              placeholder="Discount"
+              formControlName="discount"
+              [ngClass]="{
+                'danger-outline':
+                  hallForm.get('discount')?.touched &&
+                  hallForm.get('discount')?.invalid
+              }"
+            />
+            <div
+              *ngIf="
+                hallForm.get('discount')?.hasError('required') &&
+                hallForm.get('discount')?.touched
+              "
+              class="text-danger error-state"
+            >
+              Discount is required.
+            </div>
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <div class="radio-group mt-5">
+              <input type="checkbox" id="age1" name="morning" />
+              <label for="age1">Morning</label>
+
+              <input type="checkbox" id="age2" name="noon" />
+              <label for="age2">Noon</label>
+
+              <input type="checkbox" id="age3" name="evening" />
+              <label for="age3">Evening</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-start gap-5 mt-4 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="br-decription" class="label-text"
+              >Hall Description</label
+            >
+            <textarea
+              class="text-area"
+              id="description"
+              rows="6"
+              formControlName="hall_description"
+              placeholder="Hall Description"
+              [ngClass]="{
+                'danger-outline':
+                  hallForm.get('hall_description')?.touched &&
+                  hallForm.get('hall_description')?.invalid
+              }"
+            ></textarea>
+            <div
+              *ngIf="
+                hallForm.get('hall_description')?.hasError('required') &&
+                hallForm.get('hall_description')?.touched
+              "
+              class="text-danger error-state"
+            >
+              Hall Description is required.
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-column">
+          <div class="d-flex align-items-center gap-5 mt-2">
+            <label for="branchName" class="images-slider mt-5"
+              >Hall Images</label
+            >
+          </div>
+        </div>
+        <div class="d-flex gap-3">
+          <div
+            class="d-flex align-items-center gap-3 mt-1"
+            style="height: fit-content"
+          >
+            <div *ngFor="let image of uploadedImages" class="chip">
+              <img
+                [src]="'https://dev-backend.hamaravenue.com' + image"
+                width="100"
+                height="100"
+                class="object-fit-fill"
+              />
+              <span class="close" (click)="removeImage(image)"
+                ><img src="../../../../assets/icon/cross-btn.png" alt=""
+              /></span>
+            </div>
+            <label for="img-upload-sm" *ngIf="uploadedImages.length !== 15">
+              <input
+                type="file"
+                id="img-upload-sm"
+                class="d-none"
+                (change)="onFileSelected($event)"
+              />
+              <img
+                src="../../../../assets/images/food-item/uploadind-cover-sm.png"
+                alt="img-drop"
+                class="upload-cover__img"
+              />
+            </label>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end mt-2 mx-157">
+          <button class="custom-button" (click)="updateHall(cardData._id)">
+            Update Hall
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,197 @@
+<nav
+  style="--bs-breadcrumb-divider: '>'; color: #b1b1b1"
+  aria-label="breadcrumb"
+  class="mt-3 mb-4"
+>
+  <ol class="breadcrumb d-flex align-items-center mt-4 pb-3">
+    <li class="breadcrumb-item">
+      <div (click)="orderManagement()" class="a">
+        <img
+          src="../../../../assets/images/icons/order-management-icon.png"
+          alt="icon"
+        />
+        Order Management
+      </div>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Add Booking</li>
+  </ol>
+</nav>
+
+<main class="bg-white mt-4 rounded-3 order-container">
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-5">
+      <span class="booking-details">Booking Details</span>
+      <img
+        src="../../../../assets/images/icons/edit-pen-icon.png"
+        alt="icon"
+        class="edit-pen"
+      />
+    </div>
+    <div class="d-flex justify-content-start gap-5 mt-4 mb-3">
+      <div class="d-flex flex-column gap-2 col-md" *ngFor="let data of detail">
+        <div class="d-flex align-items-center gap-2">
+          <img [src]="data.image" alt="icon" class="vender-icons" />
+          <span class="type-class">{{ data.name }}</span>
+        </div>
+        <span class="customer-name mt-3">{{ data.vendertype }}</span>
+      </div>
+    </div>
+    <hr />
+
+    <div class="form-container d-flex flex-column">
+      <span class="booking-details mb-4" style="font-size: 18px"
+        >Customer Details</span
+      >
+      <form
+        [formGroup]="addOrder"
+        (ngSubmit)="submitOrder()"
+        class="d-flex flex-column gap-4"
+      >
+        <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="customer-name" class="label-text">Customer Name</label>
+            <input
+              type="text"
+              id="customer-name"
+              placeholder="Customer Name"
+              class="input-class"
+              maxlength="30"
+              [ngClass]="{
+                'danger-outline':
+                  addOrder.get('customer_name')?.touched &&
+                  addOrder.get('customer_name')?.invalid
+              }"
+              formControlName="customer_name"
+            />
+            <div *ngIf="addOrder.get('customer_name')?.touched">
+              <span
+                *ngIf="addOrder.get('customer_name')?.hasError('required')"
+                class="text-danger"
+                >This field is required. *</span
+              >
+            </div>
+            <div
+              *ngIf="
+                addOrder.get('customer_name')?.touched &&
+                addOrder.get('customer_name')?.invalid
+              "
+            >
+              <span
+                class="text-danger"
+                *ngIf="addOrder.get('customer_name')?.hasError('minLength')"
+                >The minimum length is 5.</span
+              >
+            </div>
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="email" class="label-text">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="abc@gmail.com"
+              class="input-class"
+              formControlName="email"
+              (input)="emailCorrection()"
+              [ngClass]="{
+                'danger-outline':
+                  addOrder.get('email')?.invalid &&
+                  (addOrder.get('email')?.dirty ||
+                    addOrder.get('email')?.touched)
+              }"
+            />
+            <span
+              class="text-danger"
+              *ngIf="addOrder.get('email')?.errors?.['email'] && (addOrder.get('email')?.dirty || addOrder.get('email')?.touched)"
+            >
+              Please enter a valid email address
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="
+                addOrder.get('email')?.errors &&
+                (addOrder.get('email')?.dirty || addOrder.get('email')?.touched)
+              "
+            >
+              {{ getEmailErrorMessage() }}
+            </span>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="address" class="label-text">Address</label>
+            <input
+              type="text"
+              id="address"
+              placeholder="Floor 1"
+              class="input-class"
+              formControlName="address"
+              maxlength="100"
+              (input)="addressValidator()"
+            />
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="zip-code" class="label-text">Zip Code</label>
+            <input
+              type="email"
+              id="zip-code"
+              placeholder="44000"
+              class="input-class"
+              maxlength="8"
+              (keypress)="zipCodeValidator($event)"
+              formControlName="zip_code"
+            />
+            <span
+              class="text-danger"
+              *ngIf="addOrder.get('zip_code')?.errors?.['required'] && (addOrder.get('zip_code')?.dirty || addOrder.get('zip_code')?.touched)"
+            >
+              Zip code is required
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="addOrder.get('zip_code')?.errors?.['pattern'] && (addOrder.get('zip_code')?.dirty || addOrder.get('zip_code')?.touched)"
+            >
+              Only numbers are allowed in the zip code
+            </span>
+            <span
+              class="text-danger"
+              *ngIf="addOrder.get('zip_code')?.errors?.['maxlength']"
+            >
+              Zip code cannot exceed 8 characters
+            </span>
+          </div>
+        </div>
+        <div class="d-flex justify-content-start gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="address" class="label-text">CNIC</label>
+            <input
+              type="text"
+              id="address"
+              placeholder="_____-_______-_"
+              class="input-class"
+              formControlName="cnic"
+              (input)="formatCnic($event)"
+            />
+          </div>
+        </div>
+        <hr />
+        <div class="d-flex justify-content-end align-items-center gap-4">
+          <button
+            class="order-btn"
+            style="background-color: #b1b1b1; width: 180px"
+          >
+            Cancel
+          </button>
+          <button
+            class="order-btn"
+            type="submit"
+            style="width: 180px"
+            (click)="addVendor()"
+          >
+            Next
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,193 @@
+<div class="cardHeader">
+  <img src="../../../../assets/images/logo.png" alt="Logo" />
+  <div class="stars top-left" (click)="onRatingClicked($event)">
+    <label for="rating-inline" class="rating">Rating: </label>
+    <span>
+      <p class="mx-2 numbers">5.0</p>
+    </span>
+    <span class="star mx-2">
+      <img src="../../../../assets/dashboard/Vector.png" alt="Logo"
+    /></span>
+    <span class="star mx-2"
+      ><img src="../../../../assets/dashboard/Vector.png" alt="Logo"
+    /></span>
+    <span class="star mx-2" data-value="3"
+      ><img src="../../../../assets/dashboard/Vector.png" alt="Logo"
+    /></span>
+    <span class="star mx-2" data-value="4"
+      ><img src="../../../../assets/dashboard/Vector.png" alt="Logo"
+    /></span>
+    <span class="star mx-2" data-value="5"
+      ><img src="../../../../assets/dashboard/Vector.png" alt="Logo"
+    /></span>
+    <span>
+      <p class="mx-2">(5676)</p>
+    </span>
+    <i class="fas fa-pencil-square-o" aria-hidden="true"></i>
+  </div>
+
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="card card-stats mb-4 mb-xl-0">
+        <img src="../../../../assets/images/logo1.png" alt="Logo" />
+      </div>
+      <div class="text">
+        <header>
+          Royal Palace<span class="banquet-hall">(BANQUET HALL)</span>
+        </header>
+        <p>
+          Lorem ipsum dolor sit amet, eiusmod consectetur adipiscing elit,<br />
+          sed eiusm tempor incididunt ut labore.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="header-body">
+    <!-- Card stats -->
+    <div class="d-flex flex-wrap mt-5 gap-3">
+      <div class="card-body">
+        <p class="text-sm">
+          <span class="mr-2 text-header" style="color: #1fb21c"
+            ><i class="fa fa-arrow-up"></i>
+            <span class="mx-3 text-range">12%</span></span
+          >
+        </p>
+        <div class="row">
+          <div class="col">
+            <h5
+              class="card-title text-uppercase mb-3 mt-2"
+              style="color: #64748b"
+            >
+              Traffic
+            </h5>
+            <span class="h2 font-weight-bold mb-0 rates">350,897</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="text-sm">
+          <span class="text-header mr-2" style="color: #b21c1c"
+            ><i class="fas fa-arrow-down"></i>
+            <span class="mx-3 text-range">12%</span></span
+          >
+        </p>
+        <div class="row">
+          <div class="col">
+            <h5
+              class="card-title text-uppercase mb-3 mt-2"
+              style="color: #64748b"
+            >
+              New users
+            </h5>
+            <span class="h2 font-weight-bold mb-0 rates">2,356</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="text-sm">
+          <span class="text-header mr-2" style="color: #1fb21c"
+            ><i class="fas fa-arrow-down"></i>
+            <span class="mx-3 text-range">12%</span></span
+          >
+        </p>
+        <div class="row">
+          <div class="col">
+            <h5
+              class="card-title text-uppercase mb-3 mt-2"
+              style="color: #64748b"
+            >
+              Sales
+            </h5>
+            <span class="h2 font-weight-bold mb-0 rates">924</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="text-sm">
+          <span class="text-header mr-2" style="color: #b21c1c"
+            ><i class="fas fa-arrow-up"></i>
+            <span class="mx-3 text-range">12%</span></span
+          >
+        </p>
+        <div class="row">
+          <div class="col">
+            <h5
+              class="card-title text-uppercase mb-3 mt-2"
+              style="color: #64748b"
+            >
+              Performance
+            </h5>
+            <span class="h2 font-weight-bold mb-0 rates">49,65%</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="text-sm">
+          <span class="text-header mr-2" style="color: #1fb21c"
+            ><i class="fas fa-arrow-up"></i>
+            <span class="mx-3 text-range">12%</span></span
+          >
+        </p>
+        <div class="row">
+          <div class="col">
+            <h5
+              class="card-title text-uppercase mb-3 mt-2"
+              style="color: #64748b"
+            >
+              Performance
+            </h5>
+            <span class="h2 font-weight-bold mb-0 rates">49,65%</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="text-sm">
+          <span class="text-header mr-2" style="color: #1fb21c"
+            ><i class="fas fa-arrow-up"></i>
+            <span class="mx-3 text-range">12%</span></span
+          >
+        </p>
+        <div class="row">
+          <div class="col" style="margin-right: 10px">
+            <h5
+              class="card-title text-uppercase mb-3 mt-2"
+              style="color: #64748b"
+            >
+              Performance
+            </h5>
+            <span class="h2 font-weight-bold mb-0 rates">49,65%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="margin-top: 7rem !important">
+  <div class="row">
+    <div class="col-lg-6 mb-5">
+      <app-revenue-chart></app-revenue-chart>
+    </div>
+    <div class="col-lg-6 mb-5">
+      <div class="card w-100" style="border: none">
+        <app-customer-chart></app-customer-chart>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5 mb-5">
+    <div class="col-lg-8 mb-5">
+      <app-google-maps
+        [height]="'280px'"
+        [width]="'100%'"
+        #binMap
+      ></app-google-maps>
+    </div>
+    <div class="col-lg-4 mb-5">
+      <!-- <div class="card"> -->
+      <app-location-chart></app-location-chart>
+      <!-- </div> -->
+    </div>
+  </div>
+</div>

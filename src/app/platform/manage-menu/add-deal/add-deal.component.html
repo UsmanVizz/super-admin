@@ -1,0 +1,296 @@
+<div class="d-flex justify-content-between mt-5">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <div (click)="manageMenu()">
+          <img
+            src="../../../../assets/images/sidebar-icons/menu.png"
+            alt="City Icon"
+            class="category-icon mx-1"
+          />
+          <span class="bread-menu">Manage Menu</span>
+        </div>
+      </li>
+      <i class="fa-solid fa-chevron-right arrow px-3"></i>
+      <li class="breadcrumb-item active add-category mt-2" aria-current="page">
+        Deals
+      </li>
+    </ol>
+  </nav>
+</div>
+<div class="d-flex align-items-center category" style="margin-top: 30px">
+  <h1 class="flex-grow-1 mb-0 manage-category mx-1">Add Deal</h1>
+</div>
+<div cdkDropListGroup class="d-flex justify-content-between">
+  <div class="card">
+    <div class="select-branch">
+      <label for="branchName" class="branch">
+        Select Branch
+        <!-- <img
+          src="../../../../assets/images/refresh.jpg"
+          alt="Branch Image"
+          class="branch-image" 
+      /> -->
+      </label>
+      <select
+        class="form-select form-select-lg form-control-branch"
+        aria-label=".form-select-lg example"
+        (change)="onBranchSelect($event)"
+      >
+        <option selected disabled value="">Select Branch</option>
+        <option *ngFor="let item of branches" [value]="item._id">
+          {{ item.branch_name }}
+        </option>
+      </select>
+    </div>
+    <div class="select-category">Select Categories</div>
+    <div class="scroll-container #scrollContainer">
+      <div class="card-container">
+        <div
+          class="card-category"
+          *ngFor="let card of filteredCategories; let i = index"
+          [class.selected]="isSelected(i)"
+          (click)="toggleSelection(i)"
+        >
+          <img
+            [src]="
+              card.thumbnail_image
+                ? 'https://dev-backend.hamaravenue.com/' + card.thumbnail_image
+                : '../../../../assets/dashboard/default-image.webp'
+            "
+            alt="{{ card.category_name }}"
+            class="card-img-top"
+          />
+          <div class="card-body">
+            <h5 class="card-title" [class.selected-text]="isSelected(i)">
+              {{ card.category_name }}
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="select-category">Select Item</div>
+
+    <div class="card-item">
+      <div class="d-flex flex-column p-3 rounded-3">
+        <div class="d-flex justify-content-between">
+          <div class="example-container menu-border">
+            <div
+              cdkDropList
+              [cdkDropListData]="items"
+              class="example-list drag-box__container"
+              cdkDropListSortingDisabled
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div class="d-flex flex-column">
+                <div *ngIf="items?.length === 0">
+                  <div class="checkbox">No more items</div>
+                </div>
+                <div class="d-flex flex-wrap align-content-start">
+                  <div *ngFor="let item of items; trackBy: trackByFn" cdkDrag>
+                    <div class="d-flex justify-content-between custom-box">
+                      <div class="d-flex gap-3 align-items-center">
+                        <img
+                          [src]="
+                            'https://dev-backend.hamaravenue.com/' +
+                            item.thumbnail_image
+                          "
+                          alt=""
+                          class="img"
+                        />
+                        <div class="d-flex flex-column">
+                          <span class="span">{{ item.item_name }}</span>
+                          <div class="flex-grow-1">
+                            <span class="custom-price-text">
+                              Rs.{{ item.item_price_per_head }}</span
+                            >
+                            <span class="color-grey">per head</span>
+                          </div>
+                        </div>
+                      </div>
+                      <img
+                        src="../../../../assets/menu-categories/add-btn.png"
+                        alt="cross btn"
+                        class="cross-btn"
+                        (click)="addSelectItem(item)"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="drop-card">
+    <form [formGroup]="createItem" (ngSubmit)="addDeals()">
+      <div class="branches">
+        <div class="select-branch mb-4">
+          <label for="branchName" class="head-Name mt-4 mb-4">Name Deal</label>
+          <input
+            type="text"
+            class="form-control-branch px-4"
+            placeholder="Name"
+            formControlName="deal_name"
+          />
+        </div>
+
+        <div class="select-branch">
+          <label for="branchName" class="head-Name mt-4 mb-4"
+            >Branch Name</label
+          >
+          <select
+            class="form-select form-select-lg form-control-branch"
+            aria-label=".form-select-lg example"
+            formControlName="branch_id"
+          >
+            <option selected disabled value="">Select Branch</option>
+            <option *ngFor="let item of branches" [value]="item._id">
+              {{ item.branch_name }}
+            </option>
+          </select>
+        </div>
+        <div class="select-branch mb-4 mt-4">
+          <label for="branchName" class="head-Name mt-4 mb-4"
+            >Description</label
+          >
+          <textarea
+            type="text"
+            row="6"
+            class="form-control-branch px-4 h-100"
+            placeholder="Description"
+            formControlName="description"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center mt-2">
+        <label for="branchName" class="images-slider mt-5"
+          >Thumbnail Image</label
+        >
+      </div>
+      <div class="d-flex align-items-center gap-3 mx-10 mt-2">
+        <div *ngFor="let image of uploadedthumbnail" class="chip-img">
+          <img
+            [src]="'https://dev-backend.hamaravenue.com' + image.url"
+            width="130"
+            height="130"
+            class="object-fit-fill"
+            (error)="imageLoadError($event)"
+          />
+          <span class="close" (click)="removeThumbnail(image)">
+            <img src="../../../../assets/icon/cross-btn.png" alt="" />
+          </span>
+        </div>
+        <div *ngIf="uploadedthumbnail?.length === 0">
+          <label for="thumbnail-upload" class="custom-file-upload">
+            <input
+              id="thumbnail-upload"
+              type="file"
+              (change)="onThumbnailSelected($event)"
+              accept="image/*"
+              multiple
+            />
+            <span class="material-symbols-outlined"> add_circle </span>
+          </label>
+        </div>
+      </div>
+      <h2 class="selected-item">
+        Selected Item <span class="drag-text">(Drag and Drop)</span>
+      </h2>
+
+      <div class="example-container menu-border mt-5">
+        <div
+          cdkDropList
+          [cdkDropListData]="basket"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <!-- <div *ngIf="basket.length === 0" class="empty-basket-message">
+            <div class="checkbox">No Item Selected</div>
+          </div> -->
+          <div *ngFor="let item of basket; trackBy: trackByFn" cdkDrag>
+            <div class="d-flex justify-content-between custom-box">
+              <div class="d-flex gap-3 align-items-center">
+                <img
+                  [src]="
+                    'https://dev-backend.hamaravenue.com/' +
+                    item.thumbnail_image
+                  "
+                  alt=""
+                  class="img"
+                />
+                <div class="d-flex flex-column">
+                  <span class="span">{{ item.item_name }}</span>
+                  <div class="flex-grow-1">
+                    <span class="custom-price-text"
+                      >Rs.{{ item.item_price_per_head }}</span
+                    >
+                    <span class="color-grey">per head</span>
+                  </div>
+                </div>
+              </div>
+              <img
+                src="../../../../assets/menu-categories/cross-btn.png"
+                alt="cross btn"
+                class="cross-btn"
+                (click)="returnSelectedItem(item)"
+              />
+            </div>
+          </div>
+          <div class="d-flex custom-drag-box">
+            <div class="d-flex gap-4 align-items-center">
+              <img src="../../../../assets/images/upload.png" alt="" />
+              <div class="d-flex flex-column gap-3">
+                <span class="select-item">Select Item</span>
+                <span class="drag-drop-text">(Drag and Drop)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="d-flex justify-content-between align-items-center price-section"
+        >
+          <span class="total-price">Standard Price</span>
+          <span class="standard-price">{{ calculateTotalPrice() }}</span>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <label for="discountInput" class="head-Name mt-4 mb-4"
+                >Discount (%)</label
+              >
+              <input
+                type="text"
+                class="form-control px-4"
+                placeholder="0%"
+                formControlName="discount"
+                [(ngModel)]="discount"
+                id="discountInput"
+              />
+            </div>
+            <div class="col-md-6 mb-4">
+              <label for="finalPriceInput" class="head-Name mt-4 mb-4"
+                >Final Price</label
+              >
+              <input
+                type="text"
+                class="form-control px-4"
+                placeholder="0000"
+                [value]="calculateFinalPrice()"
+                id="finalPriceInput"
+                formControlName="final_price"
+                readonly
+              />
+            </div>
+          </div>
+        </div>
+        <button class="view-btn view-btn-active">Save Deal</button>
+      </div>
+    </form>
+  </div>
+</div>

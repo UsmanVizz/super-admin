@@ -1,0 +1,150 @@
+<div class="d-flex justify-content-between mt-5">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <div (click)="manageMenu()">
+          <img
+            src="../../../../assets/images/sidebar-icons/menu.png"
+            alt="City Icon"
+            class="category-icon mx-1"
+          />
+          <span class="bread-menu">Manage Deal</span>
+        </div>
+      </li>
+      <i class="fa-solid fa-chevron-right arrow px-3"></i>
+
+      <li class="breadcrumb-item active add-category mt-2" aria-current="page">
+        Add Deal
+      </li>
+    </ol>
+  </nav>
+</div>
+<main class="bg-white mt-4 rounded-3">
+  <div class="d-flex flex-column">
+    <div class="d-flex align-items-center">
+      <h1 class="flex-grow-1 mb-0 branch-name">Deals Detail</h1>
+      <div class="ml-auto">
+        <button
+          class="custom-button"
+          style="background-color: #fb6f10; font-size: 16px"
+        >
+          <span class="edit-text" (click)="editCategory(categoryData._id)">
+            Edit Deal</span
+          >
+        </button>
+      </div>
+    </div>
+    <div class="row mt-5 mb-5">
+      <div class="col">
+        <div class="info-container">
+          <div class="info-item">
+            <p class="info-label">
+              <img
+                src="../../../../assets/images/branch-details/Text.png"
+                class="icons"
+              />Title
+            </p>
+            <div class="info-value">{{ categoryData?.deal_name }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="info-item">
+          <p class="info-label">Branch</p>
+          <p class="info-value">{{ categoryData?.branch_info?.branch_name }}</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="info-item">
+          <p class="info-label">
+            <img
+              src="../../../../assets/images/branch-details/File Text.png"
+              class="icons"
+            />Description
+          </p>
+          <p class="info-value">{{ categoryData?.description }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="info-item">
+          <p class="info-label">Discount</p>
+          <p class="info-value">{{ categoryData?.discount }}</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="info-item">
+          <p class="info-label">Standard Price</p>
+          <p class="info-value">{{ categoryData?.standard_price }}</p>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="info-item">
+          <p class="info-label">Final Price</p>
+          <p class="info-value">{{ categoryData?.final_price }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-column">
+      <div class="d-flex align-items-center gap-3 mx-4 mt-2">
+        <label for="branchName" class="images-slider mt-5"
+          >Thumbnail Image</label
+        >
+        <label for="branchName" class="images-slider deal-image mt-5"
+          >Deal Images</label
+        >
+      </div>
+    </div>
+    <div class="d-flex flex-wrap gap-3">
+      <!-- Display thumbnail image or default image -->
+      <img
+        *ngIf="
+          categoryData?.menu_items_detail[0]?.thumbnail_image;
+          else defaultThumbnail
+        "
+        [src]="
+          'https://dev-backend.hamaravenue.com/' +
+          categoryData?.menu_items_detail[0]?.thumbnail_image
+        "
+        width="200"
+        height="180"
+        class="object-fit-fill rounded-4"
+      />
+      <ng-template #defaultThumbnail>
+        <img
+          src="../../../../assets/dashboard/default-image.webp"
+          width="200"
+          height="180"
+          class="object-fit-fill rounded-4"
+        />
+      </ng-template>
+
+      <!-- Display other images or default image if no images available -->
+      <ng-container
+        *ngIf="
+          categoryData?.images &&
+            categoryData?.menu_items_detail[0]?.images?.length > 0;
+          else defaultImages
+        "
+      >
+        <img
+          *ngFor="let image of categoryData?.menu_items_detail[0]?.images"
+          [src]="'https://dev-backend.hamaravenue.com/' + image"
+          alt="images"
+          class="images-loader"
+        />
+      </ng-container>
+      <ng-template #defaultImages>
+        <img
+          src="../../../../assets/dashboard/default-image.webp"
+          width="200"
+          height="180"
+          class="object-fit-fill rounded-4 images-loader"
+        />
+      </ng-template>
+    </div>
+  </div>
+</main>
