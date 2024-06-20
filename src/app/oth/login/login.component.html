@@ -17,28 +17,14 @@
       <div class="form-container d-flex justify-content-end align-items-end">
         <div class="input-container email">
           <label for="email" class="custom-text">Your Email Address</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="abc@email.com"
-            class="input-size"
-            formControlName="email"
-          />
-          <div
-            *ngIf="
+          <input type="email" id="email" placeholder="abc@email.com" class="input-size" formControlName="email" />
+          <div *ngIf="
               userLogin.get('email')?.touched && userLogin.get('email')?.invalid
-            "
-          >
-            <span
-              *ngIf="userLogin.get('email')?.hasError('required')"
-              class="text-danger"
-            >
+            ">
+            <span *ngIf="userLogin.get('email')?.hasError('required')" class="text-danger">
               Email filed is required.
             </span>
-            <span
-              *ngIf="userLogin.get('email')?.hasError('email')"
-              class="text-danger"
-            >
+            <span *ngIf="userLogin.get('email')?.hasError('email')" class="text-danger">
               Email Format is Invalid
             </span>
           </div>
@@ -50,28 +36,15 @@
               Forgot Password?
             </p>
           </div>
-          <input
-            [type]="hidePassword ? 'password' : 'text'"
-            id="password"
-            placeholder="***********"
-            class="input-size"
-            formControlName="password"
-          />
-          <i
-            class="far font-size"
-            [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'"
-            (click)="togglePasswordVisibility()"
-          ></i>
-          <div
-            *ngIf="
+          <input [type]="hidePassword ? 'password' : 'text'" id="password" placeholder="***********" class="input-size"
+            formControlName="password" />
+          <i class="far font-size" [ngClass]="hidePassword ? 'fa-eye-slash' : 'fa-eye'"
+            (click)="togglePasswordVisibility()"></i>
+          <div *ngIf="
               userLogin.get('password')?.touched &&
               userLogin.get('password')?.invalid
-            "
-          >
-            <span
-              *ngIf="userLogin.get('password')?.hasError('required')"
-              class="text-danger"
-            >
+            ">
+            <span *ngIf="userLogin.get('password')?.hasError('required')" class="text-danger">
               Password field is required.
             </span>
           </div>

@@ -21,6 +21,7 @@
   flex-grow: 0;
   margin-left: 10px;
 }
+
 .custom-text {
   font-family: "Satoshi", Arial, sans-serif;
   font-style: normal;
@@ -32,6 +33,7 @@
   order: 0;
   flex-grow: 0;
 }
+
 .forgot-password {
   font-family: "Satoshi", Arial, sans-serif;
   font-style: normal;
@@ -43,6 +45,7 @@
   order: 1;
   flex-grow: 0;
 }
+
 .signup-btn {
   padding: 16px 27px;
   gap: 11px;
@@ -50,6 +53,7 @@
   font-size: 12px !important;
   background: #fb6f10;
 }
+
 .description {
   font-family: "Satoshi", Arial, sans-serif;
   font-style: normal;
@@ -68,11 +72,13 @@
   padding: 12px !important;
   background-color: transparent;
 }
+
 .form-container {
   margin-top: 40px;
 }
 
 @media only screen and (max-width: 575.98px) {
+
   /* Your styles for extra small devices here */
   .split-screen {
     .right form {
@@ -109,6 +115,7 @@
 
 /* Small devices (landscape phones, 576px and up) */
 @media only screen and (min-width: 576px) and (max-width: 767.98px) {
+
   /* Your styles for small devices here */
   .split-screen {
     .right form {
@@ -145,6 +152,7 @@
 
 /* Medium devices (tablets, 768px and up) */
 @media only screen and (min-width: 768px) and (max-width: 991.98px) {
+
   /* Your styles for medium devices here */
   .split-screen {
     .right form {
@@ -177,6 +185,7 @@
 
 /* Large devices (desktops, 992px and up) */
 @media only screen and (min-width: 992px) and (max-width: 1199.98px) {
+
   /* Your styles for large devices here */
   .split-screen {
     .right form {
@@ -302,6 +311,7 @@
 
 /* Extra extra large devices (extra large desktops, 1920px and up) */
 @media only screen and (min-width: 1920px) and (max-width: 5000px) {
+
   /* Your styles for extra extra large devices here */
   .split-screen {
     .right form {

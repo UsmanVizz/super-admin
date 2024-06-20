@@ -1,36 +1,17 @@
 <main class="d-flex flex-column position-sticky top-0">
   <a routerLink="/hms-owner" class="a m-0">
-    <div
-      class="d-flex justify-content-start align-items-center gap-4 pt-3 pb-3 logo-container"
-    >
+    <div class="d-flex justify-content-start align-items-center gap-4 pt-3 pb-3 logo-container">
       <!-- For screens smaller than 1024px -->
       <picture>
-        <source
-          srcset="../../../assets/logo/logo1.png"
-          media="(max-width: 1154px)"
-        />
-        <img
-          src="../../../assets/logo/logo.png"
-          alt="fav icon"
-          class="fav-icon"
-        />
+        <source srcset="../../../assets/logo/logo1.png" media="(max-width: 1154px)" />
+        <img src="../../../assets/logo/logo.png" alt="fav icon" class="fav-icon" />
       </picture>
     </div>
   </a>
   <ng-container *ngFor="let link of links">
     <div class="dropdown" *ngIf="link.submenus && link.submenus.length > 0">
-      <a
-        class="dropdown-toggle"
-        href="#"
-        role="button"
-        (click)="toggleDropdown(link)"
-        style="overflow: auto"
-      >
-        <img
-          [src]="getImgPath(link)"
-          alt=""
-          [class.active-img]="isLinkActive(link)"
-        />
+      <a class="dropdown-toggle" href="#" role="button" (click)="toggleDropdown(link)" style="overflow: auto">
+        <img [src]="getImgPath(link)" alt="" [class.active-img]="isLinkActive(link)" />
         <span>{{ link.label }}</span>
       </a>
       <ul class="dropdown-menu" *ngIf="link.isOpen">
@@ -39,20 +20,10 @@
         </li>
       </ul>
     </div>
-    <a
-      [routerLink]="link.routerLink"
-      routerLinkActive="active"
-      class="a"
-      *ngIf="!link.submenus || link.submenus.length === 0"
-    >
-      <div
-        class="d-flex justify-content-start align-items-center gap-4 item-link"
-      >
-        <img
-          [src]="getImgPath(link)"
-          alt=""
-          [class.active-img]="isLinkActive(link)"
-        />
+    <a [routerLink]="link.routerLink" routerLinkActive="active" class="a"
+      *ngIf="!link.submenus || link.submenus.length === 0">
+      <div class="d-flex justify-content-start align-items-center gap-4 item-link">
+        <img [src]="getImgPath(link)" alt="" [class.active-img]="isLinkActive(link)" />
         <span class="text-visiblity">{{ link.label }}</span>
       </div>
     </a>

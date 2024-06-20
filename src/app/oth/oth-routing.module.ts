@@ -27,11 +27,7 @@ const routes: Routes = [
             (m) => m.ForgotPasswordComponent
           ),
       },
-      // {
-      //   path: 'sign-up',
-      //   loadComponent: () =>
-      //     import('./sign-up/sign-up.component').then((m) => m.SignUpComponent),
-      // },
+    
     ],
   },
 ];
@@ -40,4 +36,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class OthRoutingModule {}
+export class OthRoutingModule { }

@@ -12,7 +12,7 @@ export class IndexComponent implements OnInit {
     this.setDisplay(window.innerWidth);
   }
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
   }
 
 

@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: 'generate-report',
     loadComponent: () =>
-      import('../app/generate-report/generate-report.component').then(
+      import('./shared/generate-report/generate-report.component').then(
         (m) => m.GenerateReportComponent
       ),
 

@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainPageRoutingModule } from './mainpage-routing.module';
-// import { NavBarComponent } from './nav-bar/nav-bar.component';
-// import { SideBarComponent } from './side-bar/side-bar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';

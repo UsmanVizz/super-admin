@@ -22,7 +22,7 @@ interface Link {
   imports: [CommonModule, RouterModule],
 })
 export class SidebarComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
   @ViewChild('itemEl') itemEl: ElementRef | undefined;
   toggleDropdown(link: Link): void {
     link.isOpen = !link.isOpen;

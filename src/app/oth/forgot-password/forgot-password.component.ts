@@ -30,7 +30,7 @@ export class ForgotPasswordComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   userLoggedIn() {
     this.router.navigate(['reset-password']);

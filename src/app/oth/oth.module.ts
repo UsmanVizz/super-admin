@@ -12,17 +12,6 @@ import { DefaultPageComponent } from './default-page/default-page.component';
     FormsModule,
     ReactiveFormsModule,
     OthRoutingModule,
-
-    // NgProgressModule.withConfig({
-    //     spinner:false,
-    //     color: "#426bf7",
-    //     thick: true,
-    // }),
-    // NgProgressHttpModule,
-    // ToastrModule.forRoot({
-    //     timeOut: 10000,
-    //     preventDuplicates: true,
-    // }),
   ],
 })
-export class OthModule {}
+export class OthModule { }

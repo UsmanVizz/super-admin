@@ -27,7 +27,7 @@ export class ChangePasswordComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   changePassward() {
     console.log(this.userLogin.value);
