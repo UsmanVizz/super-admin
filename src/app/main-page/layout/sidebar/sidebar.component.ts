@@ -46,7 +46,7 @@ export class SidebarComponent implements OnInit {
       submenus: [],
     },
     {
-      routerLink: '/branch-manage',
+      routerLink: '/companies-management',
       icon: 'home_work',
       label: 'Manage companies',
       whiteImgPath:

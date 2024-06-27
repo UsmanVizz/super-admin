@@ -22,13 +22,7 @@ const routes: Routes = [
             './../platform/finance-management/expense-management/expense-management.component'
           ).then((m) => m.ExpenseManagementComponent),
       },
-      {
-        path: 'branch-manage',
-        loadComponent: () =>
-          import(
-            './../platform/manage-branch/manage-branch/manage-branch.component'
-          ).then((m) => m.ManageBranchComponent),
-      },
+
       {
         path: 'manage-customer',
         loadComponent: () =>
@@ -64,13 +58,7 @@ const routes: Routes = [
             './../platform/manage-hall/edit-halls/edit-halls.component'
           ).then((m) => m.EditHallsComponent),
       },
-      {
-        path: 'branch-manage/branch-detail/:id',
-        loadComponent: () =>
-          import(
-            './../platform/manage-branch/branch-detail/branch-detail.component'
-          ).then((m) => m.BranchDetailComponent),
-      },
+
       {
         path: 'manage-menu/catagories/add-category',
         loadComponent: () =>
@@ -246,13 +234,7 @@ const routes: Routes = [
             './../platform/reports/report-chart/report-chart.component'
           ).then((m) => m.ReportChartComponent),
       },
-      {
-        path: 'user-management',
-        loadComponent: () =>
-          import(
-            './../platform/user-management/user-management/user-management.component'
-          ).then((m) => m.UserManagementComponent),
-      },
+
       {
         path: 'vandors',
         loadComponent: () =>
@@ -260,26 +242,53 @@ const routes: Routes = [
             './../platform/vandors-management/vandors-management/vandors-management.component'
           ).then((m) => m.VandorsManagementComponent),
       },
+      //Manage Companies
       {
-        path: 'branch-manage/add-branch',
+        path: 'companies-management',
         loadComponent: () =>
           import(
-            '../platform/manage-branch/add-branch/add-branch.component'
-          ).then((m) => m.AddBranchComponent),
+            './../platform/manage-companies/manage-companies/manage-companies.component'
+          ).then((m) => m.ManageCompaniesComponent),
       },
       {
-        path: 'branch-manage/edit-branch/:id',
+        path: 'companies-management/company-detail/:id',
         loadComponent: () =>
           import(
-            '../platform/manage-branch/edit-branch/edit-branch.component'
-          ).then((m) => m.EditBranchComponent),
+            './../platform/manage-companies/detail-companies/detail-companies.component'
+          ).then((m) => m.DetailCompaniesComponent),
       },
+      {
+        path: 'companies-management/add-company',
+        loadComponent: () =>
+          import(
+            '../platform/manage-companies/add-companies/add-companies.component'
+          ).then((m) => m.AddCompaniesComponent),
+      },
+      {
+        path: 'companies-management/edit-company/:id',
+        loadComponent: () =>
+          import(
+            '../platform/manage-companies/edit-companies/edit-companies.component'
+          ).then((m) => m.EditCompaniesComponent),
+      },
+
+      //End Manage Companies
+
       {
         path: 'view-manage-customer',
         loadComponent: () =>
           import(
             '../platform/manage-customer/view-manage-customer/view-manage-customer.component'
           ).then((m) => m.ViewManageCustomerComponent),
+      },
+
+//User Management
+      {
+        path: 'user-management',
+        loadComponent: () =>
+          import(
+            './../platform/user-management/user-management/user-management.component'
+          ).then((m) => m.UserManagementComponent),
       },
       {
         path: 'user-management/add-employee',
@@ -302,6 +311,10 @@ const routes: Routes = [
             './../platform/user-management/view-user-management/view-user-management.component'
           ).then((m) => m.ViewUserManagementComponent),
       },
+// End User Management
+
+
+
       {
         path: 'profile/edit-profile',
         loadComponent: () =>
@@ -360,4 +373,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MainPageRoutingModule {}
+export class MainPageRoutingModule { }

@@ -119,9 +119,8 @@ a.active img {
 
 @media (max-width: 1154px) {
   .fav-icon {
-    height: 49px;
-    width: 75px;
-    margin-left: 25px;
+    width: 100%;
+    margin-left: 8px;
     animation: customAni 2s cubic-bezier(0.22, 1, 0.36, 1) 0s 1 normal none;
   }
 }
