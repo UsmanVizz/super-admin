@@ -252,3 +252,12 @@ td {
   object-fit: cover;
   border-radius: 50%;
 }
+.form-switch .form-check-input {
+  width: 3em !important;
+  height: 3rem !important;
+  color: #fb6f10;
+}
+.form-check-input:checked {
+  background-color: #fb6f10;
+  border-color: #fb6f10;
+}

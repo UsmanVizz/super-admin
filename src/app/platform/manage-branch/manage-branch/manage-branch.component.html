@@ -74,7 +74,7 @@
           <th scope="col" class="th-table text-nowrap">Company Size</th>
           <th scope="col" class="th-table text-nowrap">Emails</th>
           <th scope="col" class="th-table text-nowrap">Total Revenue</th>
-          <th scope="col" class="th-table text-nowrap">Status</th>
+          <th scope="col">Status</th>
           <th scope="col" class="th-table text-nowrap">Actions</th>
         </tr>
       </thead>
@@ -90,14 +90,14 @@
           <td class="email-td text-nowrap">{{ row.hall_name }}</td>
           <td class="email-td text-nowrap">{{ row.order_amount }}</td>
           <td class="email-td text-nowrap">{{ row.advance }}</td>
-          <td class="email-td text-nowrap">
-            <div class="custom-control custom-switch">
+          <td>
+            <div class="form-check form-switch">
               <input
+                class="form-check-input"
                 type="checkbox"
-                class="custom-control-input"
-                id="customSwitch1"
+                id="flexSwitchCheckDefault"
+                [checked]="row.status"
               />
-              <label class="custom-control-label" for="customSwitch1"></label>
             </div>
           </td>
 
