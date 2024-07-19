@@ -16,14 +16,15 @@ import {
 } from '@angular/forms';
 import { first } from 'rxjs';
 import { ApiService, ApiResponse } from 'src/app/services/api-services.service';
+
 @Component({
-  selector: 'app-add-companies',
+  selector: 'app-company-contact-details',
+  templateUrl: './company-contact-details.component.html',
+  styleUrls: ['./company-contact-details.component.scss'],
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './add-companies.component.html',
-  styleUrls: ['./add-companies.component.scss'],
 })
-export class AddCompaniesComponent implements OnInit {
+export class CompanyContactDetailsComponent implements OnInit {
   uploadedImages: any[] = [];
   imagesToUpload: any[] = [];
   uploadedthumbnail: any[] = [];

@@ -33,7 +33,7 @@ declare let $: any;
   imports: [CommonModule, RouterModule, FormsModule, LazyLoadImageModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './manage-companies.component.html',
-  styleUrls: ['./manage-companies.component.scss']
+  styleUrls: ['./manage-companies.component.scss'],
 })
 export class ManageCompaniesComponent implements OnInit {
   pageSize: number = 10;
@@ -43,7 +43,7 @@ export class ManageCompaniesComponent implements OnInit {
   pages!: number[];
   paginatedData!: any[];
   filteredData: any[] = [];
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
   sortProductsDesc(): void {
     this.tableData = this.tableData.sort((a, b) =>
       b.customer_name.localeCompare(a.customer_name)
@@ -286,9 +286,7 @@ export class ManageCompaniesComponent implements OnInit {
     this.filterData();
   }
 
-
-
-  addCompanies(){
-    
+  addCompanies() {
+    this.router.navigate(['/companies-management/add-company']);
   }
 }

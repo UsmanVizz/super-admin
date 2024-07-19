@@ -15,11 +15,12 @@ import {
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { CorsInterceptor } from './services/corsInterceptor.service';
 import { InterceptorService } from './services/serviceInterceptor';
+import { CompanyContactDetailsComponent } from './platform/manage-companies/company-contact-details/company-contact-details.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {};
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CompanyContactDetailsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
