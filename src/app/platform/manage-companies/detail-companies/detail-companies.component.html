@@ -1,1 +1,60 @@
-<p>detail-companies works!</p>
+<h1 class="title">All Customer</h1>
+<div class="container-fluid">
+  <div class="d-flex align-items-center bottom-border">
+    <h1 class="flex-grow-1 mb-0 customer-details">Company Details</h1>
+    <div class="ml-auto">
+      <button class="custom-button" (click)="customerDetail()">Done</button>
+    </div>
+  </div>
+  <!-- <div class="d-flex align-items-center image-container bottom-border">
+    <img src="../../../assets/images/customer.png" alt="Avatar" />
+   
+    <div class="dropdown" (click)="toggleDropdown()">
+      <button class="dropbtn">
+        Email <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="dropdown-content" [ngClass]="{ show: dropdownOpen }">
+        <a href="#">Abc123@gmail.com</a>
+      </div>
+    </div>
+  </div> -->
+  <div class="row">
+    <!-- Column for the first set of data -->
+    <div class="col-sm-6 customer-data">
+      <div>
+        <h1 class="profile-heads">Owner Name</h1>
+        <h1 class="profile-body">
+          {{ tableData?.first_name + "   " + tableData?.last_name }}
+        </h1>
+        <h1 class="profile-heads">Address</h1>
+        <h1 class="profile-body">{{ tableData?.address?.street }}</h1>
+        <h1 class="profile-heads">CNIC Number</h1>
+        <h1 class="profile-body">{{ tableData?.cnic }}</h1>
+        <h1 class="profile-heads">Brand Name</h1>
+        <h1 class="profile-body">{{ tableData?.brand_name }}</h1>
+        <h1 class="profile-heads">
+          <img src="../../../assets/images/map.png" />
+          <span class="mx-3">Address on Map</span>
+        </h1>
+        <!-- <h1 class="profile-body">{{tabl}}</h1> -->
+      </div>
+    </div>
+
+    <!-- Column for the second set of data -->
+    <div class="col-sm-6 customer-data">
+      <div>
+        <h1 class="profile-heads">Email</h1>
+        <h1 class="profile-body">{{ tableData?.email }}</h1>
+        <h1 class="profile-heads">Contact No</h1>
+        <h1 class="profile-body">{{ tableData?.personal_contact_number }}</h1>
+        <h1 class="profile-heads">Joining Date</h1>
+        <h1 class="profile-body">{{ tableData?.joining_date }}</h1>
+        <h1 class="profile-heads">Enable / Disable</h1>
+        <label class="switch">
+          <input type="checkbox" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

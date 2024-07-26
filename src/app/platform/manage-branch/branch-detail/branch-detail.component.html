@@ -1,4 +1,25 @@
-<div class="container">
+<div class="d-flex justify-content-between mt-5">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <div (click)="manageBranch()">
+          <img
+            src="../../../../assets/images/branches/branch.png"
+            alt="City Icon"
+            class="category-icon mx-1"
+          />
+          <span class="bread-menu">Manage Branch</span>
+        </div>
+      </li>
+      <i class="fa-solid fa-chevron-right arrow px-3"></i>
+
+      <li class="breadcrumb-item active add-category mt-2" aria-current="page">
+        Edit Branch
+      </li>
+    </ol>
+  </nav>
+</div>
+<div class="container-fluid">
   <div class="row justify-content-center mt-4">
     <div class="card" *ngIf="branchData">
       <div class="row no-gutters">
@@ -14,7 +35,7 @@
               <span class="icon"
                 ><img src="../../../../assets/icon/edit.png"
               /></span>
-              <span class="edit-text" (click)="editBranch(branchData._id)">
+              <span class="edit-text" (click)="editBranch(branchData?._id)">
                 Edit Branch</span
               >
             </button>
@@ -30,7 +51,7 @@
           >
             <div class="carousel-indicators">
               <button
-                *ngFor="let image of branchData.images; let j = index"
+                *ngFor="let image of branchData?.images; let j = index"
                 type="button"
                 [attr.data-bs-target]="'#carousel_card_' + i"
                 [attr.data-bs-slide-to]="j"
@@ -42,7 +63,7 @@
 
             <div class="carousel-inner">
               <div
-                *ngFor="let image of branchData.images; let j = index"
+                *ngFor="let image of branchData?.images; let j = index"
                 class="carousel-item"
                 [class.active]="j === 0"
               >
@@ -53,7 +74,7 @@
                 />
               </div>
               <div
-                *ngIf="!branchData.images || branchData.images.length === 0"
+                *ngIf="!branchData?.images || branchData?.images?.length === 0"
                 class="carousel-item active"
               >
                 <div class="image-container">
@@ -104,7 +125,134 @@
                   class="icons"
                 />Title
               </p>
-              <div class="info-value">{{ branchData.branch_name }}</div>
+              <div class="info-value">{{ branchData?.branch_name }}</div>
+            </div>
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/File Text.png"
+                  class="icons"
+                />Branch Type
+              </p>
+              <p class="info-value">{{ branchData?.branch_type }}</p>
+            </div>
+
+            <!-- <div
+              *ngIf="
+                branchData?.branch_type === 'hall' ||
+                branchData?.branch_type === 'outdoor'
+              "
+              class="info-item"
+            >
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/File Text.png"
+                  class="icons"
+                />Floor
+              </p>
+            
+              <p class="info-value">{{ branchData?.floors?.total_floors }}</p>
+            </div>
+
+            <div
+              *ngIf="
+                branchData?.branch_type !== 'hall' &&
+                branchData?.branch_type !== 'outdoor'
+              "
+              class="info-item"
+            >
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/File Text.png"
+                  class="icons"
+                />Ground Floor
+              </p>
+              <p class="info-value">
+                {{
+                  branchData?.floors?.ground_floor_included || "Ground floor"
+                }}
+              </p>
+            </div> -->
+
+            <!-- <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/File Text.png"
+                  class="icons"
+                />Branch Type
+              </p>
+              <p class="info-value">{{ branchData?.branch_type }}</p>
+            </div> -->
+            <div
+              *ngIf="
+                branchData?.branch_type === 'hall' ||
+                branchData?.branch_type === 'outdoor'
+              "
+              class="info-item"
+            >
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/File Text.png"
+                  class="icons"
+                />Floor
+              </p>
+              <p class="info-value">
+                {{ branchData?.floors?.total_floors }}
+              </p>
+            </div>
+            <div
+              *ngIf="
+                branchData?.branch_type === 'hall' ||
+                branchData?.branch_type === 'outdoor'
+              "
+              class="info-item"
+            >
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/File Text.png"
+                  class="icons"
+                />Ground Floor
+              </p>
+
+              <p class="info-value">
+                {{ branchData?.floors?.ground_floor_included }}
+              </p>
+            </div>
+            <div
+              *ngIf="
+                branchData?.branch_type !== 'hall' &&
+                branchData?.branch_type !== 'outdoor'
+              "
+              class="info-item"
+            >
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/File Text.png"
+                  class="icons"
+                />Ground Floor
+              </p>
+              <p class="info-value">
+                {{ branchData?.floors?.ground_floor_included }}
+              </p>
+            </div>
+
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/File Text.png"
+                  class="icons"
+                />Email
+              </p>
+              <p class="info-value">{{ branchData?.branch_email }}</p>
+            </div>
+            <div class="info-item">
+              <p class="info-label">
+                <img
+                  src="../../../../assets/images/branch-details/File Text.png"
+                  class="icons"
+                />Contact
+              </p>
+              <p class="info-value">{{ branchData?.branch_contact }}</p>
             </div>
             <div class="info-item">
               <p class="info-label">
@@ -113,7 +261,7 @@
                   class="icons"
                 />Description
               </p>
-              <p class="info-value">{{ branchData.branch_description }}</p>
+              <p class="info-value">{{ branchData?.branch_description }}</p>
             </div>
             <div class="info-item">
               <p class="info-label">
@@ -123,7 +271,7 @@
                   class="icons"
                 />City
               </p>
-              <p class="info-value">{{ branchData.address[0].city }}</p>
+              <p class="info-value">{{ branchData?.address[0]?.city }}</p>
             </div>
 
             <div class="info-item">
@@ -133,21 +281,30 @@
                   class="icons"
                 />Parking Capacity
               </p>
-              <p class="info-value">{{ branchData.parking_capacity }}</p>
+              <p class="info-value">{{ branchData?.parking_capacity }}</p>
             </div>
+
             <div class="info-item">
               <p class="info-label">
                 <img
-                  src="../../../../assets/images/branch-details/ferris-wheel.png"
+                  src="../../../../assets/images/branch-details/car.png"
                   class="icons"
-                />Special Attractions
+                />Amenities
               </p>
-              <p class="info-value">
-                {{
-                  branchData.attraction ? branchData.attraction : "not found"
-                }}
-              </p>
+              <div *ngIf="branchData?.amenities_info?.length > 0">
+                <p
+                  class="info-value"
+                  *ngFor="let amenity of branchData.amenities_info"
+                >
+                  {{ amenity?.name }}
+                </p>
+              </div>
+
+              <!-- <p class="info-value">
+                {{ branchData?.amenities_info }}
+              </p> -->
             </div>
+
             <div class="info-item">
               <p class="info-label">
                 <img
@@ -156,23 +313,7 @@
                 />Address
               </p>
               <p class="info-value">
-                {{ branchData.address[0].street_adress }}
-              </p>
-            </div>
-
-            <div class="info-item">
-              <div class="info-label">
-                <img
-                  src="../../../../assets/images/branch-details/owner.png"
-                  class="icons"
-                />Venus Owner
-              </div>
-              <p class="info-value text-capitalize">
-                {{
-                  branchData.hall_info.first_name +
-                    " " +
-                    branchData.hall_info.last_name
-                }}
+                {{ branchData?.address[0]?.street_adress }}
               </p>
             </div>
           </div>

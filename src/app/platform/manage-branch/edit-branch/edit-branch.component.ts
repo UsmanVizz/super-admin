@@ -49,7 +49,7 @@ export class EditBranchComponent implements OnInit {
   pakCityList: any;
   isHall: boolean = false;
   showDropdown: boolean = false;
-
+  isMarqueeSelected: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private apiService: ApiService,
@@ -67,14 +67,14 @@ export class EditBranchComponent implements OnInit {
       branch_description: ['', Validators.required],
 
       street_adress: ['', Validators.required],
-      total_floors: [''],
+      total_floors: ['', Validators.required],
       ground_floor_included: [''],
       parking_capacity: [
         '',
         [
           Validators.required,
-          Validators.maxLength(3),
-          Validators.pattern('^[1-9][0-9]{0,2}$'),
+          Validators.maxLength(4),
+
           this.validateParkingCapacity,
         ],
       ],
@@ -107,13 +107,19 @@ export class EditBranchComponent implements OnInit {
     });
     const initialBranchType = this.branchForm.get('branch_type')?.value;
     this.setHallFlag(initialBranchType);
-
+    this.branchForm
+      .get('ground_floor_included')
+      ?.valueChanges.subscribe((value: any) => {
+        console.log('ground_floor_included value changed:', value);
+      });
     // Subscribe to value changes to update the view dynamically
     this.branchForm.get('branch_type')?.valueChanges.subscribe((value) => {
       this.setHallFlag(value);
     });
   }
-
+  autoHide() {
+    this.showDropdown = false;
+  }
   getBranchData(id: any) {
     const url = new URL(`${environment.baseURL}/api/hall/branch/branch/${id}`);
     this.apiService
@@ -128,25 +134,18 @@ export class EditBranchComponent implements OnInit {
 
           if (branchData) {
             this.branchForm.patchValue({
-              branch_name: branchData.branch_name,
-              branch_email: branchData.branch_email,
-              branch_description: branchData.branch_description,
-              amenities: branchData.amenities,
-              parking_capacity: branchData.parking_capacity,
-
-              // floors: {
-              //   total_floors: this.branchForm.get('total_floors')?.value,
-              //   ground_floor_included: this.branchForm.get(
-              //     'ground_floor_included'
-              //   )?.value,
-              // },
-              // total_floors: branchData.floors,
-              total_floors: branchData.floors.total_floors,
-              ground_floor_included: branchData.floors.ground_floor_included,
-              branch_type: branchData.branch_type,
+              branch_name: branchData?.branch_name,
+              branch_email: branchData?.branch_email,
+              branch_description: branchData?.branch_description,
+              amenities: branchData?.amenities,
+              parking_capacity: branchData?.parking_capacity,
+              total_floors: branchData?.floors?.total_floors || 'Not Available',
+              ground_floor_included:
+                branchData?.floors?.ground_floor_included || 'Not Available',
+              branch_type: branchData?.branch_type,
 
               street_adress:
-                branchData.address && branchData.address.length > 0
+                branchData.address && branchData?.address.length > 0
                   ? branchData.address[0].street_adress
                   : '',
 
@@ -157,13 +156,18 @@ export class EditBranchComponent implements OnInit {
 
               branch_contact: branchData.branch_contact,
             });
-
+            console.log('amenities', branchData.amenities);
             this.branchForm.markAsPristine();
             this.branchForm.markAsUntouched();
           }
+          let dt = this.branchData.amenities; // Assuming this is an array of IDs
           this.amenities.forEach((amenity) => {
-            amenity.selected = branchData.amenities.includes(amenity._id);
+            amenity.selected = dt.includes(amenity._id);
           });
+
+          // this.amenities.forEach((amenity) => {
+          //   amenity.selected = branchData.amenities.includes(amenity._id);
+          // });
         },
         (error) => {
           console.error('Error fetching branch data:', error);
@@ -256,6 +260,10 @@ export class EditBranchComponent implements OnInit {
         city: newData.city,
       },
     ];
+    newData.amenities = this.amenities
+      .filter((amenity) => amenity.selected)
+      .map((amenity) => amenity._id);
+    console.log(' newData.amenities', newData.amenities);
     newData.floors = {
       total_floors: newData.total_floors,
       ground_floor_included: newData.ground_floor_included,
@@ -289,6 +297,7 @@ export class EditBranchComponent implements OnInit {
       firstInvalidControl.focus();
     }
   }
+
   getValidationErrors(form: FormGroup): string[] {
     const errors: string[] = [];
     Object.keys(form.controls).forEach((key) => {
@@ -458,8 +467,8 @@ export class EditBranchComponent implements OnInit {
     value: string;
   }): { [key: string]: any } | null {
     const value = control.value;
-    if (value && value.length > 3) {
-      return { minlength: true };
+    if (value && value.length > 4) {
+      return { maxlength: true };
     }
     return null;
   }
@@ -525,14 +534,26 @@ export class EditBranchComponent implements OnInit {
 
     return '';
   }
+
   setHallFlag(selectedValue: string): void {
-    if (selectedValue === 'hall') {
-      this.isHall = true;
+    this.isMarqueeSelected = selectedValue === 'marquee';
+
+    const totalFloorsControl = this.branchForm.get('total_floors');
+    if (this.isMarqueeSelected) {
+      totalFloorsControl?.disable();
+      totalFloorsControl?.setValue('');
     } else {
-      this.isHall = false;
+      totalFloorsControl?.enable();
+      if (selectedValue === 'hall') {
+        totalFloorsControl?.setValidators(Validators.required);
+      } else {
+        totalFloorsControl?.setValidators(null);
+      }
+      if (selectedValue === 'outdoor') {
+        totalFloorsControl?.clearValidators();
+        totalFloorsControl?.updateValueAndValidity();
+      }
+      totalFloorsControl?.updateValueAndValidity();
     }
-  }
-  onAmenitySelected() {
-    this.showDropdown = false;
   }
 }

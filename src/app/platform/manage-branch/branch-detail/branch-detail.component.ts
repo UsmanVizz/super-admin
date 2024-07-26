@@ -66,7 +66,9 @@ export class BranchDetailComponent implements OnInit, AfterViewInit {
       this.getBranchData(id);
     });
   }
-
+  manageBranch() {
+    this.router.navigate(['/branch-manage']);
+  }
   editBranch(branchId: string) {
     this.router.navigate(['/branch-manage/edit-branch', branchId]);
   }

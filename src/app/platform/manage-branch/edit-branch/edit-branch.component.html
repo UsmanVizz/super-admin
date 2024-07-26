@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between mt-5">
+<div class="d-flex justify-content-between mt-4">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
@@ -132,7 +132,126 @@
               Minimum 10 digits required.
             </div>
           </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <div class="input-wrapper">
+              <label for="branch_type" class="label-text">Branch Type</label>
+              <select
+                class="form-select form-select-lg"
+                aria-label=".form-select-lg example"
+                formControlName="branch_type"
+                [ngClass]="{
+                  'danger-outline':
+                    branchForm.get('branch_type')?.touched &&
+                    branchForm.get('branch_type')?.invalid
+                }"
+              >
+                <option selected disabled value="">Select Branch Type</option>
+                <option value="hall">Hall</option>
+                <option value="marquee">Marquee</option>
+                <option value="outdoor">Outdoor</option>
+              </select>
+              <div
+                *ngIf="
+                  branchForm.get('branch_type')?.hasError('required') &&
+                  branchForm.get('branch_type')?.touched
+                "
+                class="text-danger error-state error-state"
+              >
+                Branch Type are required.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-start gap-5 flex-wrap-2">
+          <div class="input-group d-flex flex-column gap-2">
+            <ng-container *ngIf="!isMarqueeSelected">
+              <label for="branch_address" class="label-text">Floor</label>
+              <input
+                type="text"
+                class="input-class"
+                placeholder="Floor"
+                formControlName="total_floors"
+                maxlength="2"
+                (keydown)="restrictInput($event)"
+                max="20"
+                [ngClass]="{
+                  'danger-outline':
+                    branchForm.get('total_floors')?.touched &&
+                    branchForm.get('total_floors')?.invalid
+                }"
+              />
+              <div
+                *ngIf="
+                  branchForm.get('total_floors')?.hasError('required') &&
+                  branchForm.get('total_floors')?.touched
+                "
+                class="text-danger error-state error-state"
+              >
+                Floor is required.
+              </div>
+              <div
+                *ngIf="
+                  branchForm.get('total_floors')?.hasError('max') &&
+                  branchForm.get('total_floors')?.touched
+                "
+                class="text-danger error-state"
+              >
+                Maximum 20 floors allowed.
+              </div>
+            </ng-container>
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <div class="d-flex align-items-center gap-3">
+              <div>
+                <ng-container
+                  *ngIf="branchForm.get('branch_type')?.value !== 'marquee'"
+                  ><p>Do you want to add ground floor?</p>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      value="yes"
+                      id="groundFloorYes"
+                      [disabled]="!branchForm.get('branch_type')?.value"
+                      formControlName="ground_floor_included"
+                    />
+                    <label class="form-check-label fw-400" for="groundFloorYes"
+                      >Yes</label
+                    >
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      value="no"
+                      id="groundFloorNo"
+                      [disabled]="!branchForm.get('branch_type')?.value"
+                      formControlName="ground_floor_included"
+                    />
+                    <label class="form-check-label fw-400" for="groundFloorNo"
+                      >No</label
+                    >
+                  </div>
+                </ng-container>
 
+                <div
+                  *ngIf="
+                    branchForm
+                      .get('ground_floor_included')
+                      ?.hasError('required') &&
+                    branchForm.get('ground_floor_included')?.touched
+                  "
+                  class="text-danger error-state"
+                >
+                  <div class="text-danger fs-12">
+                    Please select a Ground Floor option.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-start gap-5 flex-wrap-2">
           <div class="input-group d-flex flex-column gap-2">
             <label for="parking_capacity" class="label-text"
               >Parking Capacity</label
@@ -141,7 +260,7 @@
               class="input-class"
               placeholder="Parking Capacity"
               formControlName="parking_capacity"
-              maxlength="3"
+              maxlength="4"
               (keydown)="restrictInput($event)"
               [ngClass]="{
                 'danger-outline':
@@ -163,93 +282,6 @@
               class="text-danger error-state error-state"
             >
               Maximum 3 digits allowed.
-            </div>
-            <div
-              *ngIf="branchForm.get('parking_capacity')?.hasError('pattern')"
-              class="text-danger error-state error-state"
-            >
-              Please enter a valid number.
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start gap-5 flex-wrap-2">
-          <div class="input-group d-flex flex-column gap-2">
-            <label for="branch_type" class="label-text">Branch Type</label>
-            <select
-              class="form-select form-select-lg"
-              aria-label=".form-select-lg example"
-              formControlName="branch_type"
-              [ngClass]="{
-                'danger-outline':
-                  branchForm.get('branch_type')?.touched &&
-                  branchForm.get('branch_type')?.invalid
-              }"
-            >
-              <option selected disabled value="">Select Branch Type</option>
-              <option value="hall">Hall</option>
-              <option value="marquee">Marquee</option>
-              <option value="outdoor">Outdoor</option>
-            </select>
-            <div
-              *ngIf="
-                branchForm.get('branch_type')?.hasError('required') &&
-                branchForm.get('branch_type')?.touched
-              "
-              class="text-danger error-state error-state"
-            >
-              Branch Type are required.
-            </div>
-          </div>
-          <div class="input-group d-flex flex-column gap-2">
-            <label for="street_adress" class="label-text">Address</label>
-            <input
-              type="text"
-              class="input-class"
-              placeholder="Address"
-              formControlName="street_adress"
-              [ngClass]="{
-                'danger-outline':
-                  branchForm.get('street_adress')?.touched &&
-                  branchForm.get('street_adress')?.invalid
-              }"
-            />
-            <div
-              *ngIf="
-                branchForm.get('street_adress')?.hasError('required') &&
-                branchForm.get('street_adress')?.touched
-              "
-              class="text-danger error-state error-state"
-            >
-              Branch Address is required.
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start gap-5 flex-wrap-2">
-          <div class="input-group d-flex flex-column gap-2">
-            <label for="city" class="label-text">City</label>
-            <select
-              class="form-select form-select-lg"
-              aria-label=".form-select-lg example"
-              formControlName="city"
-              [ngClass]="{
-                'danger-outline':
-                  branchForm.get('city')?.touched &&
-                  branchForm.get('city')?.invalid
-              }"
-            >
-              <option selected disabled value="">Select City</option>
-              <option *ngFor="let item of pakCityList" [value]="item.name">
-                {{ item.name }}
-              </option>
-            </select>
-            <div
-              *ngIf="
-                branchForm.get('city')?.hasError('required') &&
-                branchForm.get('city')?.touched
-              "
-              class="text-danger error-state error-state"
-            >
-              City are required.
             </div>
           </div>
           <div class="input-group d-flex flex-column gap-2">
@@ -275,18 +307,18 @@
                 <div
                   class="dropdown-list custom-dropdown-list"
                   *ngIf="showDropdown"
+                  (mouseleave)="autoHide()"
                 >
-                  <div *ngFor="let amenity of amenities">
+                  <div *ngFor="let amenities of amenities">
                     <label
                       class="d-flex align-items-center gap-3 p-3 dropdown-select"
                     >
                       <input
                         type="checkbox"
-                        [(ngModel)]="amenity.selected"
+                        [(ngModel)]="amenities.selected"
                         [ngModelOptions]="{ standalone: true }"
-                        (change)="onAmenitySelected()"
                       />
-                      {{ amenity.name }}
+                      {{ amenities.name }}
                     </label>
                   </div>
                 </div>
@@ -304,56 +336,58 @@
           </div>
         </div>
         <div class="d-flex justify-content-start gap-5 flex-wrap-2">
-          <ng-container *ngIf="isHall">
-            <div class="input-group d-flex flex-column gap-2">
-              <div class="input-group d-flex flex-column gap-2">
-                <div class="d-flex align-items-center gap-3">
-                  <label for="branchId" class="label-text">Select Floor</label>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="groundFloorIncluded"
-                      formControlName="ground_floor_included"
-                    />
-                    <label class="form-check-label fw-400" for="inlineRadio1"
-                      >Ground Floor</label
-                    >
-                  </div>
-                </div>
-              </div>
-
+          <div class="input-group d-flex flex-column gap-2">
+            <div class="input-wrapper">
+              <label for="city" class="label-text">City</label>
               <select
                 class="form-select form-select-lg"
                 aria-label=".form-select-lg example"
-                formControlName="total_floors"
+                formControlName="city"
                 [ngClass]="{
                   'danger-outline':
-                    branchForm.get('total_floors')?.touched &&
-                    branchForm.get('total_floors')?.invalid
+                    branchForm.get('city')?.touched &&
+                    branchForm.get('city')?.invalid
                 }"
               >
-                <option selected disabled value="">Select Floor</option>
-                <option
-                  *ngFor="let floor of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-                  [value]="floor"
-                >
-                  {{ floor }}
+                <option selected disabled value="">Select City</option>
+                <option *ngFor="let item of pakCityList" [value]="item.name">
+                  {{ item.name }}
                 </option>
               </select>
-
               <div
                 *ngIf="
-                  branchForm.get('total_floors')?.hasError('required') &&
-                  branchForm.get('total_floors')?.touched
+                  branchForm.get('city')?.hasError('required') &&
+                  branchForm.get('city')?.touched
                 "
-                class="text-danger error-state"
+                class="text-danger error-state error-state"
               >
-                Floor is required.
+                City are required.
               </div>
             </div>
-          </ng-container>
+          </div>
+          <div class="input-group d-flex flex-column gap-2">
+            <label for="street_adress" class="label-text">Address</label>
+            <input
+              type="text"
+              class="input-class"
+              placeholder="Address"
+              formControlName="street_adress"
+              [ngClass]="{
+                'danger-outline':
+                  branchForm.get('street_adress')?.touched &&
+                  branchForm.get('street_adress')?.invalid
+              }"
+            />
+            <div
+              *ngIf="
+                branchForm.get('street_adress')?.hasError('required') &&
+                branchForm.get('street_adress')?.touched
+              "
+              class="text-danger error-state error-state"
+            >
+              Branch Address is required.
+            </div>
+          </div>
         </div>
         <div class="d-flex justify-content-start gap-5 flex-wrap-2">
           <div class="input-group d-flex flex-column gap-2">
@@ -418,7 +452,7 @@
                 ><img src="../../../../assets/icon/cross-btn.png" alt=""
               /></span>
             </div>
-            <label for="img-upload-sm" *ngIf="uploadedImages.length !== 15">
+            <label for="img-upload-sm" *ngIf="uploadedImages.length !== 8">
               <input
                 type="file"
                 id="img-upload-sm"
@@ -433,7 +467,7 @@
             </label>
           </div>
         </div>
-        <div class="d-flex justify-content-end mt-2 mx-157">
+        <div class="custom-button-container">
           <button
             class="custom-button"
             (click)="updateBranch(this.branchData._id)"
@@ -441,6 +475,15 @@
             Update Branch
           </button>
         </div>
+
+        <!-- <div class="d-flex justify-content-end mt-2">
+          <button
+            class="custom-button"
+            (click)="updateBranch(this.branchData._id)"
+          >
+            Update Branch
+          </button>
+        </div> -->
       </form>
     </div>
   </div>

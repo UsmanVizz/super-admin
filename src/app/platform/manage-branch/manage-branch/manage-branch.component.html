@@ -1,203 +1,336 @@
-<h1 class="title">All Companies</h1>
-<div class="container-fluid">
-  <div class="d-flex align-items-center mt-5 mx-5 buttons">
-    <div class="d-flex align-items-center">
-      <button
-        class="mx-2 left-button left-btn-text"
-        [class.orange-button]="selectedButton === 'all'"
-        (click)="selectButton('all')"
-        type="button"
-      >
-        All
-      </button>
-      <button
-        class="mx-2 left-button left-btn-text"
-        [class.orange-button]="selectedButton === 'active'"
-        (click)="selectButton('active')"
-        type="button"
-      >
-        Active
-      </button>
-      <button
-        class="mx-2 left-button left-btn-text"
-        [class.orange-button]="selectedButton === 'inactive'"
-        (click)="selectButton('inactive')"
-        type="button"
-      >
-        InActive
-      </button>
+<div class="d-flex align-items-center" style="margin-top: 40px">
+  <h1 class="flex-grow-1 mb-0 branches">All Branches</h1>
+  <div class="ml-auto">
+    <button class="custom-button" (click)="navigateToAddBranch()">
+      Add Branch
+    </button>
+  </div>
+</div>
+<div class="d-flex align-items-center mt-5">
+  <div class="ml-auto d-flex gap-1 align-items-center">
+    <div class="not-active mx-2">
+      <div class="input-wrapper">
+        <button class="icon">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+        <input
+          placeholder="Search..."
+          class="input"
+          [(ngModel)]="searchQuery"
+          (input)="onSearchChange()"
+          type="text"
+        />
+      </div>
     </div>
-
-    <!-- Right side buttons -->
-    <div class="ml-auto d-flex gap-1 align-items-center">
-      <button class="mx-2 sort-button search-btn btn-text" type="button">
-        <span>
-          <img
-            src="../../../../assets/halls/search-normal.png"
-            style="height: 20px"
-            alt="Logo"
-        /></span>
-      </button>
+    <div class="sort-container">
       <button
         class="mx-2 sort-button search-btn d-flex gap-1 align-items-center"
         type="button"
-        (click)="onSortButtonClick()"
+        (click)="toggleSorting()"
       >
         <span class="material-symbols-outlined"> filter_list </span>
         <span class="btn-text">Sort</span>
-        <span class="btn-text span-text__color">All</span>
+        <span class="btn-text span-text__color">{{ sortOption }}</span>
       </button>
-      <button class="mx-2 sort-button search-btn btn-text" type="button">
-        <img src="../../../../assets/images/setting-4.png" alt="Logo" />
-        <span class="btn-text-filter mx-3">Filter</span>
-      </button>
+      <div class="sorting" *ngIf="showDropdown">
+        <div class="sorting-item" (click)="sortBy('ascending')">Ascending</div>
+
+        <div class="sorting-item" (click)="sortBy('descending')">
+          Descending
+        </div>
+        <div class="sorting-item" (click)="sortBy('all')">All</div>
+      </div>
+    </div>
+    <button
+      class="mx-2 sort-button search-btn btn-text"
+      type="button"
+      (click)="toggleFilter()"
+    >
+      <img src="../../../../assets/images/setting-4.png" alt="Logo" />
+      <span class="btn-text-filter mx-3">Filter</span>
+    </button>
+
+    <div *ngIf="filterVisible" class="filter-container">
+      <div class="filter-header">
+        <span>Filters</span>
+        <img
+          src="../../../../assets/icon/cross-btn.png"
+          alt="Close"
+          class="close-btn"
+          (click)="closeFilters()"
+        />
+      </div>
+      <div class="filter-content">
+        <div class="form-group">
+          <label for="branchSelect" class="branchSelect">Select Branch</label>
+
+          <select
+            id="branchSelect"
+            [(ngModel)]="selectedBranch"
+            (change)="filterByBranch()"
+          >
+            <option disabled selected hidden>Select Branch</option>
+            <option *ngFor="let branch of branches" [value]="branch._id">
+              {{ branch.branch_name }}
+            </option>
+          </select>
+        </div>
+      </div>
     </div>
   </div>
-  <div style="flex: 1">
-    <table
-      class="table"
-      style="
-        overflow-x: auto;
-        width: 100%;
-        table-layout: fixed;
-        white-space: nowrap;
-        border-collapse: collapse;
-      "
-    >
-      <thead>
-        <tr>
-          <th scope="col" class="t-head">Sr No.</th>
-          <th scope="col" class="th-table text-nowrap">Company ID</th>
-          <th scope="col" class="th-table text-nowrap">Owner Name</th>
-          <th scope="col" class="th-table text-nowrap">Last Login & Time</th>
-          <th scope="col" class="th-table text-nowrap">Joining Date</th>
-          <th scope="col" class="th-table text-nowrap">Company Size</th>
-          <th scope="col" class="th-table text-nowrap">Emails</th>
-          <th scope="col" class="th-table text-nowrap">Total Revenue</th>
-          <th scope="col">Status</th>
-          <th scope="col" class="th-table text-nowrap">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let row of paginatedData; let i = index" class="d-flex">
-          <td class="t-head" style="border-bottom: none">
-            {{ (currentPage - 1) * pageSize + i + 1 }}
-          </td>
-          <td class="email-td text-nowrap">{{ row.order_id }}</td>
-          <td class="email-td text-nowrap">{{ row.customer_name }}</td>
-          <td class="email-td text-nowrap">{{ row.date_time }}</td>
-          <td class="email-td text-nowrap">{{ row.booking_date }}</td>
-          <td class="email-td text-nowrap">{{ row.hall_name }}</td>
-          <td class="email-td text-nowrap">{{ row.order_amount }}</td>
-          <td class="email-td text-nowrap">{{ row.advance }}</td>
-          <td>
-            <div class="form-check form-switch">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="flexSwitchCheckDefault"
-                [checked]="row.status"
-              />
-            </div>
-          </td>
-
-          <td>
-            <div style="display: flex; border: none">
-              <button type="button" class="btn action-button">
-                <img src="../../../../assets/icon/edit.png" alt="Edit" />
-              </button>
-              <button type="button" class="btn action-button">
-                <img src="../../../../assets/icon/delete.png" alt="Delete" />
-              </button>
-              <button
-                type="button "
-                class="btn action-button"
-                (click)="openNewComponent()"
-              >
-                <img src="../../../../assets/icon/view.png" alt="View" />
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <!-- <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Sr No.</th>
-        <th scope="col">Order ID</th>
-        <th scope="col">Customer Name</th>
-        <th scope="col">Event Date & Time</th>
-        <th scope="col">Booking Date</th>
-        <th scope="col">Hall Name</th>
-        <th scope="col">Order Amount</th>
-        <th scope="col">Advance</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let row of paginatedData">
-        <td>{{ row.id }}</td>
-        <td>{{ row.order_id }}</td>
-        <td>{{ row.customer_name }}</td>
-        <td>{{ row.date_time }}</td>
-        <td>{{ row.booking_date }}</td>
-        <td>{{ row.hall_name }}</td>
-        <td>{{ row.order_amount }}</td>
-        <td>{{ row.advance }}</td>
-        <td>
-          <div style="display: flex">
-            <button type="button" class="btn action-button">
-              <img src="../../../../assets/icon/edit.png" alt="Edit" />
-            </button>
-            <button type="button" class="btn action-button">
-              <img src="../../../../assets/icon/delete.png" alt="Delete" />
-            </button>
-            <button
-              type="button "
-              class="btn action-button"
-              (click)="openNewComponent()"
-            >
-              <img src="../../../../assets/icon/view.png" alt="View" />
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table> -->
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-end m-5 align-items-center">
-      <!-- Previous button -->
-      <li class="page-item" [class.disabled]="currentPage == 1">
-        <a
-          class="page-link d-flex align-items-center"
-          (click)="prevPage()"
-          tabindex="-1"
-        >
-          <span class="material-symbols-outlined" style="color: #fb6f10"
-            >chevron_left</span
-          >
-          Previous
-        </a>
-      </li>
-      <!-- Pagination links -->
-      <li
-        class="page-item"
-        *ngFor="let page of pages"
-        [class.active]="currentPage == page"
-      >
-        <a class="page-link" (click)="setCurrentPage(page)">{{ page }}</a>
-      </li>
-      <!-- Next button -->
-      <li class="page-item" [class.disabled]="currentPage == totalPages">
-        <a class="page-link d-flex align-items-center" (click)="nextPage()">
-          Next
-          <span class="material-symbols-outlined" style="color: #fb6f10"
-            >chevron_right</span
-          >
-        </a>
-      </li>
-    </ul>
-  </nav>
 </div>
+<div class="row" style="margin-top: 30px">
+  <ng-container>
+    <ng-container *ngFor="let category of filteredCategories; let i = index">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card" style="margin-bottom: 20px">
+          <div class="row no-gutters">
+            <!-- Image Side -->
+            <div class="col-md-5">
+              <div
+                #carouselElement
+                [id]="'carousel_card_' + i"
+                class="carousel slide carousel-fade"
+              >
+                <div class="carousel-indicators">
+                  <button
+                    *ngFor="let image of category.images; let j = index"
+                    type="button"
+                    [attr.data-bs-target]="'#carousel_card_' + i"
+                    [attr.data-bs-slide-to]="j"
+                    [class.active]="j === 0"
+                    aria-current="true"
+                    [attr.aria-label]="'Slide ' + (j + 1)"
+                  ></button>
+                </div>
+
+                <div class="carousel-inner">
+                  <div
+                    *ngFor="let image of category.images; let j = index"
+                    class="carousel-item"
+                    [class.active]="j === 0"
+                  >
+                    <img
+                      [src]="'https://dev-backend.hamaravenue.com' + image"
+                      class="d-block"
+                      alt="..."
+                    />
+                  </div>
+                  <div
+                    *ngIf="!category.images || category.images.length === 0"
+                    class="carousel-item active"
+                  >
+                    <div class="image-container">
+                      <img
+                        src="../../../../assets/dashboard/default-image.webp"
+                        class="d-block"
+                        alt="Default Image"
+                      />
+                      <span class="no-image-text">No Image Found</span>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  [attr.data-bs-target]="'#carousel_card_' + i"
+                  data-bs-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  [attr.data-bs-target]="'#carousel_card_' + i"
+                  data-bs-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="col-md-7 d-flex flex-column justify-content-between">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div class="card-title flex-grow-1 mb-0">
+                    {{ category.branch_name }}
+                    <button
+                      class="{{
+                        category.branch_status ? 'active-btn' : 'inactive-btn'
+                      }}"
+                    >
+                      {{ category.branch_status ? "Active" : "Deactive" }}
+                    </button>
+                  </div>
+                  <span>
+                    <div class="dropdown">
+                      <button
+                        class="btn edit-button m-2"
+                        (click)="toggleDropdown(i)"
+                      >
+                        <img src="../../../../assets/icon/btn.png" />
+                      </button>
+                      <div
+                        class="dropdown-menu"
+                        (mouseleave)="autoHide()"
+                        [class.show]="activeDropdownIndex === i"
+                      >
+                        <button
+                          class="dropdown-item"
+                          (click)="editBranch(category._id)"
+                        >
+                          <span>Edit</span>
+                        </button>
+                        <button
+                          class="dropdown-item"
+                          (click)="deleteBranch(category._id, i)"
+                        >
+                          <span>Delete</span>
+                        </button>
+                        <button
+                          class="dropdown-item"
+                          (click)="viewBranch(category._id)"
+                        >
+                          <span>View</span>
+                        </button>
+                      </div>
+                    </div>
+                  </span>
+                </div>
+                <div class="card-text mt-3 mb-5 des-lines">
+                  {{ category.branch_description }}
+                </div>
+              </div>
+              <div class="bottom-content">
+                <div class="d-flex align-items-center text-black">
+                  <h5 class="card-location address w-50 flex-grow-1 mb-0">
+                    <img src="../../../../assets/icon/map-pin.png" />
+                    {{ category.truncatedAddress }}
+                  </h5>
+                  <span>
+                    <div
+                      class="d-flex justify-content-center align-items-center"
+                    >
+                      <img
+                        src="../../../../assets/icon/library.png"
+                        class="me-2"
+                      />
+                      <h5 class="card-location mb-0 text-capitalize">
+                        <span
+                          >{{ category.no_of_sub_halls }}
+                          {{ category.branch_type }}</span
+                        >
+                      </h5>
+                    </div>
+                  </span>
+
+                  <!-- <span>
+                    <h5 class="card-location flex-grow-1 mb-0">
+                      <img src="../../../../assets/icon/library.png" />{{
+                        category.branch_type
+                      }}
+                    </h5>
+                  </span> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="filteredCategories.length === 0">
+    <div class="w-100-p h-100-p main">
+      <div class="form-group mb-10 mr-12 shadow noShow">
+        <div style="padding: 10px">
+          <h5 class="noShowTitle">
+            <img src="assets/images/empty.svg" alt="" /><br />
+            <b class="text-data"
+              >No Records Found <br />Please Add Your Branches.</b
+            >
+          </h5>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<!-- Pagination -->
+<!-- <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end m-5 align-items-center">
+
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a
+        class="page-link d-flex align-items-center"
+        (click)="prevPage()"
+        tabindex="-1"
+      >
+        <span class="material-symbols-outlined">chevron_left</span>
+        <span> Previous</span>
+      </a>
+    </li>
+    <li
+      class="page-item"
+      *ngFor="let page of pages"
+      [class.active]="currentPage === page"
+    >
+      <a
+        class="page-link"
+        (click)="setCurrentPage(page)"
+        [class.active]="currentPage === page"
+        >{{ page }}</a
+      >
+    </li>
+  
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link d-flex align-items-center" (click)="nextPage()">
+        <span>Next</span>
+        <span class="material-symbols-outlined">chevron_right</span>
+      </a>
+    </li>
+  </ul>
+</nav> -->
+<nav aria-label="Page navigation" class="mt-30">
+  <ul class="pagination justify-content-end m-5 align-items-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <span
+        class="page-link pagination-style"
+        [class.disabled]="currentPage === 1"
+        (click)="prevPage()"
+      >
+        <i class="bi bi-chevron-left"></i> Previous
+      </span>
+    </li>
+    <li
+      class="page-item"
+      *ngFor="let page of pages"
+      [class.active]="currentPage === page"
+    >
+      <span
+        class="page-link pagination-style"
+        (click)="setCurrentPage(page)"
+        [class.active]="currentPage === page"
+      >
+        {{ page }}
+      </span>
+    </li>
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <span
+        class="page-link pagination-style"
+        [class.disabled]="currentPage === totalPages"
+        (click)="nextPage()"
+      >
+        Next <i class="bi bi-chevron-right"></i>
+      </span>
+    </li>
+  </ul>
+</nav>

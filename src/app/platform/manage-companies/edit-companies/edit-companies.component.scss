@@ -1,0 +1,206 @@
+.card {
+  padding: 50px 20px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  border: none;
+  flex: 1;
+  // width: calc(103.333% - 100px);
+  // height: calc(112.4% - 100px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.branch {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  margin-left: 30px;
+  line-height: 19.36px;
+  text-align: left;
+  color: #232323;
+}
+input[type="text"] {
+  width: 90%;
+  font-size: 15px;
+  padding: 30px 20px;
+  margin: 8px 30px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+.form-select-lg {
+  width: 80%;
+  font-size: 15px;
+  padding: 14px 20px;
+  margin: 0px 30px;
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+.form-control-text {
+  width: 80%;
+}
+.btn {
+  width: 32%;
+  height: 43px;
+  font-size: 15px;
+}
+
+.card-title {
+  margin-left: 67px;
+  font-family: Plus Jakarta Sans;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+}
+
+.custom-button {
+  border: none;
+  background-color: #fb6f10;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.mx-5 {
+  margin-left: 6rem !important;
+}
+.upload-button {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.upload-button:hover {
+  background-color: #0056b3;
+}
+.material-symbols-outlined {
+  color: #7e7e7e;
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 24 !important;
+  font-size: 24px !important;
+}
+
+.mt-1 {
+  margin-top: -6.75rem !important;
+}
+
+// breadcrumb
+.breadcrumb {
+  font-size: 15px;
+  // margin-left: 3rem !important;
+  text-decoration: none !important;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #fb6f10;
+}
+.bread-menu {
+  margin-left: 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15.12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #fb6f10;
+}
+.company-icon {
+  width: 22.5px;
+  height: 20.83px;
+  top: 13.5px;
+  left: 13px;
+  gap: 0px;
+  border: 0.2px 0px 0px 0px;
+  opacity: 0px;
+  color: #fb6f10;
+}
+.add-company {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15.12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #b1b1b1;
+}
+.arrow {
+  font-size: 12px;
+  margin: 7px;
+  color: #b1b1b1;
+}
+
+//header
+.company-header {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: #1e293b;
+}
+
+.custom-dropdown-list {
+  position: absolute;
+  z-index: 35;
+  background-color: white;
+  width: 35%;
+  max-width: 535px;
+}
+
+.input-class:focus {
+  outline: none;
+  border: 1px solid #0077ff;
+}
+
+.input-class {
+  height: 50px;
+  top: 30px;
+  gap: 0px;
+  border-radius: 15px;
+  border: 1px solid #dfeaf2;
+  opacity: 0px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  padding: 10px;
+  // color: #718ebf;
+  width: 100%;
+  max-width: 560px;
+}
+
+.label-text {
+  color: #232323;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  margin-left: 30px;
+}
+
+.checkbox {
+  display: flex;
+  padding-left: 3em;
+}
+
+.orange-text {
+  color: orange;
+  text-decoration: underline;
+}
+
+.form-check-label {
+  color: black;
+  padding-left: 2px !important;
+}
+.checkbox input[type="checkbox"] {
+  padding: 8px;
+}

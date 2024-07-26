@@ -1,5 +1,55 @@
-.container {
-  margin-top: 100px;
+$breadcrumb-divider: quote(">");
+
+$orange_color: #fb6f10;
+
+main {
+  box-shadow: 0px 0px 8px -4px #00000052;
+}
+//breadcrumb
+.breadcrumb {
+  font-size: 15px;
+
+  text-decoration: none !important;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #fb6f10;
+}
+.bread-menu {
+  margin-left: 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15.12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #fb6f10;
+  cursor: pointer;
+}
+.category-icon {
+  width: 22.5px;
+  height: 20.83px;
+  top: 13.5px;
+  left: 13px;
+  gap: 0px;
+  border: 0.2px 0px 0px 0px;
+  opacity: 0px;
+  color: #fb6f10;
+}
+.add-category {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15.12px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: #b1b1b1;
+}
+.arrow {
+  font-size: 12px;
+  margin: 7px;
+  color: #b1b1b1;
 }
 .card-title {
   color: black;
@@ -33,11 +83,7 @@
     rgba(0, 0, 0, 0.84) 92.31%
   ); /* Adjust the opacity and direction of the shadow as needed */
 }
-.d-flex {
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-top: 20px;
-}
+
 .custom-button {
   color: white;
   padding: 5px 20px;
@@ -50,6 +96,8 @@
   display: flex;
   // width: 902px;
   height: auto;
+  border: none;
+  padding: 60px;
 }
 // img {
 //   height: 320px;
@@ -104,7 +152,7 @@
   border: 1px dashed #b1b1b1;
   border-radius: 8px;
   object-fit: cover;
-  margin: 20px;
+  margin: 20px 20px 20px 1px;
   line-height: 15%;
   max-width: 90%;
   filter: brightness(0.8);

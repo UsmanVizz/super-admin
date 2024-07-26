@@ -14,6 +14,7 @@ import {
   FormsModule,
   ValidationErrors,
   AbstractControl,
+  ValidatorFn,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { environment } from 'src/environment/environment';
@@ -50,7 +51,10 @@ export class AddBranchComponent implements OnInit {
   branches: any[] = [];
   pakCityList: any;
   isHall: boolean = false;
-
+  isMarqueeSelected: boolean = false;
+  isFloorDisabled: boolean = true; // Initialize to true as default
+  selectedBranch: any = {};
+  isButtonClicked: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private apiService: ApiService,
@@ -73,14 +77,23 @@ export class AddBranchComponent implements OnInit {
       ],
       branch_description: ['', Validators.required],
       street_adress: ['', Validators.required],
-      total_floors: [''],
-      ground_floor_included: [''],
+      // total_floors: ['', [Validators.required, this.maxFloorsValidator]],
+      total_floors: [
+        '',
+        [
+          Validators.required,
+          Validators.min(0),
+          Validators.max(20),
+          Validators.pattern(/^[0-9]*$/),
+        ],
+      ],
+      // ground_floor_included: ['', Validators.required],
       parking_capacity: [
         '',
         [
           Validators.required,
-          Validators.maxLength(3),
-          Validators.pattern('^[1-9][0-9]{0,2}$'),
+          Validators.maxLength(4),
+
           this.validateParkingCapacity,
         ],
       ],
@@ -98,13 +111,47 @@ export class AddBranchComponent implements OnInit {
         ],
       ],
     });
+
+    this.branchForm.get('branch_type')?.valueChanges.subscribe((value) => {
+      this.isMarqueeSelected = value === 'marquee';
+
+      if (this.isMarqueeSelected) {
+        this.branchForm.get('total_floors')?.disable();
+      } else {
+        this.branchForm.get('total_floors')?.enable();
+      }
+    });
+
+    this.updateFloorControlsState();
   }
 
   ngOnInit(): void {
     this.pakCityList = this.citiesJson.getCities();
+    this.branchForm.get('total_floors')?.valueChanges.subscribe((value) => {
+      console.log('total_floors value:', value); // Debug log
+    });
 
     this.getAllAmenities();
   }
+  validateInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const cleanedValue = inputElement.value.replace(/[^0-9]/g, '');
+    inputElement.value = cleanedValue;
+    this.branchForm
+      .get('total_floor')
+      ?.setValue(cleanedValue, { emitEvent: false });
+  }
+  maxFloorsValidator: ValidatorFn = (
+    control: AbstractControl
+  ): ValidationErrors | null => {
+    console.log('maxFloorsValidator called:', control.value);
+    const totalFloors = control.value;
+    if (totalFloors && +totalFloors > 20) {
+      return { maxFloors: { max: 20 } };
+    }
+    console.log('maxFloorsValidator called:', control.value);
+    return null;
+  };
   //dropdwon
   toggleDropdown(): void {
     this.showDropdown = !this.showDropdown;
@@ -140,6 +187,9 @@ export class AddBranchComponent implements OnInit {
         }
       );
   }
+  autoHide() {
+    this.showDropdown = false;
+  }
 
   /////////
 
@@ -153,34 +203,64 @@ export class AddBranchComponent implements OnInit {
         const fileSizeKB = file.size / 1024;
         const fileType = file.type;
         if (fileSizeKB >= 5000) {
-          this.apiService.errorToster('Image is larger than 5 MB', 'Error');
+          this.apiService.errorToster('Image is larger then 5 mb', 'Error');
+
           return;
         }
         if (!fileType.startsWith('image/')) {
           this.apiService.errorToster('File Type is not an Image', 'Error');
+
           return;
         }
-
-        // Generate a unique name for the file
-        const uniqueName = this.generateUniqueFileName(file.name);
-
+        const existingImage = this.uploadedImages.find(
+          (img) => img.name === file.name
+        );
+        if (existingImage) {
+          this.apiService.errorToster(
+            'Image with the same name already uploaded',
+            'Error'
+          );
+          continue; // Skip adding this image
+        }
+        // this.uplaodImageToServer(file);
+        // this.imagesToUpload.push(file);
         const imgDataUrl = this.readFileAsDataURL(file);
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.uploadedImages.push({ name: uniqueName, url: e.target.result });
+          this.uploadedImages.push({ name: file.name, url: e.target.result });
         };
         reader.readAsDataURL(file);
         event.target.value = '';
-        this.uploadImageToServer(file, uniqueName);
+        this.uploadImageToServer(file);
+        console.log('this.uploadedImages', this.uploadedImages);
       }
     }
   }
 
-  generateUniqueFileName(fileName: string): string {
-    const timestamp = new Date().getTime();
-    const randomString = Math.random().toString(36).substring(7);
-    const name = fileName.replace(/[^a-z0-9_.]/gi, '_').toLowerCase();
-    return `${timestamp}_${randomString}_${name}`;
+  uploadImageToServer(file: File) {
+    const formData = new FormData();
+    const uniqueFileName = `${Date.now()}-${file.name}`;
+    formData.append('images', file, uniqueFileName);
+
+    let url = `${environment.baseURL}/api/hall/branch/upload-images`;
+    this.apiService
+      .post(url, formData)
+      .pipe(first())
+      .subscribe(
+        (res: any) => {
+          console.log('Upload response:', res);
+          // this.uploadedImages.push(...res);
+          this.imagesToUpload.push(res.file[0].file_url);
+          // this.updateLocalStorage();
+        },
+        (error) => {
+          console.error('Upload error:', error);
+        }
+      );
+  }
+  updateLocalStorage() {
+    localStorage.setItem('uploadedImages', JSON.stringify(this.uploadedImages));
+    localStorage.setItem('imagesToUpload', JSON.stringify(this.imagesToUpload));
   }
 
   private readFileAsDataURL(file: File): Promise<string> {
@@ -191,53 +271,10 @@ export class AddBranchComponent implements OnInit {
       reader.readAsDataURL(file);
     });
   }
-
-  uploadImageToServer(file: File, uniqueName: string) {
-    const formData = new FormData();
-    formData.append('images', file, uniqueName);
-
-    let url = `${environment.baseURL}/api/hall/branch/upload-images`;
-    this.apiService
-      .post(url, formData)
-      .pipe(first())
-      .subscribe(
-        (res: any) => {
-          console.log('Upload response:', res);
-          this.imagesToUpload.push(res.file[0].file_url);
-        },
-        (error) => {
-          console.error('Upload error:', error);
-        }
-      );
-  }
-
   manageBranch() {
     this.router.navigate(['/branch-manage']);
   }
 
-  // removeImage(image: any) {
-  //   const index = this.uploadedImages.indexOf(image);
-  //   const ind = this.imagesToUpload.indexOf(image);
-  //   if (index !== -1) {
-  //     this.uploadedImages.splice(index, 1);
-  //   }
-  //   if (index !== -1) {
-  //     this.imagesToUpload.splice(index, 1);
-  //   }
-  // }
-  // removeImage(image: any): void {
-  //   const index: number = this.uploadedImages.indexOf(image);
-  //   console.log('log');
-  //   if (index !== -1) {
-  //     this.uploadedImages.splice(index, 1);
-
-  //     const fileUploadElement: HTMLInputElement | null =
-  //       document.getElementById('image-upload') as HTMLInputElement;
-  //     if (fileUploadElement) {
-  //       fileUploadElement.value = '';
-  //     }
-  //   }
-  // }
   removeImage(image: any): void {
     const index: number = this.uploadedImages.findIndex((img) => img === image);
     if (index !== -1) {
@@ -246,7 +283,6 @@ export class AddBranchComponent implements OnInit {
     }
     this.changeDetectorRef.detectChanges(); // Trigger change detection
   }
-
   uploadImages() {
     console.log('Uploading images...');
     console.log(this.uploadedImages);
@@ -276,12 +312,14 @@ export class AddBranchComponent implements OnInit {
       );
       return;
     }
+
     let selectedAmenities: string[] = [];
     if (this.amenities && Array.isArray(this.amenities)) {
       selectedAmenities = this.amenities
         .filter((amenity) => amenity.selected)
-        .map((amenity) => amenity._id); // Assuming _id is the ID field for amenities
+        .map((amenity) => amenity._id);
     }
+
     let payload: any = {
       branch_name: this.branchForm.controls['branch_name'].value,
       branch_email:
@@ -305,6 +343,7 @@ export class AddBranchComponent implements OnInit {
       images: this.imagesToUpload,
     };
     console.log(payload, 'ground_floor_included');
+
     try {
       if (this.data) {
         this.updateBranch(payload);
@@ -361,7 +400,7 @@ export class AddBranchComponent implements OnInit {
           console.log('Response:', res);
           this.apiService.successToster(
             'Branch Created Successfully',
-            'Success'
+            'Success' || res.message
           );
           this.router.navigate(['/branch-manage']);
         },
@@ -390,7 +429,7 @@ export class AddBranchComponent implements OnInit {
   //validation
   restrictInput(event: KeyboardEvent) {
     const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight'];
-    if (event.key.length === 1 && /\D/.test(event.key)) {
+    if (event.key?.length === 1 && /\D/.test(event.key)) {
       event.preventDefault();
     }
     if (!allowedKeys.includes(event.key) && isNaN(Number(event.key))) {
@@ -413,8 +452,8 @@ export class AddBranchComponent implements OnInit {
     value: string;
   }): { [key: string]: any } | null {
     const value = control.value;
-    if (value && value.length > 3) {
-      return { minlength: true };
+    if (value && value.length > 5) {
+      return { maxlength: true };
     }
     return null;
   }
@@ -500,15 +539,86 @@ export class AddBranchComponent implements OnInit {
 
     return '';
   }
+  // onBranchTypeChange(event: Event): void {
+  //   const selectedValue = (event.target as HTMLSelectElement).value;
 
+  //   // Determine if Marquee type is selected
+  //   this.isMarqueeSelected = selectedValue === 'marquee';
+
+  //   // Update total_floors control based on branch type selection
+  //   const totalFloorsControl = this.branchForm.get('total_floors');
+  //   if (this.isMarqueeSelected) {
+  //     totalFloorsControl?.disable(); // Disable if Marquee is selected
+  //     totalFloorsControl?.setValue(''); // Optionally clear value
+  //   } else {
+  //     totalFloorsControl?.enable(); // Enable for other branch types
+  //     if (selectedValue === 'hall') {
+  //       totalFloorsControl?.setValidators(Validators.required);
+  //     } else {
+  //       totalFloorsControl?.setValidators(null);
+  //     }
+  //     totalFloorsControl?.updateValueAndValidity();
+  //   }
+
+  //   // Update ground_floor_included control based on branch type
+  //   const groundFloorIncludedControl = this.branchForm.get(
+  //     'ground_floor_included'
+  //   );
+  //   groundFloorIncludedControl?.enable(); // Ensure ground_floor_included is always enabled
+  //   if (selectedValue === 'outdoor') {
+  //     totalFloorsControl?.clearValidators();
+  //     totalFloorsControl?.updateValueAndValidity();
+  //   }
+  // }
   onBranchTypeChange(event: Event): void {
     const selectedValue = (event.target as HTMLSelectElement).value;
-    if (selectedValue === 'hall') {
-      this.isHall = true;
+
+    this.isMarqueeSelected = selectedValue === 'marquee';
+
+    const totalFloorsControl = this.branchForm.get('total_floors');
+    if (this.isMarqueeSelected) {
+      totalFloorsControl?.disable(); // Disable if Marquee is selected
+      totalFloorsControl?.setValue(''); // Optionally clear value
+      this.toastr.info('Ground floor is by default selected for Marquee'); // Show toast message
     } else {
-      this.isHall = false;
+      totalFloorsControl?.enable(); // Enable for other branch types
+      if (selectedValue === 'hall') {
+        totalFloorsControl?.setValidators(Validators.required);
+      } else {
+        totalFloorsControl?.setValidators(null);
+      }
+      totalFloorsControl?.updateValueAndValidity();
+    }
+
+    const groundFloorIncludedControl = this.branchForm.get(
+      'ground_floor_included'
+    );
+    groundFloorIncludedControl?.enable(); // Ensure ground_floor_included is always enabled
+    if (selectedValue === 'outdoor') {
+      totalFloorsControl?.clearValidators();
+      totalFloorsControl?.updateValueAndValidity();
     }
   }
+  updateFloorControlsState(): void {
+    const totalFloorsControl = this.branchForm.get('total_floors');
+    const selectedBranchType = this.branchForm.get('branch_type')?.value;
+
+    // Disable total_floors control until a branch type is selected
+    if (!selectedBranchType) {
+      totalFloorsControl?.disable();
+    } else {
+      // Enable total_floors control if a branch type is selected
+      totalFloorsControl?.enable();
+      // Set validators based on the selected branch type if needed
+      if (selectedBranchType === 'hall' || selectedBranchType === 'outdoor') {
+        totalFloorsControl?.setValidators(Validators.required);
+      } else {
+        totalFloorsControl?.setValidators(null);
+      }
+      totalFloorsControl?.updateValueAndValidity();
+    }
+  }
+
   onAmenitySelected() {
     this.showDropdown = false;
   }

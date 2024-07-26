@@ -22,7 +22,7 @@ interface Link {
   imports: [CommonModule, RouterModule],
 })
 export class SidebarComponent implements OnInit {
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
   @ViewChild('itemEl') itemEl: ElementRef | undefined;
   toggleDropdown(link: Link): void {
     link.isOpen = !link.isOpen;
@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit {
     {
       routerLink: '/companies-management',
       icon: 'home_work',
-      label: 'Manage companies',
+      label: 'Manage Companies',
       whiteImgPath:
         '../../../../assets/images/sidebar-icons/branch-icon-white.png',
       grayImgPath:
@@ -141,6 +141,17 @@ export class SidebarComponent implements OnInit {
     {
       routerLink: '/expense-manage',
       icon: 'assured_workload',
+      label: 'Subscriptions Plan',
+      whiteImgPath:
+        '../../../../assets/images/sidebar-icons/finance-management-white.png',
+      grayImgPath:
+        '../../../../assets/images/sidebar-icons/finance-management-gray.png',
+      imgPath: '',
+      submenus: [],
+    },
+    {
+      routerLink: '/expense-manage',
+      icon: 'assured_workload',
       label: 'CMS',
       whiteImgPath:
         '../../../../assets/images/sidebar-icons/finance-management-white.png',
@@ -160,8 +171,6 @@ export class SidebarComponent implements OnInit {
       imgPath: '',
       submenus: [],
     },
-
-
   ];
 
   ngOnInit(): void {

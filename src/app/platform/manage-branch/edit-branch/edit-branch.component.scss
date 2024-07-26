@@ -4,6 +4,7 @@ $orange_color: #fb6f10;
 
 main {
   box-shadow: 0px 0px 8px -4px #00000052;
+  margin-bottom: 30px;
 }
 //breadcrumb
 .breadcrumb {
@@ -23,6 +24,7 @@ main {
   font-weight: 600;
   line-height: 15.12px;
   letter-spacing: -0.02em;
+  cursor: pointer;
   text-align: left;
   color: #fb6f10;
 }
@@ -80,10 +82,10 @@ main {
 
 .input-class {
   width: 100%;
-  max-width: 535px;
-  height: 50px;
+  max-width: 650px;
+  height: 59px;
   padding-left: 20px;
-  border-radius: 15px !important;
+  border-radius: 12px !important;
   border: 1px solid #dfeaf2;
   transition: 0.5s ease;
 }
@@ -97,7 +99,7 @@ form {
   z-index: 35;
   background-color: aliceblue;
   width: 100%;
-  max-width: 535px;
+  max-width: 650px;
 }
 
 .input-class:focus {
@@ -124,14 +126,14 @@ form {
 .dropdown-select {
   cursor: pointer;
   width: 100%;
-  max-width: 535px;
+  max-width: 650px;
   height: 35px;
   font-family: "Plus Jakarta Sans";
   font-weight: 400;
   font-size: 16.9241px;
   line-height: 14px;
   letter-spacing: -0.01em;
-  text-transform: capitalize;
+  // text-transform: capitalize;
   color: #b1b1b1;
   background: white;
 
@@ -158,13 +160,13 @@ form {
 .form-select-lg {
   cursor: pointer;
   width: 100%;
-  max-width: 535px;
+  max-width: 650px;
   font-size: 15px;
   padding: 14px 20px;
-  margin: 8px 60px 0px;
+  // margin: 8px 60px 0px;
   box-sizing: border-box;
-  border-radius: 16px !important;
-  height: 50px;
+  border-radius: 12px !important;
+  height: 59px;
 }
 .form-select-lg:hover {
   background-color: #58585818;
@@ -178,11 +180,13 @@ form {
 }
 
 .text-area {
-  width: 89%;
-  max-width: 89%;
+  // width: 89%;
+  // max-width: 89%;
+  width: 100%;
+  max-width: 1418px;
   height: 100px;
   font-size: 15px;
-  border-radius: 16px !important;
+  border-radius: 12px !important;
   padding-left: 20px;
   border: 1px solid #dfeaf2;
   transition: 0.5s ease;
@@ -228,7 +232,7 @@ form {
   text-align: left;
   color: #b1b1b1;
 }
-@media (max-width: 1125px) {
+@media (max-width: 1024px) {
   form {
     display: flex;
     justify-content: center;
@@ -237,6 +241,15 @@ form {
   .flex-wrap-2 {
     display: flex;
     flex-wrap: wrap;
+  }
+}
+@media (min-width: 850px) and (max-width: 992px) {
+  .text-area {
+    width: 93%;
+  }
+  .input-class {
+    font-size: 12px;
+    width: 93%;
   }
 }
 @media (min-width: 320px) and (max-width: 768px) {
@@ -262,4 +275,12 @@ form {
     font-size: 12px;
     margin-right: 0 !important;
   }
+}
+.floor {
+  margin-top: 13%;
+}
+.custom-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem; /* Equivalent to mt-2 */
 }

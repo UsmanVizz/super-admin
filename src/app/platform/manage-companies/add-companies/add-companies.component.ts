@@ -41,25 +41,23 @@ export class AddCompaniesComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef
   ) {
     this.companyForm = this.fb.group({
-      company_name: ['', Validators.required],
-      branch_id: ['', Validators.required],
-      company_description: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['', Validators.required],
+      personal_contact_number: ['', Validators.required],
+      password: ['', Validators.required],
+      confirm_password: ['', Validators.required],
+      address: ['', Validators.required],
+      cnic: ['', Validators.required],
+      brand_name: ['', Validators.required],
+      office_google_link: ['', Validators.required],
+      office_address: ['', Validators.required],
+      website_link: ['', Validators.required],
     });
   }
   ngOnInit(): void {}
-
-  getSelectedBranch(): string | undefined {
-    const selectedBranch = this.branches.filter((branch) => branch.selected);
-    if (selectedBranch.length === 0) {
-      return 'Select Branch';
-    } else if (selectedBranch.length === 1) {
-      return selectedBranch[0].branch_name;
-    } else {
-      return selectedBranch.map((branch) => branch.branch_name).join(', ');
-    }
-  }
   manageCompany() {
-    this.router.navigate(['/manage-menu/catagories']);
+    this.router.navigate(['/companies-management']);
   }
 
   saveData() {
@@ -75,22 +73,20 @@ export class AddCompaniesComponent implements OnInit {
 
       return;
     }
-
-    let selectedBranches: string[] = [];
-    if (this.branches && Array.isArray(this.branches)) {
-      selectedBranches = this.branches
-        .filter((branch) => branch.selected)
-        .map((branch) => branch._id); // Assuming _id is the ID field for amenities
-    }
-    console.log('selectedBranches', selectedBranches);
     let payload: any = {
-      company_name: this.companyForm.controls['company_name'].value,
-      company_description:
-        this.companyForm.controls['company_description'].value,
-      // branch_id: selectedBranches,
-      branch_id: this.companyForm.controls['branch_id'].value,
-      images: this.uploadedImages.map((image) => image.url),
-      thumbnail_image: this.setThumbnail,
+      first_name: this.companyForm.controls['first_name'].value,
+      last_name: this.companyForm.controls['last_name'].value,
+      email: this.companyForm.controls['email'].value,
+      personal_contact_number:
+        this.companyForm.controls['personal_contact_number'].value,
+      password: this.companyForm.controls['password'].value,
+      confirm_password: this.companyForm.controls['confirm_password'].value,
+      address: this.companyForm.controls['address'].value,
+      cnic: this.companyForm.controls['cnic'].value,
+      brand_name: this.companyForm.controls['brand_name'].value,
+      office_google_link: this.companyForm.controls['office_google_link'].value,
+      office_address: this.companyForm.controls['office_address'].value,
+      website_link: this.companyForm.controls['website_link'].value,
     };
     console.log('payload', payload);
     try {
@@ -105,7 +101,7 @@ export class AddCompaniesComponent implements OnInit {
   }
 
   createHall(payload: any) {
-    let url = `${environment.baseURL}/api/hall/menu_company/menu_company`;
+    let url = `${environment.baseURL}/api/admin/company/company`;
     this.apiService
       .post(url, payload)
       .pipe(first())
@@ -116,7 +112,7 @@ export class AddCompaniesComponent implements OnInit {
             'company Created Successfully',
             'Success'
           );
-          this.router.navigate(['/manage-menu/catagories']);
+          this.router.navigate(['/companies-management']);
         },
         (err: any) => {
           console.error('API Error:', err);

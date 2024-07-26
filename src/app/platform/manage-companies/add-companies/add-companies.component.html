@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between mt-5">
+<div class="d-flex justify-content-between mt-4">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
@@ -20,7 +20,7 @@
   </nav>
 </div>
 <div class="container-fluid">
-  <div class="d-flex align-items-center mt-5">
+  <div class="d-flex align-items-center">
     <h1 class="company-header flex-grow-1">Add Company</h1>
   </div>
 
@@ -33,17 +33,17 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Company Name"
-              formControlName="company_name"
+              placeholder="First Name"
+              formControlName="first_name"
             />
             <div
               *ngIf="
-                companyForm.get('company_name')?.hasError('required') &&
-                companyForm.get('company_name')?.touched
+                companyForm.get('first_name')?.hasError('required') &&
+                companyForm.get('first_name')?.touched
               "
               class="text-danger error-state mx-5"
             >
-              Company Name is required.
+              First Name is required.
             </div>
           </div>
           <div class="col">
@@ -51,17 +51,17 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Company Name"
-              formControlName="company_name"
+              placeholder="Last Name"
+              formControlName="last_name"
             />
             <div
               *ngIf="
-                companyForm.get('company_name')?.hasError('required') &&
-                companyForm.get('company_name')?.touched
+                companyForm.get('last_name')?.hasError('required') &&
+                companyForm.get('last_name')?.touched
               "
               class="text-danger error-state mx-5"
             >
-              Company Name is required.
+              Last Name is required.
             </div>
           </div>
         </div>
@@ -71,17 +71,17 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Company Name"
-              formControlName="company_name"
+              placeholder="Email"
+              formControlName="email"
             />
             <div
               *ngIf="
-                companyForm.get('company_name')?.hasError('required') &&
-                companyForm.get('company_name')?.touched
+                companyForm.get('email')?.hasError('required') &&
+                companyForm.get('email')?.touched
               "
               class="text-danger error-state mx-5"
             >
-              Company Name is required.
+              Email is required.
             </div>
           </div>
           <div class="col">
@@ -89,76 +89,40 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Company Name"
-              formControlName="company_name"
+              placeholder="Contact Number"
+              formControlName="personal_contact_number"
             />
             <div
               *ngIf="
-                companyForm.get('company_name')?.hasError('required') &&
-                companyForm.get('company_name')?.touched
+                companyForm
+                  .get('personal_contact_number')
+                  ?.hasError('required') &&
+                companyForm.get('personal_contact_number')?.touched
               "
               class="text-danger error-state mx-5"
             >
-              Company Name is required.
+              Contact Number is required.
             </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col">
-            <label for="categoryName" class="branch">Password</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Company Name"
-              formControlName="company_name"
-            />
-            <div
-              *ngIf="
-                companyForm.get('company_name')?.hasError('required') &&
-                companyForm.get('company_name')?.touched
-              "
-              class="text-danger error-state mx-5"
-            >
-              Company Name is required.
-            </div>
-          </div>
-          <div class="col">
-            <label for="categoryName" class="branch">Confirm Password</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Company Name"
-              formControlName="company_name"
-            />
-            <div
-              *ngIf="
-                companyForm.get('company_name')?.hasError('required') &&
-                companyForm.get('company_name')?.touched
-              "
-              class="text-danger error-state mx-5"
-            >
-              Company Name is required.
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
             <label for="categoryName" class="branch">Address</label>
             <input
               type="text"
               class="form-control"
-              placeholder="Company Name"
-              formControlName="company_name"
+              placeholder="Address"
+              formControlName="address"
             />
             <div
               *ngIf="
-                companyForm.get('company_name')?.hasError('required') &&
-                companyForm.get('company_name')?.touched
+                companyForm.get('address')?.hasError('required') &&
+                companyForm.get('address')?.touched
               "
               class="text-danger error-state mx-5"
             >
-              Company Name is required.
+              Address is required.
             </div>
           </div>
           <div class="col">
@@ -166,19 +130,154 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Company Name"
-              formControlName="company_name"
+              placeholder="CNIC"
+              formControlName="cnic"
             />
             <div
               *ngIf="
-                companyForm.get('company_name')?.hasError('required') &&
-                companyForm.get('company_name')?.touched
+                companyForm.get('cnic')?.hasError('required') &&
+                companyForm.get('cnic')?.touched
               "
               class="text-danger error-state mx-5"
             >
-              Company Name is required.
+              CNIC is required.
             </div>
           </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="categoryName" class="branch">Password</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Password"
+              formControlName="password"
+            />
+            <div
+              *ngIf="
+                companyForm.get('password')?.hasError('required') &&
+                companyForm.get('password')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Password is required.
+            </div>
+          </div>
+          <div class="col">
+            <label for="categoryName" class="branch">Confirm Password</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Confirm Password"
+              formControlName="confirm_password"
+            />
+            <div
+              *ngIf="
+                companyForm.get('confirm_password')?.hasError('required') &&
+                companyForm.get('confirm_password')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Confirm Password is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="categoryName" class="branch">Brand Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Brand Name"
+              formControlName="brand_name"
+            />
+            <div
+              *ngIf="
+                companyForm.get('brand_name')?.hasError('required') &&
+                companyForm.get('brand_name')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Brand Name is required.
+            </div>
+          </div>
+          <div class="col">
+            <label for="categoryName" class="branch">Office Google Link</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Office Google Link"
+              formControlName="office_google_link"
+            />
+            <div
+              *ngIf="
+                companyForm.get('office_google_link')?.hasError('required') &&
+                companyForm.get('office_google_link')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Office Google Link is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="categoryName" class="branch">Office Address</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Office Address"
+              formControlName="office_address"
+            />
+            <div
+              *ngIf="
+                companyForm.get('office_address')?.hasError('required') &&
+                companyForm.get('office_address')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Office Address is required.
+            </div>
+          </div>
+          <div class="col">
+            <label for="categoryName" class="branch">Website</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Website"
+              formControlName="website_link"
+            />
+            <div
+              *ngIf="
+                companyForm.get('website_link')?.hasError('required') &&
+                companyForm.get('website_link')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Website is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="categoryName" class="branch">Joining Date</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="dd/mm/yyyy"
+              formControlName="joining_date"
+            />
+            <div
+              *ngIf="
+                companyForm.get('joining_date')?.hasError('required') &&
+                companyForm.get('joining_date')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Joining Date is required.
+            </div>
+          </div>
+          <div class="col"></div>
         </div>
         <div class="row">
           <div class="col">

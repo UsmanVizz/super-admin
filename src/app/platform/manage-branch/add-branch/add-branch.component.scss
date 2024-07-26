@@ -4,6 +4,7 @@ $orange_color: #fb6f10;
 
 main {
   box-shadow: 0px 0px 8px -4px #00000052;
+  margin-bottom: 30px;
 }
 //breadcrumb
 .breadcrumb {
@@ -27,6 +28,7 @@ main {
   line-height: 15.12px;
   letter-spacing: -0.02em;
   text-align: left;
+  cursor: pointer;
   color: #fb6f10;
 }
 .category-icon {
@@ -87,13 +89,13 @@ main {
 }
 
 .input-class {
-  height: 50px;
+  height: 59px;
   top: 30px;
   gap: 0px;
-  border-radius: 15px;
+  border-radius: 12px;
   border: 1px solid #dfeaf2;
   opacity: 0px;
-
+  width: 50%;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
@@ -102,13 +104,13 @@ main {
 
   color: black;
   width: 100%;
-  max-width: 535px;
+  max-width: 650px;
 }
 
 .dropdown-select {
   cursor: pointer;
   width: 100%;
-  max-width: 535px;
+  max-width: 650px;
   height: 35px;
   font-family: "Plus Jakarta Sans";
   font-weight: 400;
@@ -133,7 +135,7 @@ form {
   z-index: 35;
   background-color: aliceblue;
   width: 100%;
-  max-width: 535px;
+  max-width: 650px;
 }
 
 .input-class:focus {
@@ -173,13 +175,13 @@ form {
 .form-select-lg {
   cursor: pointer;
   width: 100%;
-  max-width: 535px;
+  max-width: 650px;
   font-size: 15px;
   padding: 14px 20px;
   // margin: 8px 60px 0px;
   box-sizing: border-box;
-  border-radius: 16px !important;
-  height: 50px;
+  border-radius: 12px !important;
+  height: 59px;
 }
 .form-select-lg:hover {
   background-color: #58585818;
@@ -193,11 +195,13 @@ form {
 }
 
 .text-area {
-  width: 89%;
-  max-width: 89%;
+  // width: 89%;
+  // max-width: 89%;
+  width: 100%;
+  max-width: 1418px;
   height: 100px;
   font-size: 15px;
-  border-radius: 16px !important;
+  border-radius: 12px !important;
   padding-left: 20px;
   // border: 1px solid #dfeaf2;
   transition: 0.5s ease;
@@ -243,7 +247,7 @@ form {
   text-align: left;
   color: #b1b1b1;
 }
-@media (max-width: 1125px) {
+@media (max-width: 1024px) {
   form {
     display: flex;
     justify-content: center;
@@ -254,10 +258,18 @@ form {
     flex-wrap: wrap;
   }
 }
+@media (min-width: 850px) and (max-width: 992px) {
+  .text-area {
+    width: 93%;
+  }
+  .input-class {
+    font-size: 12px;
+    width: 93%;
+  }
+}
 @media (min-width: 320px) and (max-width: 768px) {
   .text-area {
     width: 100%;
-    max-width: 100%;
   }
   .form-select-lg {
     cursor: pointer;
@@ -283,7 +295,7 @@ form {
     .valid-feedback
   ):not(.invalid-tooltip):not(.invalid-feedback) {
   padding-left: calc(var(--bs-border-width) * 16);
-  border-radius: 16px;
+  border-radius: 12px;
 }
 //////////////////////////////
 // .input-wrapper {
@@ -320,7 +332,7 @@ form {
 
 .text-danger.error-state {
   position: absolute;
-  bottom: -25px;
+  bottom: -20px;
   left: 0;
   width: 100%;
 }

@@ -36,31 +36,13 @@ declare let $: any;
   styleUrls: ['./manage-companies.component.scss'],
 })
 export class ManageCompaniesComponent implements OnInit {
-  pageSize: number = 10;
-  currentPage: number = 1;
-  totalPages!: number;
-  searchQuery: string = '';
-  pages!: number[];
+  selectedButton: string = 'all';
   tableData: any[] = [];
-  paginatedData!: any[];
-  filteredData: any[] = [];
   constructor(private router: Router, private apiService: ApiService) {}
   ngOnInit(): void {
-    this.calculatePages();
     this.getAllCategories();
-    this.filterData();
-  }
-  sortProductsDesc(): void {
-    this.tableData = this.tableData.sort((a, b) =>
-      b.customer_name.localeCompare(a.customer_name)
-    );
   }
 
-  // Example event handler for a button click
-  onSortButtonClick(): void {
-    this.sortProductsDesc();
-    console.log(1255);
-  }
   getAllCategories(page: number = 1): void {
     const url = new URL(`${environment.baseURL}/api/admin/company/company`);
 
@@ -88,69 +70,64 @@ export class ManageCompaniesComponent implements OnInit {
       );
   }
 
-  openNewComponent() {
-    this.router.navigate(['view-manage-customer']);
+  viewCompany(userId: string) {
+    this.router.navigate(['companies-management/company-detail', userId]);
+    console.log('call function');
+  }
+  editCompany(userId: string) {
+    this.router.navigate(['companies-management/edit-company', userId]);
     console.log('call function');
   }
 
-  selectedButton: string = 'all';
+  deleteCategory(cardId: string) {
+    const url = `https://dev-backend.hamaravenue.com/api/admin/company/company/${cardId}`;
 
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to delete it?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: 'grey',
+      confirmButtonText: 'Yes',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User confirmed, proceed with deletion
+        this.apiService
+          .delete(url)
+          .pipe(first())
+          .subscribe(
+            () => {
+              Swal.fire({
+                title: 'Deleted!',
+                text: 'Hall has been deleted.',
+                icon: 'success',
+              });
+              this.getAllCategories();
+
+              console.log('Hall deleted successfully');
+            },
+            (error) => {
+              Swal.fire({
+                title: 'Error!',
+                text: 'An error occurred while deleting the branch.',
+                icon: 'error',
+              });
+
+              console.error('Error deleting branch:', error);
+            }
+          );
+      }
+    });
+  }
   selectButton(button: string) {
     this.selectedButton = button;
-  }
-  // Calculate total number of pages and set paginated data
-  calculatePages(): void {
-    this.totalPages = Math.ceil(this.tableData.length / this.pageSize);
-    this.paginate();
-  }
-
-  // Paginate data based on current page
-  paginate(): void {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedData = this.tableData.slice(startIndex, endIndex);
-    this.pages = Array(this.totalPages)
-      .fill(0)
-      .map((x, i) => i + 1);
-  }
-
-  // Set current page
-  setCurrentPage(page: number): void {
-    this.currentPage = page;
-    this.paginate();
-  }
-
-  // Go to previous page
-  prevPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.paginate();
+    if (button === 'branch') {
+      this.router.navigate(['/branch-manage']);
     }
-  }
-
-  // Go to next page
-  nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.paginate();
+    if (button === 'hall') {
+      this.router.navigate(['/hall-manage']);
     }
-  }
-
-  filterData(): void {
-    this.filteredData = this.tableData.filter((item: any) => {
-      // Use optional chaining to safely access name and email properties
-      return (
-        item.name?.toLowerCase()?.includes(this.searchQuery.toLowerCase()) ||
-        false ||
-        item.email?.toLowerCase()?.includes(this.searchQuery.toLowerCase()) ||
-        false
-      );
-    });
-    this.calculatePages(); // Recalculate pagination after filtering
-  }
-
-  onSearchChange(): void {
-    this.filterData();
   }
 
   addCompanies() {
