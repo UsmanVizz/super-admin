@@ -76,7 +76,7 @@
           <th scope="col" class="th-table text-nowrap">Owner Name</th>
           <th scope="col" class="th-table text-nowrap">Last Login & Time</th>
           <th scope="col" class="th-table text-nowrap">Joining Date</th>
-          <th scope="col" class="th-table text-nowrap">Company Size</th>
+          <th scope="col" class="th-table text-nowrap">Brand Name</th>
           <th scope="col" class="th-table text-nowrap">Emails</th>
           <th scope="col" class="th-table text-nowrap">Total Revenue</th>
           <th scope="col" class="th-table text-nowrap">Status</th>
@@ -84,17 +84,32 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let row of paginatedData; let i = index" class="d-flex">
+        <tr *ngFor="let row of tableData; let i = index" class="d-flex">
           <td class="t-head" style="border-bottom: none">
             {{ (currentPage - 1) * pageSize + i + 1 }}
           </td>
-          <td class="email-td text-nowrap">{{ row.order_id }}</td>
-          <td class="email-td text-nowrap">{{ row.customer_name }}</td>
-          <td class="email-td text-nowrap">{{ row.date_time }}</td>
-          <td class="email-td text-nowrap">{{ row.booking_date }}</td>
-          <td class="email-td text-nowrap">{{ row.hall_name }}</td>
-          <td class="email-td text-nowrap">{{ row.order_amount }}</td>
-          <td class="email-td text-nowrap">{{ row.advance }}</td>
+          <td class="email-td text-nowrap">
+            {{ row.order_id || "No Data" }}
+          </td>
+          <td class="email-td text-nowrap">
+            {{ row?.first_name + "   " + row?.last_name }}
+          </td>
+          <td class="email-td text-nowrap">
+            {{ row.last_login_at || "No Data" }}
+          </td>
+          <td class="email-td text-nowrap">
+            {{ row.joining_date | date : "dd/MM/yyyy" || "No Data" }}
+          </td>
+          <td class="email-td text-nowrap">
+            {{ row.brand_name || "No Data" }}
+          </td>
+          <td class="email-td text-nowrap">
+            {{ row.email || "No Data" }}
+          </td>
+          <td class="email-td text-nowrap">
+            {{ row.salary || "No Data" }}
+          </td>
+
           <td class="email-td text-nowrap">
             <div class="form-check form-switch">
               <input
@@ -127,50 +142,7 @@
       </tbody>
     </table>
   </div>
-  <!-- <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Sr No.</th>
-        <th scope="col">Order ID</th>
-        <th scope="col">Customer Name</th>
-        <th scope="col">Event Date & Time</th>
-        <th scope="col">Booking Date</th>
-        <th scope="col">Hall Name</th>
-        <th scope="col">Order Amount</th>
-        <th scope="col">Advance</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let row of paginatedData">
-        <td>{{ row.id }}</td>
-        <td>{{ row.order_id }}</td>
-        <td>{{ row.customer_name }}</td>
-        <td>{{ row.date_time }}</td>
-        <td>{{ row.booking_date }}</td>
-        <td>{{ row.hall_name }}</td>
-        <td>{{ row.order_amount }}</td>
-        <td>{{ row.advance }}</td>
-        <td>
-          <div style="display: flex">
-            <button type="button" class="btn action-button">
-              <img src="../../../../assets/icon/edit.png" alt="Edit" />
-            </button>
-            <button type="button" class="btn action-button">
-              <img src="../../../../assets/icon/delete.png" alt="Delete" />
-            </button>
-            <button
-              type="button "
-              class="btn action-button"
-              (click)="openNewComponent()"
-            >
-              <img src="../../../../assets/icon/view.png" alt="View" />
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table> -->
+
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-end m-5 align-items-center">
       <!-- Previous button -->

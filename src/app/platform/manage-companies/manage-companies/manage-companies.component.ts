@@ -70,23 +70,20 @@ export class ManageCompaniesComponent implements OnInit {
       .subscribe(
         (response: any) => {
           if (response.data && response.data.length) {
-            // Map through the response data to transform or process as needed
             this.tableData = response.data.map((item: any, index: number) => {
-              // Perform any additional transformations here
               return {
                 ...item,
-                index: index, // Add index to each item if needed
+                index: index,
               };
             });
             console.log('tableData', this.tableData);
-            // this.filteredCategories = [...this.cards];
           } else {
             this.tableData = [];
           }
         },
         (error) => {
           console.error('Error fetching categories:', error);
-          this.tableData = []; // Reset tableData on error
+          this.tableData = [];
         }
       );
   }
