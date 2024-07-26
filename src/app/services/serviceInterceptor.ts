@@ -10,7 +10,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { environment } from '../../environment/environment';
+import { environment } from '../../environment/environment'; // Adjust the import path as needed
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
@@ -20,11 +20,18 @@ export class InterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // Get the auth token from local storage
-    const token = localStorage.getItem('token')
-      ? localStorage.getItem('token')
-      : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uX2hhc2giOiI4M2RhY2ZkYWI2ZjY1OWUzMmY4NzhhODY3OWMwMzFhZSIsImlhdCI6MTcxNjQ2Mjg4N30.fD56lmhnxc2CIPveEdmPYO50jGClxPswF-xdZh-wjCQ';
+    // Get the auth token from local storage and remove any surrounding quotes
+    let token = localStorage.getItem('user_token');
+
+    // if (token) {
+    //   // Remove surrounding quotes if they exist
+    //   token = token.replace(/^"(.*)"$/, '$1');
+    // }
+
     const baseUrl = environment.baseURL;
+
+    console.log('Intercepted request:', req.url);
+    console.log('Token:', token);
 
     // Clone the request to add the authorization header if token is present
     if (token && req.url.includes(baseUrl)) {
@@ -41,17 +48,25 @@ export class InterceptorService implements HttpInterceptor {
           console.log('Request successful:', event);
         }
       }),
-      catchError((error) => {
-        // Handle errors
+      catchError((error: any) => {
         if (error instanceof HttpErrorResponse) {
+          console.error('HTTP error:', error);
+
           const status = error.status;
           const unauthorizedStatuses = [
-            401, 2, 3, 11, 151, 153, 18, 300, 301, 227,
+            401, 2, 3, 11, 151, 153, 18, 300, 301, 227, 440,
           ];
           if (unauthorizedStatuses.includes(status)) {
             // Redirect to login or home page and clear token
+            console.error(
+              'Unauthorized or session timeout, redirecting to login.'
+            );
             this.router.navigateByUrl('');
-            localStorage.removeItem('token');
+            localStorage.removeItem('user_token');
+          } else if (status === 0) {
+            console.error('Network error - make sure API is running:', error);
+          } else {
+            console.error(`HTTP error: ${status}`, error);
           }
         }
         return throwError(error);

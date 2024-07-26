@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
     //   this.router.navigate(['dashboard']);
     // }
   }
-
   loggedIn() {
     const userEmail = this.userLogin.get('email');
     const userPassword = this.userLogin.get('password');
@@ -50,11 +49,19 @@ export class LoginComponent implements OnInit {
       } else {
         this.authService.userLoggedIn(this.userLogin.value).subscribe(
           (res) => {
-            // console.log(res);
-            localStorage.setItem('user_token', JSON.stringify(res.token));
+            // Assuming res.data.token is the token you want to store
+            const token = res.data.token;
+
+            // Store token without quotes in localStorage
+            localStorage.setItem('user_token', token);
+
+            // Store the whole user object as string
             localStorage.setItem('user', JSON.stringify(res));
-            sessionStorage.setItem('user_token', JSON.stringify(res.token));
+
+            // If you need to use sessionStorage as well
+            sessionStorage.setItem('user_token', token);
             sessionStorage.setItem('user', JSON.stringify(res));
+
             this.toastr.success('Login Successful');
             this.router.navigate(['/dashboard']);
             this.userLogin.reset();

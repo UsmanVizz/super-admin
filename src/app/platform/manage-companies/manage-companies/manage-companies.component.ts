@@ -41,9 +41,15 @@ export class ManageCompaniesComponent implements OnInit {
   totalPages!: number;
   searchQuery: string = '';
   pages!: number[];
+  tableData: any[] = [];
   paginatedData!: any[];
   filteredData: any[] = [];
-  constructor(private router: Router) {}
+  constructor(private router: Router, private apiService: ApiService) {}
+  ngOnInit(): void {
+    this.calculatePages();
+    this.getAllCategories();
+    this.filterData();
+  }
   sortProductsDesc(): void {
     this.tableData = this.tableData.sort((a, b) =>
       b.customer_name.localeCompare(a.customer_name)
@@ -55,177 +61,41 @@ export class ManageCompaniesComponent implements OnInit {
     this.sortProductsDesc();
     console.log(1255);
   }
-  tableData = [
-    {
-      id: 1,
-      order_id: 'Mark',
-      customer_name: 'ahmad',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 2,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 3,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 4,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 5,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 6,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 7,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 8,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 9,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 10,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 11,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 12,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 13,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 14,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 15,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-    {
-      id: 16,
-      order_id: 'Mark',
-      customer_name: 'Otto',
-      date_time: '@mdo',
-      booking_date: '2 feb 2023',
-      hall_name: 'A1+A2+A3',
-      order_amount: '200,000',
-      advance: '20,000',
-    },
-  ];
+  getAllCategories(page: number = 1): void {
+    const url = new URL(`${environment.baseURL}/api/admin/company/company`);
+
+    this.apiService
+      .get(url.href)
+      .pipe(first())
+      .subscribe(
+        (response: any) => {
+          if (response.data && response.data.length) {
+            // Map through the response data to transform or process as needed
+            this.tableData = response.data.map((item: any, index: number) => {
+              // Perform any additional transformations here
+              return {
+                ...item,
+                index: index, // Add index to each item if needed
+              };
+            });
+            console.log('tableData', this.tableData);
+            // this.filteredCategories = [...this.cards];
+          } else {
+            this.tableData = [];
+          }
+        },
+        (error) => {
+          console.error('Error fetching categories:', error);
+          this.tableData = []; // Reset tableData on error
+        }
+      );
+  }
 
   openNewComponent() {
     this.router.navigate(['view-manage-customer']);
     console.log('call function');
   }
-  ngOnInit(): void {
-    this.calculatePages();
-    this.filterData();
-  }
+
   selectedButton: string = 'all';
 
   selectButton(button: string) {
