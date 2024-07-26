@@ -330,6 +330,37 @@ const routes: Routes = [
             './../platform/manage-hall/hall-detail/hall-detail.component'
           ).then((m) => m.HallDetailComponent),
       },
+
+      /// subscription plans
+      {
+        path: 'subsciption-plan',
+        loadComponent: () =>
+          import(
+            './../platform/subscription-plan/subscriptions-plan/subscriptions-plan.component'
+          ).then((m) => m.SubscriptionsPlanComponent),
+      },
+      {
+        path: 'subsciption-plan/add-subsciption-plan',
+        loadComponent: () =>
+          import(
+            './../platform/subscription-plan/add-subscription-plan/add-subscription-plan.component'
+          ).then((m) => m.AddSubscriptionPlanComponent),
+      },
+      {
+        path: 'subsciption-plan/edit-subsciption-plan',
+        loadComponent: () =>
+          import(
+            './../platform/subscription-plan/edit-subscription-plan/edit-subscription-plan.component'
+          ).then((m) => m.EditSubscriptionPlanComponent),
+      },
+      {
+        path: 'subsciption-plan/view-subsciption-plan',
+        loadComponent: () =>
+          import(
+            './../platform/subscription-plan/view-subscription-plan/view-subscription-plan.component'
+          ).then((m) => m.ViewSubscriptionPlanComponent),
+      },
+      /////
       {
         path: 'view-manage-customer',
         loadComponent: () =>

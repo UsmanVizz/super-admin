@@ -1,0 +1,95 @@
+<div class="d-flex justify-content-between mt-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <div>
+          <img
+            src="../../../../assets/images/sidebar-icons/hall.png"
+            alt="icon"
+            class="category-icon mx-1"
+          />
+          <span class="bread-menu">Subscription plan</span>
+        </div>
+      </li>
+      <i class="fa-solid fa-chevron-right arrow px-3"></i>
+
+      <li class="breadcrumb-item active add-category mt-2" aria-current="page">
+        Add Hall
+      </li>
+    </ol>
+  </nav>
+</div>
+<div class="container-fluid">
+  <div class="d-flex align-items-center mt-3">
+    <h1 class="category-header flex-grow-1">Add Hall</h1>
+    <div class="ml-auto">
+      <button class="custom-button" (click)="saveData()">Save</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="categoryForm">
+        <div class="row">
+          <div class="col">
+            <label for="categoryName" class="branch">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="title"
+              formControlName="category_name"
+            />
+            <div
+              *ngIf="
+                categoryForm.get('category_name')?.hasError('required') &&
+                categoryForm.get('category_name')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Hall Name is required.
+            </div>
+          </div>
+          <div class="col">
+            <label for="categoryName" class="branch">Price</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="price"
+              formControlName="category_name"
+            />
+            <div
+              *ngIf="
+                categoryForm.get('category_name')?.hasError('required') &&
+                categoryForm.get('category_name')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Hall Name is required.
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col">
+            <label for="description" class="branch">Description</label>
+            <textarea
+              class="form-control small-textarea"
+              placeholder="Description"
+              formControlName="category_description"
+            ></textarea>
+            <div
+              *ngIf="
+                categoryForm
+                  .get('category_description')
+                  ?.hasError('required') &&
+                categoryForm.get('category_description')?.touched
+              "
+              class="text-danger error-state mx-5"
+            >
+              Hall Description is required.
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

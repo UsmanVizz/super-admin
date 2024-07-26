@@ -139,7 +139,7 @@ export class SidebarComponent implements OnInit {
       submenus: [],
     },
     {
-      routerLink: '/expense-manage',
+      routerLink: '/subsciption-plan',
       icon: 'assured_workload',
       label: 'Subscriptions Plan',
       whiteImgPath:
